@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "id": "astelfa",
+  "version": "${version}",
+  "name": "Astelfa",
+  "description": "Add magic to the world.",
+  "authors": [
+    "dublikuntMax"
+  ],
+  "contact": {
+    "homepage": "https://github.com/DublikuntMux/Astelfa",
+    "sources": "https://github.com/DublikuntMux/Astelfa",
+    "issues": "https://github.com/DublikuntMux/Astelfa/issues"
+  },
+  "license": "BSD-3-Clause",
+  "icon": "assets/astelfa/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.dublikunt.astelfa.Astelfa"
+    ],
+    "client": [
+      "com.dublikunt.astelfa.AstelfaClient"
+    ],
+    "fabric-datagen": [
+      "com.dublikunt.astelfa.generator.AstelfaDataGenerator"
+    ],
+    "modmenu": [
+      "com.dublikunt.astelfa.integration.ModMenu"
+    ],
+    "emi": [
+      "com.dublikunt.astelfa.integration.AstelfaEmiPlugin"
+    ]
+  },
+  "mixins": [
+    "astelfa.mixins.json"
+  ],
+  "depends": {
+    "minecraft": "${minecraft_version}",
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "trinkets": "*"
+  }
+}

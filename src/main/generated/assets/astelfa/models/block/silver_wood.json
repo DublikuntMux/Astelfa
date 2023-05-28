@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "astelfa:block/silver_log",
+    "side": "astelfa:block/silver_log"
+  }
+}

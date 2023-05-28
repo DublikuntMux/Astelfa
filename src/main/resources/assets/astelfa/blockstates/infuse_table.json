@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "astelfa:block/infuse_table"
+    },
+    "facing=south": {
+      "model": "astelfa:block/infuse_table",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "astelfa:block/infuse_table",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "astelfa:block/infuse_table",
+      "y": 90
+    }
+  }
+}

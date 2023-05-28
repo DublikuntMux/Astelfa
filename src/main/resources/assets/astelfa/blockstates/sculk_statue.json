@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "astelfa:block/sculk_statue"
+    },
+    "facing=south": {
+      "model": "astelfa:block/sculk_statue",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "astelfa:block/sculk_statue",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "astelfa:block/sculk_statue",
+      "y": 90
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "item": "astelfa:matter2"
+    },
+    "O": {
+      "item": "astelfa:matter1"
+    }
+  },
+  "pattern": [
+    "OOO",
+    "OIO",
+    "OOO"
+  ],
+  "result": {
+    "item": "astelfa:matter3"
+  },
+  "show_notification": true
+}
