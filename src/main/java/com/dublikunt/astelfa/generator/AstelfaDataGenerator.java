@@ -18,7 +18,7 @@ public class AstelfaDataGenerator implements DataGeneratorEntrypoint {
     }
 
     @Override
-    public void buildRegistry(RegistryBuilder registryBuilder) {
+    public void buildRegistry(@NotNull RegistryBuilder registryBuilder) {
         registryBuilder.addRegistry(RegistryKeys.CONFIGURED_FEATURE, ModConfiguredFeatures::register);
         registryBuilder.addRegistry(RegistryKeys.PLACED_FEATURE, ModPlacedFeatures::register);
     }

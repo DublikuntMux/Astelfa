@@ -16,7 +16,7 @@ public class ModelGenerator extends FabricModelProvider {
     }
 
     @Override
-    public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
+    public void generateBlockStateModels(@NotNull BlockStateModelGenerator blockStateModelGenerator) {
         blockStateModelGenerator.registerLog(ModBlocks.SILVER_LOG).log(ModBlocks.SILVER_LOG).wood(ModBlocks.SILVER_WOOD);
         blockStateModelGenerator.registerLog(ModBlocks.STRIPPED_SILVER_LOG).log(ModBlocks.STRIPPED_SILVER_LOG)
                 .wood(ModBlocks.STRIPPED_SILVER_WOOD);

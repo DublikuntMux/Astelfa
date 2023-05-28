@@ -122,9 +122,7 @@ public class InfuseTableRecipe implements Recipe<SimpleInventory> {
         public InfuseTableRecipe read(Identifier id, @NotNull PacketByteBuf buf) {
             DefaultedList<Ingredient> inputs = DefaultedList.ofSize(buf.readInt(), Ingredient.EMPTY);
 
-            for (int i = 0; i < inputs.size(); i++) {
-                inputs.set(i, Ingredient.fromPacket(buf));
-            }
+            inputs.replaceAll(ignored -> Ingredient.fromPacket(buf));
 
             ItemStack output = buf.readItemStack();
             return new InfuseTableRecipe(id, output, inputs);

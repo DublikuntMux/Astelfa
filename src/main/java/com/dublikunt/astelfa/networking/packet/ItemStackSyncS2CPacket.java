@@ -1,6 +1,7 @@
 package com.dublikunt.astelfa.networking.packet;
 
 import com.dublikunt.astelfa.block.entity.InfuseTableBlockEntity;
+import com.dublikunt.astelfa.block.entity.ManaFillerBlockEntity;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
@@ -20,6 +21,10 @@ public class ItemStackSyncS2CPacket {
         BlockPos position = buf.readBlockPos();
 
         if (client.world.getBlockEntity(position) instanceof InfuseTableBlockEntity blockEntity) {
+            blockEntity.setInventory(list);
+        }
+
+        if (client.world.getBlockEntity(position) instanceof ManaFillerBlockEntity blockEntity) {
             blockEntity.setInventory(list);
         }
     }

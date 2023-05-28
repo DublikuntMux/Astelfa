@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-    "end": "astelfa:block/stripped_silver_log",
-    "side": "astelfa:block/stripped_silver_log"
-  }
-}

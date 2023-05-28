@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "astelfa:block/mana_filler"
+    },
+    "facing=south": {
+      "model": "astelfa:block/mana_filler",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "astelfa:block/mana_filler",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "astelfa:block/mana_filler",
+      "y": 90
+    }
+  }
+}

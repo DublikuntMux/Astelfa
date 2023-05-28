@@ -13,10 +13,7 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.DyeColor;
-import net.minecraft.util.Identifier;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -24,6 +21,8 @@ import java.util.Map;
 public class ModBlocks {
     public static final InfuseTableBlock INFUSING_TABLE_BLOCK = new InfuseTableBlock(
             FabricBlockSettings.of(Material.METAL).strength(2f).requiresTool().nonOpaque());
+    public static final ManaFillerBlock MANA_FILLER_BLOCK = new ManaFillerBlock(
+            FabricBlockSettings.of(Material.STONE).nonOpaque());
     public static final SculkStatueBlock SCULK_STATUE_BLOCK = new SculkStatueBlock(
             FabricBlockSettings.of(Material.SCULK).strength(3f).requiresTool().nonOpaque());
     public static final Block SILVER_LOG = new PillarBlock(FabricBlockSettings.copyOf(Blocks.OAK_LOG)
@@ -40,11 +39,12 @@ public class ModBlocks {
             .mapColor(DyeColor.LIGHT_GRAY));
     public static final Block SILVER_SAPLING = new SaplingBlock(new SilverWoodSaplingGenerator(),
             FabricBlockSettings.copyOf(Blocks.OAK_SAPLING)
-            .mapColor(DyeColor.LIGHT_GRAY));
+                    .mapColor(DyeColor.LIGHT_GRAY));
     public static Map<String, Block> BLOCKS = new LinkedHashMap<>();
 
     static {
         BLOCKS.put("infuse_table", INFUSING_TABLE_BLOCK);
+        BLOCKS.put("mana_filler", MANA_FILLER_BLOCK);
         BLOCKS.put("sculk_statue", SCULK_STATUE_BLOCK);
 
         BLOCKS.put("silver_log", SILVER_LOG);

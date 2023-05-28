@@ -1,0 +1,6 @@
+{
+  "type": "astelfa:mana_filler",
+  "input": { "item": "astelfa:matter6" },
+  "catalyst": { "item": "astelfa:philosophers_stone" },
+  "output": { "item": "minecraft:nether_star" }
+}

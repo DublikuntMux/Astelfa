@@ -1,7 +1,7 @@
 package com.dublikunt.astelfa.integration.emi;
 
 import com.dublikunt.astelfa.integration.AstelfaEmiPlugin;
-import com.dublikunt.astelfa.recipe.InfuseTableRecipe;
+import com.dublikunt.astelfa.recipe.ManaFillerRecipe;
 import dev.emi.emi.api.recipe.EmiRecipe;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import dev.emi.emi.api.render.EmiTexture;
@@ -14,24 +14,20 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class InfuseTableEmiRecipe implements EmiRecipe {
+public class ManaFillerEmiRecipe implements EmiRecipe {
     private final Identifier id;
     private final EmiStack output;
     private final List<EmiIngredient> inputs;
 
-    public InfuseTableEmiRecipe(@NotNull InfuseTableRecipe recipe) {
+    public ManaFillerEmiRecipe(@NotNull ManaFillerRecipe recipe) {
         this.id = recipe.getId();
-        this.inputs = List.of(EmiIngredient.of(recipe.getInputs().get(0)), EmiIngredient.of(recipe.getInputs().get(1)),
-                EmiIngredient.of(recipe.getInputs().get(2)), EmiIngredient.of(recipe.getInputs().get(3)),
-                EmiIngredient.of(recipe.getInputs().get(4)), EmiIngredient.of(recipe.getInputs().get(5)),
-                EmiIngredient.of(recipe.getInputs().get(6)), EmiIngredient.of(recipe.getInputs().get(7)),
-                EmiIngredient.of(recipe.getInputs().get(8)));
+        this.inputs = List.of(EmiIngredient.of(recipe.getInputs().get(0)), EmiIngredient.of(recipe.getInputs().get(1)));
         this.output = EmiStack.of(recipe.getOutput());
     }
 
     @Override
     public EmiRecipeCategory getCategory() {
-        return AstelfaEmiPlugin.INFUSE_CATEGORY;
+        return AstelfaEmiPlugin.MANA_CATEGORY;
     }
 
     @Override
@@ -61,15 +57,8 @@ public class InfuseTableEmiRecipe implements EmiRecipe {
 
     @Override
     public void addWidgets(@NotNull WidgetHolder widgets) {
-        widgets.addSlot(inputs.get(0), 33, 34);
-        widgets.addSlot(inputs.get(1), 33, 7);
-        widgets.addSlot(inputs.get(2), 51, 16);
-        widgets.addSlot(inputs.get(3), 60, 34);
-        widgets.addSlot(inputs.get(4), 51, 52);
-        widgets.addSlot(inputs.get(5), 33, 61);
-        widgets.addSlot(inputs.get(6), 15, 52);
-        widgets.addSlot(inputs.get(7), 6, 34);
-        widgets.addSlot(inputs.get(8), 15, 16);
+        widgets.addSlot(inputs.get(0), 43, 17);
+        widgets.addSlot(inputs.get(1), 43, 53);
 
         widgets.addTexture(EmiTexture.EMPTY_ARROW, 81, 34);
 
