@@ -1,5 +1,6 @@
-package com.dublikunt.astelfa.block;
+package com.dublikunt.astelfa.block.custom;
 
+import com.dublikunt.astelfa.block.ModBlockEntities;
 import com.dublikunt.astelfa.block.entity.InfuseTableBlockEntity;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
@@ -41,7 +42,7 @@ public class InfuseTableBlock extends BlockWithEntity implements BlockEntityProv
             ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get(),
             Block.createCuboidShape(0, 9, 0, 16, 11, 16), BooleanBiFunction.OR);
 
-    protected InfuseTableBlock(Settings settings) {
+    public InfuseTableBlock(Settings settings) {
         super(settings);
         setDefaultState(getDefaultState().with(WATERLOGGED, false));
     }

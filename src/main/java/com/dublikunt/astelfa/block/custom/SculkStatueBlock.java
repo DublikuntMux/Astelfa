@@ -1,4 +1,4 @@
-package com.dublikunt.astelfa.block;
+package com.dublikunt.astelfa.block.custom;
 
 import net.minecraft.block.*;
 import net.minecraft.fluid.FluidState;
@@ -54,7 +54,7 @@ public class SculkStatueBlock extends HorizontalFacingBlock implements Waterlogg
             Block.createCuboidShape(3, 24, 4, 11, 32, 12)
     ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get();
 
-    protected SculkStatueBlock(Settings settings) {
+    public SculkStatueBlock(Settings settings) {
         super(settings);
         setDefaultState(getDefaultState().with(WATERLOGGED, false));
     }

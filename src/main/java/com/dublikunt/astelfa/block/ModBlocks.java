@@ -1,5 +1,10 @@
 package com.dublikunt.astelfa.block;
 
+import com.dublikunt.astelfa.block.common.SparkleBlock;
+import com.dublikunt.astelfa.block.common.SparklePillarBlock;
+import com.dublikunt.astelfa.block.custom.InfuseTableBlock;
+import com.dublikunt.astelfa.block.custom.ManaFillerBlock;
+import com.dublikunt.astelfa.block.custom.SculkStatueBlock;
 import com.dublikunt.astelfa.helper.Helpers;
 import com.dublikunt.astelfa.item.ModItems;
 import com.dublikunt.astelfa.world.feature.tree.SilverWoodSaplingGenerator;
@@ -25,15 +30,15 @@ public class ModBlocks {
             FabricBlockSettings.of(Material.STONE).nonOpaque());
     public static final SculkStatueBlock SCULK_STATUE_BLOCK = new SculkStatueBlock(
             FabricBlockSettings.of(Material.SCULK).strength(3f).requiresTool().nonOpaque());
-    public static final Block SILVER_LOG = new PillarBlock(FabricBlockSettings.copyOf(Blocks.OAK_LOG)
-            .mapColor(DyeColor.LIGHT_GRAY));
-    public static final Block SILVER_WOOD = new PillarBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD)
-            .mapColor(DyeColor.LIGHT_GRAY));
-    public static final Block STRIPPED_SILVER_LOG = new PillarBlock(FabricBlockSettings.copyOf(Blocks.STRIPPED_OAK_LOG)
-            .mapColor(DyeColor.LIGHT_GRAY));
-    public static final Block STRIPPED_SILVER_WOOD = new PillarBlock(FabricBlockSettings.copyOf(Blocks.STRIPPED_OAK_WOOD)
-            .mapColor(DyeColor.LIGHT_GRAY));
-    public static final Block SILVER_PLANKS = new Block(FabricBlockSettings.copyOf(Blocks.OAK_PLANKS)
+    public static final SparklePillarBlock SILVER_LOG = new SparklePillarBlock(FabricBlockSettings.copyOf(
+            Blocks.OAK_LOG).mapColor(DyeColor.LIGHT_GRAY));
+    public static final SparklePillarBlock SILVER_WOOD = new SparklePillarBlock(FabricBlockSettings.copyOf(
+            Blocks.OAK_WOOD).mapColor(DyeColor.LIGHT_GRAY));
+    public static final SparklePillarBlock STRIPPED_SILVER_LOG = new SparklePillarBlock(FabricBlockSettings.copyOf(
+            Blocks.STRIPPED_OAK_LOG).mapColor(DyeColor.LIGHT_GRAY));
+    public static final SparklePillarBlock STRIPPED_SILVER_WOOD = new SparklePillarBlock(FabricBlockSettings.copyOf(
+            Blocks.STRIPPED_OAK_WOOD).mapColor(DyeColor.LIGHT_GRAY));
+    public static final SparkleBlock SILVER_PLANKS = new SparkleBlock(FabricBlockSettings.copyOf(Blocks.OAK_PLANKS)
             .mapColor(DyeColor.LIGHT_GRAY));
     public static final Block SILVER_LEAVES = new LeavesBlock(FabricBlockSettings.copyOf(Blocks.OAK_LEAVES)
             .mapColor(DyeColor.LIGHT_GRAY));

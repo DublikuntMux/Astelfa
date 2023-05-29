@@ -1,6 +1,6 @@
 package com.dublikunt.astelfa.block.entity;
 
-import com.dublikunt.astelfa.block.ManaFillerBlock;
+import com.dublikunt.astelfa.block.custom.ManaFillerBlock;
 import com.dublikunt.astelfa.block.ModBlockEntities;
 import com.dublikunt.astelfa.helper.InventoryImpl;
 import com.dublikunt.astelfa.networking.ModMessages;

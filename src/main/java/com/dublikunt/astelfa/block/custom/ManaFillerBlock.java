@@ -1,5 +1,6 @@
-package com.dublikunt.astelfa.block;
+package com.dublikunt.astelfa.block.custom;
 
+import com.dublikunt.astelfa.block.ModBlockEntities;
 import com.dublikunt.astelfa.block.entity.ManaFillerBlockEntity;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
@@ -41,7 +42,7 @@ public class ManaFillerBlock extends BlockWithEntity implements BlockEntityProvi
             Block.createCuboidShape(12.25, 10, 12, 14.25, 16, 14)
     ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get();
 
-    protected ManaFillerBlock(Settings settings) {
+    public ManaFillerBlock(Settings settings) {
         super(settings);
         setDefaultState(getDefaultState().with(WATERLOGGED, false));
     }

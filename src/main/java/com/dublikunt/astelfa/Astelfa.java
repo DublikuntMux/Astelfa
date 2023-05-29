@@ -29,7 +29,7 @@ public class Astelfa implements ModInitializer {
         GeckoLib.initialize();
 
         ModMessages.registerC2SPackets();
-        ModParticle.register();
+        ModParticle.registerServer();
         ModItems.register();
         ModBlocks.register();
         ModBlocks.registerFlammableBlocks();

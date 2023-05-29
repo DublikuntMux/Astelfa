@@ -1,6 +1,6 @@
 package com.dublikunt.astelfa.renderer.block;
 
-import com.dublikunt.astelfa.block.InfuseTableBlock;
+import com.dublikunt.astelfa.block.custom.InfuseTableBlock;
 import com.dublikunt.astelfa.block.entity.InfuseTableBlockEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.LightmapTextureManager;
