@@ -16,6 +16,6 @@ public class ModBlockEntities {
         INFUSE_TABLE_BLOCK_ENTITY_TYPE = Registry.register(Registries.BLOCK_ENTITY_TYPE, Helpers.id("infuse_table"),
                 FabricBlockEntityTypeBuilder.create(InfuseTableBlockEntity::new, ModBlocks.INFUSING_TABLE_BLOCK).build());
         MANA_FILLER_BLOCK_ENTITY_TYPE = Registry.register(Registries.BLOCK_ENTITY_TYPE, Helpers.id("mana_filler"),
-                FabricBlockEntityTypeBuilder.create(ManaFillerBlockEntity::new, ModBlocks.INFUSING_TABLE_BLOCK).build());
+                FabricBlockEntityTypeBuilder.create(ManaFillerBlockEntity::new, ModBlocks.MANA_FILLER_BLOCK).build());
     }
 }

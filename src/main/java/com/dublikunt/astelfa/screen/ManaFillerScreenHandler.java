@@ -24,7 +24,7 @@ public class ManaFillerScreenHandler extends ScreenHandler {
     }
 
     public ManaFillerScreenHandler(int syncId, @NotNull PlayerInventory playerInventory, BlockEntity entity, PropertyDelegate delegate) {
-        super(ModScreenHandlers.INFUSE_TABLE_SCREEN_HANDLER, syncId);
+        super(ModScreenHandlers.MANA_FILLER_SCREEN_HANDLER, syncId);
         this.inventory = (Inventory) entity;
         inventory.onOpen(playerInventory.player);
         this.propertyDelegate = delegate;

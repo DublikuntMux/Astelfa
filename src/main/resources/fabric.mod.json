@@ -8,9 +8,9 @@
     "dublikuntMax"
   ],
   "contact": {
-    "homepage": "https://github.com/DublikuntMux/Astelfa",
-    "sources": "https://github.com/DublikuntMux/Astelfa",
-    "issues": "https://github.com/DublikuntMux/Astelfa/issues"
+    "homepage": "https://github.com/DublikuntMux",
+    "sources": "https://github.com/DublikuntMux/AstelfaMod",
+    "issues": "https://github.com/DublikuntMux/AstelfaMod/issues"
   },
   "license": "BSD-3-Clause",
   "icon": "assets/astelfa/icon.png",

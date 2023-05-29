@@ -47,21 +47,21 @@ public class ManaFillerEmiRecipe implements EmiRecipe {
 
     @Override
     public int getDisplayWidth() {
-        return 139;
+        return 82;
     }
 
     @Override
     public int getDisplayHeight() {
-        return 80;
+        return 55;
     }
 
     @Override
     public void addWidgets(@NotNull WidgetHolder widgets) {
-        widgets.addSlot(inputs.get(0), 43, 17);
-        widgets.addSlot(inputs.get(1), 43, 53);
+        widgets.addSlot(inputs.get(0), 6, 4);
+        widgets.addSlot(inputs.get(1), 6, 31);
 
-        widgets.addTexture(EmiTexture.EMPTY_ARROW, 81, 34);
+        widgets.addTexture(EmiTexture.EMPTY_ARROW, 26, 16);
 
-        widgets.addSlot(output, 114, 34).recipeContext(this);
+        widgets.addSlot(output, 53, 18).recipeContext(this);
     }
 }

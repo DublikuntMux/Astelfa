@@ -22,9 +22,7 @@ public class ItemStackSyncS2CPacket {
 
         if (client.world.getBlockEntity(position) instanceof InfuseTableBlockEntity blockEntity) {
             blockEntity.setInventory(list);
-        }
-
-        if (client.world.getBlockEntity(position) instanceof ManaFillerBlockEntity blockEntity) {
+        } else if (client.world.getBlockEntity(position) instanceof ManaFillerBlockEntity blockEntity) {
             blockEntity.setInventory(list);
         }
     }

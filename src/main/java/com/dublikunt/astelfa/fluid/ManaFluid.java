@@ -41,28 +41,28 @@ public abstract class ManaFluid extends FlowableFluid {
     }
 
     @Override
-    public boolean canBeReplacedWith(FluidState state, BlockView world, BlockPos pos, Fluid fluid, Direction direction) {
-        return direction == Direction.DOWN && !fluid.isIn(FluidTags.WATER);
-    }
-
-    @Override
     protected int getLevelDecreasePerBlock(WorldView worldView) {
         return 1;
     }
 
     @Override
-    public int getTickRate(WorldView worldView) {
-        return 10;
-    }
-
-    @Override
-    protected float getBlastResistance() {
-        return 100f;
+    public boolean canBeReplacedWith(FluidState state, BlockView world, BlockPos pos, Fluid fluid, Direction direction) {
+        return direction == Direction.DOWN && !fluid.isIn(FluidTags.WATER);
     }
 
     @Override
     public int getLevel(FluidState state) {
         return 0;
+    }
+
+    @Override
+    public int getTickRate(WorldView worldView) {
+        return 5;
+    }
+
+    @Override
+    protected float getBlastResistance() {
+        return 100f;
     }
 
     @Override
@@ -99,7 +99,7 @@ public abstract class ManaFluid extends FlowableFluid {
 
         @Override
         public int getLevel(@NotNull FluidState state) {
-            return state.getLevel();
+            return state.get(LEVEL);
         }
 
         @Override
@@ -110,8 +110,8 @@ public abstract class ManaFluid extends FlowableFluid {
 
     public static class Still extends ManaFluid {
         @Override
-        public int getLevel(@NotNull FluidState state) {
-            return 15;
+        public int getLevel(FluidState state) {
+            return 8;
         }
 
         @Override

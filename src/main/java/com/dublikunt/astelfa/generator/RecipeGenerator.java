@@ -6,6 +6,7 @@ import com.dublikunt.astelfa.item.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
@@ -31,6 +32,17 @@ public class RecipeGenerator extends FabricRecipeProvider {
 
         offerWood(exporter, ModBlocks.SILVER_WOOD, ModBlocks.SILVER_LOG, ModBlocks.STRIPPED_SILVER_WOOD,
                 ModBlocks.STRIPPED_SILVER_LOG, ModBlocks.SILVER_PLANKS);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.MANA_FILLER_BLOCK)
+                .pattern("I I")
+                .pattern("WGW")
+                .pattern("WWW")
+                .input('G', Blocks.GLASS)
+                .input('W', ModBlocks.SILVER_LOG)
+                .input('I', Items.AMETHYST_SHARD)
+                .criterion(FabricRecipeProvider.hasItem(ModBlocks.SILVER_LOG),
+                        FabricRecipeProvider.conditionsFromItem(ModBlocks.SILVER_LOG))
+                .offerTo(exporter);
     }
 
     private void offerMatter(Consumer<RecipeJsonProvider> exporter, Item ringItem, Item inItem, Item output) {

@@ -16,17 +16,17 @@ import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
 
 public class AstelfaEmiPlugin implements EmiPlugin {
-    public static final Identifier SPRITE_SHEET = Helpers.id("textures/gui/emi_simplified.png");
+    public static final Identifier SPRITE_SHEET = Helpers.id("textures/gui/emi.png");
 
     public static final EmiStack INFUSE_TABLE = EmiStack.of(ModBlocks.INFUSING_TABLE_BLOCK);
-    public static final EmiStack MANA_FILLER = EmiStack.of(ModBlocks.INFUSING_TABLE_BLOCK);
+    public static final EmiStack MANA_FILLER = EmiStack.of(ModBlocks.MANA_FILLER_BLOCK);
 
     public static final EmiRecipeCategory INFUSE_CATEGORY
             = new EmiRecipeCategory(Helpers.id("infuse_table"), INFUSE_TABLE,
             new EmiTexture(SPRITE_SHEET, 0, 0, 16, 16));
     public static final EmiRecipeCategory MANA_CATEGORY
             = new EmiRecipeCategory(Helpers.id("mana_filler"), MANA_FILLER,
-            new EmiTexture(SPRITE_SHEET, 17, 0, 32, 32));
+            new EmiTexture(SPRITE_SHEET, 16, 0, 16, 16));
 
     @Override
     public void register(@NotNull EmiRegistry registry) {
