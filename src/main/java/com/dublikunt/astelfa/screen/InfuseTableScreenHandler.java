@@ -30,16 +30,16 @@ public class InfuseTableScreenHandler extends ScreenHandler {
         this.propertyDelegate = delegate;
         this.blockEntity = (InfuseTableBlockEntity) entity;
 
-        this.addSlot(new Slot(inventory, 0, 34, 35));
-        this.addSlot(new Slot(inventory, 1, 34, 8));
-        this.addSlot(new Slot(inventory, 2, 52, 17));
-        this.addSlot(new Slot(inventory, 3, 61, 35));
-        this.addSlot(new Slot(inventory, 4, 52, 53));
-        this.addSlot(new Slot(inventory, 5, 34, 62));
-        this.addSlot(new Slot(inventory, 6, 16, 53));
-        this.addSlot(new Slot(inventory, 7, 7, 35));
-        this.addSlot(new Slot(inventory, 8, 16, 17));
-        this.addSlot(new Slot(inventory, 9, 115, 35));
+        this.addSlot(new Slot(inventory, 0, 43, 35));
+        this.addSlot(new Slot(inventory, 1, 43, 8));
+        this.addSlot(new Slot(inventory, 2, 61, 17));
+        this.addSlot(new Slot(inventory, 3, 70, 35));
+        this.addSlot(new Slot(inventory, 4, 61, 53));
+        this.addSlot(new Slot(inventory, 5, 43, 62));
+        this.addSlot(new Slot(inventory, 6, 25, 53));
+        this.addSlot(new Slot(inventory, 7, 16, 35));
+        this.addSlot(new Slot(inventory, 8, 25, 17));
+        this.addSlot(new Slot(inventory, 9, 120, 35));
 
         for (int si = 0; si < 3; ++si)
             for (int sj = 0; sj < 9; ++sj)

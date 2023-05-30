@@ -45,3 +45,5 @@ public class Astelfa implements ModInitializer {
         Logger.debug("Mod loading complete!");
     }
 }
+
+// TODO: Add mana handling for mana filler

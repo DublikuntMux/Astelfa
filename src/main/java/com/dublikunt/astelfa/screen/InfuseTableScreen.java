@@ -36,7 +36,7 @@ public class InfuseTableScreen extends HandledScreen<InfuseTableScreenHandler> {
 
     private void renderProgressArrow(MatrixStack matrices, int x, int y) {
         if (handler.isCrafting()) {
-            drawTexture(matrices, x + 81, y + 38, 176, 0, handler.getScaledProgress(), 10);
+            drawTexture(matrices, x + 89, y + 38, 176, 0, handler.getScaledProgress(), 10);
         }
     }
 

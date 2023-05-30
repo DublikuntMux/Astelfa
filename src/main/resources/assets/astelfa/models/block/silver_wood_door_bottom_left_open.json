@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_bottom_left_open",
+  "textures": {
+    "bottom": "astelfa:block/silver_wood_door_bottom",
+    "top": "astelfa:block/silver_wood_door_top"
+  }
+}

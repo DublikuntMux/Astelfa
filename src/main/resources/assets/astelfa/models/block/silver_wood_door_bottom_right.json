@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_bottom_right",
+  "textures": {
+    "bottom": "astelfa:block/silver_wood_door_bottom",
+    "top": "minecraft:block/silver_wood_door_top"
+  }
+}

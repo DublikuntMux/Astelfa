@@ -30,9 +30,9 @@ public class ManaFillerScreenHandler extends ScreenHandler {
         this.propertyDelegate = delegate;
         this.blockEntity = (ManaFillerBlockEntity) entity;
 
-        this.addSlot(new Slot(inventory, 0, 43, 17));
-        this.addSlot(new Slot(inventory, 1, 43, 53));
-        this.addSlot(new Slot(inventory, 2, 120, 35));
+        this.addSlot(new Slot(inventory, 0, 52, 13) );
+        this.addSlot(new Slot(inventory, 1, 52, 58));
+        this.addSlot(new Slot(inventory, 2, 115, 35));
 
         for (int si = 0; si < 3; ++si)
             for (int sj = 0; sj < 9; ++sj)
@@ -50,7 +50,7 @@ public class ManaFillerScreenHandler extends ScreenHandler {
     public int getScaledProgress() {
         int progress = this.propertyDelegate.get(0);
         int maxProgress = this.propertyDelegate.get(1);
-        int progressArrowSize = 69;
+        int progressArrowSize = 54;
 
         return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
     }

@@ -21,8 +21,10 @@ public class ModelGenerator extends FabricModelProvider {
         blockStateModelGenerator.registerLog(ModBlocks.STRIPPED_SILVER_LOG).log(ModBlocks.STRIPPED_SILVER_LOG)
                 .wood(ModBlocks.STRIPPED_SILVER_WOOD);
 
-        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.SILVER_PLANKS);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.SILVER_LEAVES);
+        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.SILVER_PLANKS);
+        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.CARVED_SILVER_WOOD);
+
         blockStateModelGenerator.registerTintableCross(ModBlocks.SILVER_SAPLING, BlockStateModelGenerator.TintType.NOT_TINTED);
 
     }

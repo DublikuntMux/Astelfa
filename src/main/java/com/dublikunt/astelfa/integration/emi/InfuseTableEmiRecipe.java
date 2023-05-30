@@ -51,28 +51,28 @@ public class InfuseTableEmiRecipe implements EmiRecipe {
 
     @Override
     public int getDisplayWidth() {
-        return 139;
+        return 118;
     }
 
     @Override
     public int getDisplayHeight() {
-        return 80;
+        return 72;
     }
 
     @Override
     public void addWidgets(@NotNull WidgetHolder widgets) {
-        widgets.addSlot(inputs.get(0), 33, 34);
-        widgets.addSlot(inputs.get(1), 33, 7);
-        widgets.addSlot(inputs.get(2), 51, 16);
-        widgets.addSlot(inputs.get(3), 60, 34);
-        widgets.addSlot(inputs.get(4), 51, 52);
-        widgets.addSlot(inputs.get(5), 33, 61);
-        widgets.addSlot(inputs.get(6), 15, 52);
-        widgets.addSlot(inputs.get(7), 6, 34);
-        widgets.addSlot(inputs.get(8), 15, 16);
+        widgets.addSlot(inputs.get(0), 27, 27);
+        widgets.addSlot(inputs.get(1), 27, 0);
+        widgets.addSlot(inputs.get(2), 45, 9);
+        widgets.addSlot(inputs.get(3), 54, 27);
+        widgets.addSlot(inputs.get(4), 45, 45);
+        widgets.addSlot(inputs.get(5), 27, 54);
+        widgets.addSlot(inputs.get(6), 9, 45);
+        widgets.addSlot(inputs.get(7), 0, 27);
+        widgets.addSlot(inputs.get(8), 9, 9);
 
-        widgets.addTexture(EmiTexture.EMPTY_ARROW, 81, 34);
+        widgets.addTexture(EmiTexture.EMPTY_ARROW, 74, 27);
 
-        widgets.addSlot(output, 114, 34).recipeContext(this);
+        widgets.addSlot(output, 100, 27).recipeContext(this);
     }
 }

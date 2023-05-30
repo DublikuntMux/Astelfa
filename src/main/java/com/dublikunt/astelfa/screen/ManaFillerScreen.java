@@ -36,7 +36,7 @@ public class ManaFillerScreen extends HandledScreen<ManaFillerScreenHandler> {
 
     private void renderProgressArrow(MatrixStack matrices, int x, int y) {
         if (handler.isCrafting()) {
-            drawTexture(matrices, x + 47, y + 36, 176, 0, handler.getScaledProgress(), 13);
+            drawTexture(matrices, x + 56, y + 31, 176, 0, handler.getScaledProgress(), 25);
         }
     }
 

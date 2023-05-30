@@ -34,8 +34,19 @@
   "block.astelfa.stripped_silver_log": "Stripped silver log",
   "block.astelfa.stripped_silver_wood": "Stripped silver wood",
   "block.astelfa.silver_planks": "Silver wood planks",
+  "block.astelfa.carved_silver_wood": "Carved silver planks",
   "block.astelfa.silver_leaves": "Silver wood leaves",
   "block.astelfa.silver_sapling": "Silver wood sapling",
+  "block.astelfa.silver_wood_button": "Silver wood button",
+  "block.astelfa.silver_wood_door": "Silver wood door",
+  "block.astelfa.silver_wood_trapdoor": "Silver wood trapdoor",
+  "block.astelfa.silver_wood_pressure_pate": "Silver wood pressure pate",
+  "block.astelfa.silver_wood_fence": "Silver wood fence",
+  "block.astelfa.silver_wood_fence_gate": "Silver wood fence gate",
+  "block.astelfa.mana_fluid_block": "Mana",
+
+  "fluid.astelfa.mana_fluid": "Mana",
+  "fluid.astelfa.flowing_mana_fluid": "Mana",
 
   "entity.astelfa.irritant": "Irritant",
 

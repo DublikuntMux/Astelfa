@@ -60,7 +60,7 @@ public class ManaFillerEmiRecipe implements EmiRecipe {
         widgets.addSlot(inputs.get(0), 6, 4);
         widgets.addSlot(inputs.get(1), 6, 31);
 
-        widgets.addTexture(EmiTexture.EMPTY_ARROW, 26, 17);
+        widgets.addTexture(EmiTexture.EMPTY_ARROW, 26, 18);
 
         widgets.addSlot(output, 53, 18).recipeContext(this);
     }

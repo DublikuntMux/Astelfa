@@ -1,7 +1,8 @@
 package com.dublikunt.astelfa.block;
 
-import com.dublikunt.astelfa.block.common.SparkleBlock;
+import com.dublikunt.astelfa.block.common.SparkleLeavesBlock;
 import com.dublikunt.astelfa.block.common.SparklePillarBlock;
+import com.dublikunt.astelfa.block.common.SparkleSaplingBlock;
 import com.dublikunt.astelfa.block.custom.InfuseTableBlock;
 import com.dublikunt.astelfa.block.custom.ManaFillerBlock;
 import com.dublikunt.astelfa.block.custom.SculkStatueBlock;
@@ -18,6 +19,7 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.DyeColor;
 
 import java.util.LinkedHashMap;
@@ -30,6 +32,7 @@ public class ModBlocks {
             FabricBlockSettings.of(Material.STONE).nonOpaque());
     public static final SculkStatueBlock SCULK_STATUE_BLOCK = new SculkStatueBlock(
             FabricBlockSettings.of(Material.SCULK).strength(3f).requiresTool().nonOpaque());
+
     public static final SparklePillarBlock SILVER_LOG = new SparklePillarBlock(FabricBlockSettings.copyOf(
             Blocks.OAK_LOG).mapColor(DyeColor.LIGHT_GRAY));
     public static final SparklePillarBlock SILVER_WOOD = new SparklePillarBlock(FabricBlockSettings.copyOf(
@@ -38,13 +41,32 @@ public class ModBlocks {
             Blocks.STRIPPED_OAK_LOG).mapColor(DyeColor.LIGHT_GRAY));
     public static final SparklePillarBlock STRIPPED_SILVER_WOOD = new SparklePillarBlock(FabricBlockSettings.copyOf(
             Blocks.STRIPPED_OAK_WOOD).mapColor(DyeColor.LIGHT_GRAY));
-    public static final SparkleBlock SILVER_PLANKS = new SparkleBlock(FabricBlockSettings.copyOf(Blocks.OAK_PLANKS)
+    public static final SparkleLeavesBlock SILVER_LEAVES = new SparkleLeavesBlock(FabricBlockSettings.copyOf(Blocks.OAK_LEAVES)
             .mapColor(DyeColor.LIGHT_GRAY));
-    public static final Block SILVER_LEAVES = new LeavesBlock(FabricBlockSettings.copyOf(Blocks.OAK_LEAVES)
-            .mapColor(DyeColor.LIGHT_GRAY));
-    public static final Block SILVER_SAPLING = new SaplingBlock(new SilverWoodSaplingGenerator(),
+    public static final SparkleSaplingBlock SILVER_SAPLING = new SparkleSaplingBlock(new SilverWoodSaplingGenerator(),
             FabricBlockSettings.copyOf(Blocks.OAK_SAPLING)
                     .mapColor(DyeColor.LIGHT_GRAY));
+
+    public static final Block SILVER_PLANKS = new Block(FabricBlockSettings.copyOf(Blocks.OAK_PLANKS)
+            .mapColor(DyeColor.LIGHT_GRAY));
+    public static final Block CARVED_SILVER_WOOD = new Block(FabricBlockSettings.copyOf(Blocks.OAK_PLANKS)
+            .mapColor(DyeColor.LIGHT_GRAY));
+    public static final ButtonBlock SILVER_WOOD_BUTTON = new ButtonBlock(FabricBlockSettings.of(Material.WOOD)
+            .noCollision().strength(0.5F), BlockSetType.OAK, 30, true);
+    public static final DoorBlock SILVER_WOOD_DOOR = new DoorBlock(FabricBlockSettings.of(Material.WOOD,
+            SILVER_PLANKS.getDefaultMapColor()).strength(3.0F).nonOpaque(), BlockSetType.OAK);
+    public static final TrapdoorBlock SILVER_WOOD_TRAPDOOR = new TrapdoorBlock(FabricBlockSettings.of(Material.WOOD,
+            SILVER_PLANKS.getDefaultMapColor()).strength(3.0F).nonOpaque(), BlockSetType.OAK);
+    public static final PressurePlateBlock SILVER_WOOD_PRESSURE_PLATE = new PressurePlateBlock(
+            PressurePlateBlock.ActivationRule.EVERYTHING,
+            FabricBlockSettings.of(Material.WOOD, SILVER_PLANKS.getDefaultMapColor()).noCollision().strength(0.5F),
+            BlockSetType.OAK
+    );
+    public static final FenceBlock SILVER_WOOD_FENCE = new FenceBlock(FabricBlockSettings.of(Material.WOOD,
+            SILVER_PLANKS.getDefaultMapColor()).strength(2.0F, 3.0F).sounds(BlockSoundGroup.WOOD));
+    public static final FenceGateBlock SILVER_WOOD_FENCE_GATE = new FenceGateBlock(FabricBlockSettings.of(Material.WOOD,
+            SILVER_PLANKS.getDefaultMapColor()).strength(2.0F, 3.0F), WoodType.OAK);
+
     public static Map<String, Block> BLOCKS = new LinkedHashMap<>();
 
     static {
@@ -56,9 +78,17 @@ public class ModBlocks {
         BLOCKS.put("silver_wood", SILVER_WOOD);
         BLOCKS.put("stripped_silver_log", STRIPPED_SILVER_LOG);
         BLOCKS.put("stripped_silver_wood", STRIPPED_SILVER_WOOD);
-        BLOCKS.put("silver_planks", SILVER_PLANKS);
         BLOCKS.put("silver_leaves", SILVER_LEAVES);
         BLOCKS.put("silver_sapling", SILVER_SAPLING);
+
+        BLOCKS.put("silver_planks", SILVER_PLANKS);
+        BLOCKS.put("carved_silver_wood", CARVED_SILVER_WOOD);
+        BLOCKS.put("silver_wood_button", SILVER_WOOD_BUTTON);
+        BLOCKS.put("silver_wood_door", SILVER_WOOD_DOOR);
+        BLOCKS.put("silver_wood_trapdoor", SILVER_WOOD_TRAPDOOR);
+        BLOCKS.put("silver_wood_pressure_plate", SILVER_WOOD_PRESSURE_PLATE);
+        BLOCKS.put("silver_wood_fence", SILVER_WOOD_FENCE);
+        BLOCKS.put("silver_wood_fence_gate", SILVER_WOOD_FENCE_GATE);
     }
 
     public static void register() {
@@ -77,10 +107,17 @@ public class ModBlocks {
         registry.add(SILVER_WOOD, 5, 5);
         registry.add(STRIPPED_SILVER_LOG, 5, 5);
         registry.add(STRIPPED_SILVER_WOOD, 5, 5);
-
-        registry.add(SILVER_PLANKS, 5, 20);
         registry.add(SILVER_LEAVES, 30, 60);
         registry.add(SILVER_SAPLING, 5, 20);
+
+        registry.add(SILVER_PLANKS, 5, 20);
+        registry.add(CARVED_SILVER_WOOD, 5, 20);
+        registry.add(SILVER_WOOD_BUTTON, 5, 20);
+        registry.add(SILVER_WOOD_DOOR, 5, 20);
+        registry.add(SILVER_WOOD_TRAPDOOR, 5, 20);
+        registry.add(SILVER_WOOD_PRESSURE_PLATE, 5, 20);
+        registry.add(SILVER_WOOD_FENCE, 5, 20);
+        registry.add(SILVER_WOOD_FENCE_GATE, 5, 20);
     }
 
     public static void registerStrippables() {
