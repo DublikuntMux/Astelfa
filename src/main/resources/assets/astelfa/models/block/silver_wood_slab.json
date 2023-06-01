@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "astelfa:block/silver_planks",
+    "top": "astelfa:block/silver_planks",
+    "side": "astelfa:block/silver_planks"
+  }
+}

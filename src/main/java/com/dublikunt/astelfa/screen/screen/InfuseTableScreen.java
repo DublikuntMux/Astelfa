@@ -1,6 +1,7 @@
-package com.dublikunt.astelfa.screen;
+package com.dublikunt.astelfa.screen.screen;
 
 import com.dublikunt.astelfa.helper.Helpers;
+import com.dublikunt.astelfa.screen.handler.InfuseTableScreenHandler;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.util.math.MatrixStack;
@@ -8,10 +9,10 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
-public class ManaFillerScreen extends HandledScreen<ManaFillerScreenHandler> {
-    private static final Identifier TEXTURE = Helpers.id("textures/gui/mana_filler.png");
+public class InfuseTableScreen extends HandledScreen<InfuseTableScreenHandler> {
+    private static final Identifier TEXTURE = Helpers.id("textures/gui/infuse_table.png");
 
-    public ManaFillerScreen(ManaFillerScreenHandler handler, PlayerInventory inventory, Text title) {
+    public InfuseTableScreen(InfuseTableScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
     }
 
@@ -36,7 +37,7 @@ public class ManaFillerScreen extends HandledScreen<ManaFillerScreenHandler> {
 
     private void renderProgressArrow(MatrixStack matrices, int x, int y) {
         if (handler.isCrafting()) {
-            drawTexture(matrices, x + 56, y + 31, 176, 0, handler.getScaledProgress(), 25);
+            drawTexture(matrices, x + 89, y + 38, 176, 0, handler.getScaledProgress(), 10);
         }
     }
 

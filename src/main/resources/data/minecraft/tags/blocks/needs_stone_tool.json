@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "astelfa:mana_filler",
+
+    "#astelfa:silver_wood",
+    "astelfa:silver_planks",
+    "astelfa:carved_silver_wood",
+    "astelfa:silver_wood_button",
+    "astelfa:silver_wood_door",
+    "astelfa:silver_wood_trapdoor",
+    "astelfa:silver_wood_pressure_plate",
+    "astelfa:silver_wood_fence",
+    "astelfa:silver_wood_fence_gate"
+  ]
+}

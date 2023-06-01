@@ -1,6 +1,7 @@
-package com.dublikunt.astelfa.screen;
+package com.dublikunt.astelfa.screen.handler;
 
 import com.dublikunt.astelfa.block.entity.ManaFillerBlockEntity;
+import com.dublikunt.astelfa.screen.ModScreenHandlers;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -30,7 +31,7 @@ public class ManaFillerScreenHandler extends ScreenHandler {
         this.propertyDelegate = delegate;
         this.blockEntity = (ManaFillerBlockEntity) entity;
 
-        this.addSlot(new Slot(inventory, 0, 52, 13) );
+        this.addSlot(new Slot(inventory, 0, 52, 13));
         this.addSlot(new Slot(inventory, 1, 52, 58));
         this.addSlot(new Slot(inventory, 2, 115, 35));
 

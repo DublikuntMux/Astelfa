@@ -1,6 +1,7 @@
-package com.dublikunt.astelfa.screen;
+package com.dublikunt.astelfa.screen.handler;
 
 import com.dublikunt.astelfa.block.entity.InfuseTableBlockEntity;
+import com.dublikunt.astelfa.screen.ModScreenHandlers;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;

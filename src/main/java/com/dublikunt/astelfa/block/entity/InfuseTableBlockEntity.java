@@ -1,11 +1,11 @@
 package com.dublikunt.astelfa.block.entity;
 
-import com.dublikunt.astelfa.block.custom.InfuseTableBlock;
 import com.dublikunt.astelfa.block.ModBlockEntities;
+import com.dublikunt.astelfa.block.custom.InfuseTableBlock;
 import com.dublikunt.astelfa.helper.InventoryImpl;
 import com.dublikunt.astelfa.networking.ModMessages;
 import com.dublikunt.astelfa.recipe.InfuseTableRecipe;
-import com.dublikunt.astelfa.screen.InfuseTableScreenHandler;
+import com.dublikunt.astelfa.screen.handler.InfuseTableScreenHandler;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;

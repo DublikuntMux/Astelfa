@@ -10,6 +10,8 @@
     "astelfa:matter5",
     "astelfa:matter6",
     "astelfa:mana_filler",
+    "astelfa:infuse_table",
+
     "astelfa:carved_silver_wood",
     "astelfa:block.astelfa.silver_planks_1",
     "astelfa:silver_wood_button",
@@ -20,6 +22,8 @@
     "astelfa:silver_wood_fence_gate",
     "astelfa:stripped_silver_wood",
     "astelfa:silver_wood",
+    "astelfa:silver_wood_stairs",
+    "astelfa:silver_wood_slab",
 
     "astelfa:philosophers_stone_infuse_table"
   ]

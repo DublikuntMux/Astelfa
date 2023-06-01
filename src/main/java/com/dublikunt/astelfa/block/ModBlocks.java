@@ -66,6 +66,10 @@ public class ModBlocks {
             SILVER_PLANKS.getDefaultMapColor()).strength(2.0F, 3.0F).sounds(BlockSoundGroup.WOOD));
     public static final FenceGateBlock SILVER_WOOD_FENCE_GATE = new FenceGateBlock(FabricBlockSettings.of(Material.WOOD,
             SILVER_PLANKS.getDefaultMapColor()).strength(2.0F, 3.0F), WoodType.OAK);
+    public static final StairsBlock SILVER_WOOD_STAIRS = new StairsBlock(SILVER_PLANKS.getDefaultState(),
+            FabricBlockSettings.copyOf(SILVER_PLANKS));
+    public static final SlabBlock SILVER_WOOD_SLAB = new SlabBlock(FabricBlockSettings.of(Material.WOOD,
+            SILVER_PLANKS.getDefaultMapColor()).requiresTool().strength(1.5F, 6.0F));
 
     public static Map<String, Block> BLOCKS = new LinkedHashMap<>();
 
@@ -89,6 +93,8 @@ public class ModBlocks {
         BLOCKS.put("silver_wood_pressure_plate", SILVER_WOOD_PRESSURE_PLATE);
         BLOCKS.put("silver_wood_fence", SILVER_WOOD_FENCE);
         BLOCKS.put("silver_wood_fence_gate", SILVER_WOOD_FENCE_GATE);
+        BLOCKS.put("silver_wood_stairs", SILVER_WOOD_STAIRS);
+        BLOCKS.put("silver_wood_slab", SILVER_WOOD_SLAB);
     }
 
     public static void register() {
@@ -118,6 +124,8 @@ public class ModBlocks {
         registry.add(SILVER_WOOD_PRESSURE_PLATE, 5, 20);
         registry.add(SILVER_WOOD_FENCE, 5, 20);
         registry.add(SILVER_WOOD_FENCE_GATE, 5, 20);
+        registry.add(SILVER_WOOD_STAIRS, 5, 20);
+        registry.add(SILVER_WOOD_SLAB, 5, 20);
     }
 
     public static void registerStrippables() {
