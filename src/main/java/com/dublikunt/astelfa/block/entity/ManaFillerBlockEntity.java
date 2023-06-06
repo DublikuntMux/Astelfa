@@ -264,9 +264,17 @@ public class ManaFillerBlockEntity extends BlockEntity implements ExtendedScreen
     }
 
     private static void extractFluid(@NotNull ManaFillerBlockEntity entity) {
+        SimpleInventory inventory = new SimpleInventory(entity.size());
+        for (int i = 0; i < entity.size(); i++) {
+            inventory.setStack(i, entity.getStack(i));
+        }
+
+        Optional<ManaFillerRecipe> match = entity.getWorld().getRecipeManager()
+                .getFirstMatch(ManaFillerRecipe.Type.INSTANCE, inventory, entity.getWorld());
+
         try(Transaction transaction = Transaction.openOuter()) {
             entity.fluidStorage.extract(FluidVariant.of(ModFluids.STILL_MANA_FLUID),
-                    500, transaction);
+                    match.get().getManaAmount(), transaction);
             transaction.commit();
         }
     }

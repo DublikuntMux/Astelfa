@@ -36,10 +36,11 @@ public class ModItems {
             .formatted(Formatting.DARK_PURPLE), new FabricItemSettings().rarity(Rarity.EPIC));
     public static final TooltipItem MATTER_6 = new TooltipItem(Text.translatable("item.astelfa.matter.tooltip")
             .formatted(Formatting.WHITE), new FabricItemSettings().rarity(Rarity.EPIC));
+    public static final TooltipItem MANA_INGOT = new TooltipItem(Text.translatable("item.astelfa.mana_ingot.tooltip"),
+            new FabricItemSettings());
 
     public static final HartRing HART_RING = new HartRing(new FabricItemSettings().rarity(Rarity.RARE));
     public static final AdosChains ADOS_CHAINS = new AdosChains(new FabricItemSettings().rarity(Rarity.RARE));
-
     public static final RingBelt RING_BELT = new RingBelt(new FabricItemSettings());
 
     public static final PhilosophersStone PHILOSOPHERS_STONE = new PhilosophersStone(new FabricItemSettings().rarity(Rarity.RARE).maxCount(1));
@@ -57,6 +58,7 @@ public class ModItems {
         ITEMS.put("matter4", MATTER_4);
         ITEMS.put("matter5", MATTER_5);
         ITEMS.put("matter6", MATTER_6);
+        ITEMS.put("mana_ingot", MANA_INGOT);
         ITEMS.put("hart_ring", HART_RING);
         ITEMS.put("ados_chains", ADOS_CHAINS);
         ITEMS.put("philosophers_stone", PHILOSOPHERS_STONE);

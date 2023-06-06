@@ -37,6 +37,7 @@ public class ModelGenerator extends FabricModelProvider {
         itemModelGenerator.register(ModItems.MATTER_4, Models.GENERATED);
         itemModelGenerator.register(ModItems.MATTER_5, Models.GENERATED);
         itemModelGenerator.register(ModItems.MATTER_6, Models.GENERATED);
+        itemModelGenerator.register(ModItems.MANA_INGOT, Models.GENERATED);
         itemModelGenerator.register(ModItems.ADOS_CHAINS, Models.GENERATED);
         itemModelGenerator.register(ModItems.HART_RING, Models.GENERATED);
         itemModelGenerator.register(ModItems.RING_BELT, Models.GENERATED);

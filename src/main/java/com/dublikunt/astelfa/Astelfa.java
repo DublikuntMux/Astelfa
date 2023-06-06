@@ -5,6 +5,7 @@ import com.dublikunt.astelfa.block.ModBlocks;
 import com.dublikunt.astelfa.enchantment.ModEnchantments;
 import com.dublikunt.astelfa.entity.ModEntitys;
 import com.dublikunt.astelfa.fluid.ModFluids;
+import com.dublikunt.astelfa.generator.LootTableModifiers;
 import com.dublikunt.astelfa.helper.Logger;
 import com.dublikunt.astelfa.item.ModItems;
 import com.dublikunt.astelfa.networking.ModMessages;
@@ -41,6 +42,7 @@ public class Astelfa implements ModInitializer {
         ModScreenHandlers.registry();
         ModWorldGen.generateWorldGen();
         ModFluids.register();
+        LootTableModifiers.modifyLootTables();
 
         Logger.debug("Mod loading complete!");
     }

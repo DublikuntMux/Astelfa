@@ -39,6 +39,12 @@
     "minecraft": "${minecraft_version}",
     "fabricloader": ">=${loader_version}",
     "fabric": "*",
-    "trinkets": "*"
+    "trinkets": ">=3.6.0",
+    "geckolib": ">=4.1.3"
+  },
+  "suggests": {
+    "modmenu": ">=6.2.2",
+    "emi": ">=1.0.1",
+    "cloth-config": ">=10.0.96"
   }
 }

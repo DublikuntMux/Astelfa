@@ -12,9 +12,11 @@
   "item.astelfa.matter4": "Blue matter",
   "item.astelfa.matter5": "Purple matter",
   "item.astelfa.matter6": "White matter",
-  "item.astelfa.matter.tooltip": "I am everything and nothing",
+  "item.astelfa.matter.tooltip": "I am everything and nothing.",
+  "item.astelfa.mana_ingot": "Mana ingot",
+  "item.astelfa.mana_ingot.tooltip": "100% less water.",
   "item.astelfa.philosophers_stone": "Philosopher's Stone",
-  "item.astelfa.philosophers_stone.tooltip": "Let your imagination run wild",
+  "item.astelfa.philosophers_stone.tooltip": "Let your imagination run wild.",
   "item.astelfa.mana_bucket": "Bucket of mana",
 
   "item.astelfa.hart_ring": "Hart ring",
@@ -43,6 +45,8 @@
   "block.astelfa.silver_wood_pressure_pate": "Silver wood pressure pate",
   "block.astelfa.silver_wood_fence": "Silver wood fence",
   "block.astelfa.silver_wood_fence_gate": "Silver wood fence gate",
+  "block.astelfa.silver_wood_stairs": "Silver wood stairs",
+  "block.astelfa.silver_wood_slab": "Silver wood slab",
   "block.astelfa.mana_fluid_block": "Mana",
   "block.astelfa.mana_fluid": "Mana",
 
