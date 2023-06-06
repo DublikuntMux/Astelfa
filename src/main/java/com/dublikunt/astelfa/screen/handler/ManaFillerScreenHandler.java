@@ -1,6 +1,7 @@
 package com.dublikunt.astelfa.screen.handler;
 
 import com.dublikunt.astelfa.block.entity.ManaFillerBlockEntity;
+import com.dublikunt.astelfa.helper.FluidStack;
 import com.dublikunt.astelfa.screen.ModScreenHandlers;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -17,6 +18,7 @@ import org.jetbrains.annotations.NotNull;
 public class ManaFillerScreenHandler extends ScreenHandler {
     public final ManaFillerBlockEntity blockEntity;
     private final Inventory inventory;
+    public FluidStack fluidStack;
     private final PropertyDelegate propertyDelegate;
 
     public ManaFillerScreenHandler(int syncId, PlayerInventory inventory, @NotNull PacketByteBuf packetByteBuf) {
@@ -28,12 +30,14 @@ public class ManaFillerScreenHandler extends ScreenHandler {
         super(ModScreenHandlers.MANA_FILLER_SCREEN_HANDLER, syncId);
         this.inventory = (Inventory) entity;
         inventory.onOpen(playerInventory.player);
-        this.propertyDelegate = delegate;
         this.blockEntity = (ManaFillerBlockEntity) entity;
+        this.fluidStack = new FluidStack(blockEntity.fluidStorage.variant, blockEntity.fluidStorage.amount);
+        this.propertyDelegate = delegate;
 
-        this.addSlot(new Slot(inventory, 0, 52, 13));
-        this.addSlot(new Slot(inventory, 1, 52, 58));
-        this.addSlot(new Slot(inventory, 2, 115, 35));
+        this.addSlot(new Slot(inventory, 0, 72, 13));
+        this.addSlot(new Slot(inventory, 1, 72, 58));
+        this.addSlot(new Slot(inventory, 2, 135, 35));
+        this.addSlot(new Slot(inventory, 3, 8, 35));
 
         for (int si = 0; si < 3; ++si)
             for (int sj = 0; sj < 9; ++sj)
@@ -42,6 +46,10 @@ public class ManaFillerScreenHandler extends ScreenHandler {
             this.addSlot(new Slot(playerInventory, si, 8 + si * 18, 142));
 
         addProperties(delegate);
+    }
+
+    public void setFluid(FluidStack stack) {
+        fluidStack = stack;
     }
 
     public boolean isCrafting() {

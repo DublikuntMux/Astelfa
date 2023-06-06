@@ -44,12 +44,17 @@
   "block.astelfa.silver_wood_fence": "Silver wood fence",
   "block.astelfa.silver_wood_fence_gate": "Silver wood fence gate",
   "block.astelfa.mana_fluid_block": "Mana",
+  "block.astelfa.mana_fluid": "Mana",
 
   "fluid.astelfa.mana_fluid": "Mana",
   "fluid.astelfa.flowing_mana_fluid": "Mana",
 
+  "block.astelfa.mana_filler.tooltip.amount_capacity": "%s / %s mB",
+  "block.astelfa.mana_filler.tooltip.amount": "%s mB",
+
   "entity.astelfa.irritant": "Irritant",
 
   "emi.category.astelfa.infuse_table": "Infusing",
-  "emi.category.astelfa.mana_filler": "Mana filling"
+  "emi.category.astelfa.mana_filler": "Mana filling",
+  "emi.astelfa.mana_amount": "%s mB of Mana"
 }

@@ -16,11 +16,13 @@ public class ManaFillerRecipe implements Recipe<SimpleInventory> {
     private final Identifier id;
     private final ItemStack output;
     private final DefaultedList<Ingredient> recipeItems;
+    private final int manaAmount;
 
-    public ManaFillerRecipe(Identifier id, ItemStack output, DefaultedList<Ingredient> recipeItems) {
+    public ManaFillerRecipe(Identifier id, ItemStack output, DefaultedList<Ingredient> recipeItems, int manaAmount) {
         this.id = id;
         this.output = output;
         this.recipeItems = recipeItems;
+        this.manaAmount = manaAmount;
     }
 
     @Override
@@ -55,6 +57,10 @@ public class ManaFillerRecipe implements Recipe<SimpleInventory> {
         return id;
     }
 
+    public int getManaAmount(){
+        return manaAmount;
+    }
+
     public DefaultedList<Ingredient> getInputs() {
         return this.recipeItems;
     }
@@ -80,6 +86,7 @@ public class ManaFillerRecipe implements Recipe<SimpleInventory> {
     static class ManaFillerRecipeJsonFormat {
         JsonObject input;
         JsonObject catalyst;
+        Integer mana_amount;
         JsonObject output;
     }
 
@@ -96,7 +103,7 @@ public class ManaFillerRecipe implements Recipe<SimpleInventory> {
             inputs.set(0, Ingredient.fromJson(recipeJson.input));
             inputs.set(1, Ingredient.fromJson(recipeJson.catalyst));
 
-            return new ManaFillerRecipe(id, output, inputs);
+            return new ManaFillerRecipe(id, output, inputs, recipeJson.mana_amount);
         }
 
         @Override
@@ -104,9 +111,8 @@ public class ManaFillerRecipe implements Recipe<SimpleInventory> {
             DefaultedList<Ingredient> inputs = DefaultedList.ofSize(buf.readInt(), Ingredient.EMPTY);
 
             inputs.replaceAll(ignored -> Ingredient.fromPacket(buf));
-
             ItemStack output = buf.readItemStack();
-            return new ManaFillerRecipe(id, output, inputs);
+            return new ManaFillerRecipe(id, output, inputs, buf.readInt());
         }
 
         @Override

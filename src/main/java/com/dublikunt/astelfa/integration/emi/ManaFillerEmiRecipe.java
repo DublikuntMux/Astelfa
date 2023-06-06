@@ -8,6 +8,7 @@ import dev.emi.emi.api.render.EmiTexture;
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.WidgetHolder;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -18,11 +19,13 @@ public class ManaFillerEmiRecipe implements EmiRecipe {
     private final Identifier id;
     private final EmiStack output;
     private final List<EmiIngredient> inputs;
+    private final int manaAmount;
 
     public ManaFillerEmiRecipe(@NotNull ManaFillerRecipe recipe) {
         this.id = recipe.getId();
         this.inputs = List.of(EmiIngredient.of(recipe.getInputs().get(0)), EmiIngredient.of(recipe.getInputs().get(1)));
         this.output = EmiStack.of(recipe.getOutput());
+        this.manaAmount = recipe.getManaAmount();
     }
 
     @Override
@@ -47,7 +50,7 @@ public class ManaFillerEmiRecipe implements EmiRecipe {
 
     @Override
     public int getDisplayWidth() {
-        return 82;
+        return 105;
     }
 
     @Override
@@ -63,5 +66,6 @@ public class ManaFillerEmiRecipe implements EmiRecipe {
         widgets.addTexture(EmiTexture.EMPTY_ARROW, 26, 18);
 
         widgets.addSlot(output, 53, 18).recipeContext(this);
+        widgets.addText(Text.translatable("emi.astelfa.mana_amount", manaAmount), 26, 45, 212121, false);
     }
 }
