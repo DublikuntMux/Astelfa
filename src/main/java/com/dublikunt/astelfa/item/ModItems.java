@@ -3,7 +3,7 @@ package com.dublikunt.astelfa.item;
 import com.dublikunt.astelfa.entity.ModEntitys;
 import com.dublikunt.astelfa.helper.Helpers;
 import com.dublikunt.astelfa.item.animated.PhilosophersStone;
-import com.dublikunt.astelfa.item.matter.*;
+import com.dublikunt.astelfa.item.common.TooltipItem;
 import com.dublikunt.astelfa.item.trinket.AdosChains;
 import com.dublikunt.astelfa.item.trinket.HartRing;
 import com.dublikunt.astelfa.item.trinket.RingBelt;
@@ -16,18 +16,26 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.SpawnEggItem;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Rarity;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class ModItems {
-    public static final Matter1 MATTER_1 = new Matter1(new FabricItemSettings());
-    public static final Matter2 MATTER_2 = new Matter2(new FabricItemSettings());
-    public static final Matter3 MATTER_3 = new Matter3(new FabricItemSettings().rarity(Rarity.RARE));
-    public static final Matter4 MATTER_4 = new Matter4(new FabricItemSettings().rarity(Rarity.RARE));
-    public static final Matter5 MATTER_5 = new Matter5(new FabricItemSettings().rarity(Rarity.EPIC));
-    public static final Matter6 MATTER_6 = new Matter6(new FabricItemSettings().rarity(Rarity.EPIC));
+    public static final TooltipItem MATTER_1 = new TooltipItem(Text.translatable("item.astelfa.matter.tooltip")
+            .formatted(Formatting.RED), new FabricItemSettings());
+    public static final TooltipItem MATTER_2 = new TooltipItem(Text.translatable("item.astelfa.matter.tooltip")
+            .formatted(Formatting.YELLOW), new FabricItemSettings());
+    public static final TooltipItem MATTER_3 = new TooltipItem(Text.translatable("item.astelfa.matter.tooltip")
+            .formatted(Formatting.GREEN), new FabricItemSettings().rarity(Rarity.RARE));
+    public static final TooltipItem MATTER_4 = new TooltipItem(Text.translatable("item.astelfa.matter.tooltip")
+            .formatted(Formatting.AQUA), new FabricItemSettings().rarity(Rarity.RARE));
+    public static final TooltipItem MATTER_5 = new TooltipItem(Text.translatable("item.astelfa.matter.tooltip")
+            .formatted(Formatting.DARK_PURPLE), new FabricItemSettings().rarity(Rarity.EPIC));
+    public static final TooltipItem MATTER_6 = new TooltipItem(Text.translatable("item.astelfa.matter.tooltip")
+            .formatted(Formatting.WHITE), new FabricItemSettings().rarity(Rarity.EPIC));
 
     public static final HartRing HART_RING = new HartRing(new FabricItemSettings().rarity(Rarity.RARE));
     public static final AdosChains ADOS_CHAINS = new AdosChains(new FabricItemSettings().rarity(Rarity.RARE));
@@ -36,7 +44,7 @@ public class ModItems {
 
     public static final PhilosophersStone PHILOSOPHERS_STONE = new PhilosophersStone(new FabricItemSettings().rarity(Rarity.RARE).maxCount(1));
 
-    public static final Item IRRITANT_EGG = new SpawnEggItem(ModEntitys.IRRITANT, 0x101B21, 0x009195, new FabricItemSettings());
+    public static final SpawnEggItem IRRITANT_EGG = new SpawnEggItem(ModEntitys.IRRITANT, 0x101B21, 0x009195, new FabricItemSettings());
     public static final ItemGroup MOD_GROUP = FabricItemGroup.builder(Helpers.id("item_group"))
             .icon(() -> new ItemStack(ModItems.MATTER_1))
             .build();

@@ -1,23 +1,24 @@
-package com.dublikunt.astelfa.item.matter;
+package com.dublikunt.astelfa.item.common;
 
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class Matter6 extends Item {
-    public Matter6(Settings settings) {
+public class TooltipItem extends Item {
+    private final Text tooltip;
+
+    public TooltipItem(Text tooltip, Settings settings) {
         super(settings);
+        this.tooltip = tooltip;
     }
 
     @Override
     public void appendTooltip(ItemStack itemStack, World world, @NotNull List<Text> tooltip, TooltipContext tooltipContext) {
-        tooltip.add(Text.translatable("item.astelfa.matter.tooltip").formatted(Formatting.WHITE));
+        tooltip.add(this.tooltip);
     }
-
 }

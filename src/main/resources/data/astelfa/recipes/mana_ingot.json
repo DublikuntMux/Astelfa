@@ -1,0 +1,6 @@
+{
+  "type": "astelfa:mana_filler",
+  "input": { "item": "minecraft:iron" },
+  "mana_amount": 100,
+  "output": { "item": "astelfa:mana_iron" }
+}

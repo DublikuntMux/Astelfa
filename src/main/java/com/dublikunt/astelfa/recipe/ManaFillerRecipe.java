@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.recipe.*;
 import net.minecraft.registry.DynamicRegistryManager;
@@ -101,7 +102,11 @@ public class ManaFillerRecipe implements Recipe<SimpleInventory> {
 
             DefaultedList<Ingredient> inputs = DefaultedList.ofSize(9, Ingredient.EMPTY);
             inputs.set(0, Ingredient.fromJson(recipeJson.input));
-            inputs.set(1, Ingredient.fromJson(recipeJson.catalyst));
+
+            if (json.has("catalyst"))
+                inputs.set(1, Ingredient.fromJson(recipeJson.catalyst));
+            else
+                inputs.set(1, Ingredient.EMPTY);
 
             return new ManaFillerRecipe(id, output, inputs, recipeJson.mana_amount);
         }
