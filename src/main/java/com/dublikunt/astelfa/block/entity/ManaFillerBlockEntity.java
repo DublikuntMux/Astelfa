@@ -4,7 +4,7 @@ import com.dublikunt.astelfa.block.ModBlockEntities;
 import com.dublikunt.astelfa.block.custom.ManaFillerBlock;
 import com.dublikunt.astelfa.fluid.ModFluids;
 import com.dublikunt.astelfa.helper.FluidStack;
-import com.dublikunt.astelfa.helper.InventoryImpl;
+import com.dublikunt.astelfa.helper.notmy.InventoryImpl;
 import com.dublikunt.astelfa.networking.ModMessages;
 import com.dublikunt.astelfa.recipe.ManaFillerRecipe;
 import com.dublikunt.astelfa.screen.handler.ManaFillerScreenHandler;
@@ -36,7 +36,6 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -47,26 +46,6 @@ public class ManaFillerBlockEntity extends BlockEntity implements ExtendedScreen
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(4, ItemStack.EMPTY);
     private int progress = 0;
     private int maxProgress = 100;
-
-    public final SingleVariantStorage<FluidVariant> fluidStorage = new SingleVariantStorage<>() {
-        @Override
-        protected FluidVariant getBlankVariant() {
-            return FluidVariant.blank();
-        }
-
-        @Override
-        protected long getCapacity(FluidVariant variant) {
-            return FluidStack.convertDropletsToMb(FluidConstants.BUCKET) * 20;
-        }
-
-        @Override
-        protected void onFinalCommit() {
-            markDirty();
-            if (!world.isClient()) {
-                sendFluidPacket();
-            }
-        }
-    };
 
     public ManaFillerBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.MANA_FILLER_BLOCK_ENTITY_TYPE, pos, state);
@@ -91,7 +70,25 @@ public class ManaFillerBlockEntity extends BlockEntity implements ExtendedScreen
                 return 2;
             }
         };
-    }
+    }    public final SingleVariantStorage<FluidVariant> fluidStorage = new SingleVariantStorage<>() {
+        @Override
+        protected FluidVariant getBlankVariant() {
+            return FluidVariant.blank();
+        }
+
+        @Override
+        protected long getCapacity(FluidVariant variant) {
+            return FluidStack.convertDropletsToMb(FluidConstants.BUCKET) * 20;
+        }
+
+        @Override
+        protected void onFinalCommit() {
+            markDirty();
+            if (!world.isClient()) {
+                sendFluidPacket();
+            }
+        }
+    };
 
     public static void tick(@NotNull World world, BlockPos blockPos, BlockState state, ManaFillerBlockEntity entity) {
         if (world.isClient()) {
@@ -109,25 +106,9 @@ public class ManaFillerBlockEntity extends BlockEntity implements ExtendedScreen
             entity.resetProgress();
             markDirty(world, blockPos, state);
         }
-        if(hasFluidSourceInSlot(entity)) {
+        if (hasFluidSourceInSlot(entity)) {
             transferFluidToFluidStorage(entity);
         }
-    }
-
-    private void sendFluidPacket() {
-        PacketByteBuf data = PacketByteBufs.create();
-        fluidStorage.variant.toPacket(data);
-        data.writeLong(fluidStorage.amount);
-        data.writeBlockPos(getPos());
-
-        for (ServerPlayerEntity player : PlayerLookup.tracking((ServerWorld) world, getPos())) {
-            ServerPlayNetworking.send(player, ModMessages.FLUID_SYNC, data);
-        }
-    }
-
-    public void setFluidLevel(FluidVariant fluidVariant, long fluidLevel) {
-        this.fluidStorage.variant = fluidVariant;
-        this.fluidStorage.amount = fluidLevel;
     }
 
     private static void craftItem(@NotNull ManaFillerBlockEntity entity) {
@@ -168,6 +149,51 @@ public class ManaFillerBlockEntity extends BlockEntity implements ExtendedScreen
 
     private static boolean canInsertAmountIntoOutputSlot(@NotNull SimpleInventory inventory) {
         return inventory.getStack(2).getMaxCount() > inventory.getStack(2).getCount();
+    }
+
+    private static void extractFluid(@NotNull ManaFillerBlockEntity entity) {
+        SimpleInventory inventory = new SimpleInventory(entity.size());
+        for (int i = 0; i < entity.size(); i++) {
+            inventory.setStack(i, entity.getStack(i));
+        }
+
+        Optional<ManaFillerRecipe> match = entity.getWorld().getRecipeManager()
+                .getFirstMatch(ManaFillerRecipe.Type.INSTANCE, inventory, entity.getWorld());
+
+        try (Transaction transaction = Transaction.openOuter()) {
+            entity.fluidStorage.extract(FluidVariant.of(ModFluids.STILL_MANA_FLUID),
+                    match.get().getManaAmount(), transaction);
+            transaction.commit();
+        }
+    }
+
+    private static void transferFluidToFluidStorage(@NotNull ManaFillerBlockEntity entity) {
+        try (Transaction transaction = Transaction.openOuter()) {
+            entity.fluidStorage.insert(FluidVariant.of(ModFluids.STILL_MANA_FLUID),
+                    FluidStack.convertDropletsToMb(FluidConstants.BUCKET), transaction);
+            transaction.commit();
+            entity.setStack(3, new ItemStack(Items.BUCKET));
+        }
+    }
+
+    private static boolean hasFluidSourceInSlot(@NotNull ManaFillerBlockEntity entity) {
+        return entity.getStack(3).getItem() == ModFluids.MANA_BUCKET;
+    }
+
+    private void sendFluidPacket() {
+        PacketByteBuf data = PacketByteBufs.create();
+        fluidStorage.variant.toPacket(data);
+        data.writeLong(fluidStorage.amount);
+        data.writeBlockPos(getPos());
+
+        for (ServerPlayerEntity player : PlayerLookup.tracking((ServerWorld) world, getPos())) {
+            ServerPlayNetworking.send(player, ModMessages.FLUID_SYNC, data);
+        }
+    }
+
+    public void setFluidLevel(FluidVariant fluidVariant, long fluidLevel) {
+        this.fluidStorage.variant = fluidVariant;
+        this.fluidStorage.amount = fluidLevel;
     }
 
     @Override
@@ -263,32 +289,5 @@ public class ManaFillerBlockEntity extends BlockEntity implements ExtendedScreen
         super.markDirty();
     }
 
-    private static void extractFluid(@NotNull ManaFillerBlockEntity entity) {
-        SimpleInventory inventory = new SimpleInventory(entity.size());
-        for (int i = 0; i < entity.size(); i++) {
-            inventory.setStack(i, entity.getStack(i));
-        }
 
-        Optional<ManaFillerRecipe> match = entity.getWorld().getRecipeManager()
-                .getFirstMatch(ManaFillerRecipe.Type.INSTANCE, inventory, entity.getWorld());
-
-        try(Transaction transaction = Transaction.openOuter()) {
-            entity.fluidStorage.extract(FluidVariant.of(ModFluids.STILL_MANA_FLUID),
-                    match.get().getManaAmount(), transaction);
-            transaction.commit();
-        }
-    }
-
-    private static void transferFluidToFluidStorage(@NotNull ManaFillerBlockEntity entity) {
-        try(Transaction transaction = Transaction.openOuter()) {
-            entity.fluidStorage.insert(FluidVariant.of(ModFluids.STILL_MANA_FLUID),
-                    FluidStack.convertDropletsToMb(FluidConstants.BUCKET), transaction);
-            transaction.commit();
-            entity.setStack(3, new ItemStack(Items.BUCKET));
-        }
-    }
-
-    private static boolean hasFluidSourceInSlot(@NotNull ManaFillerBlockEntity entity) {
-        return entity.getStack(3).getItem() == ModFluids.MANA_BUCKET;
-    }
 }

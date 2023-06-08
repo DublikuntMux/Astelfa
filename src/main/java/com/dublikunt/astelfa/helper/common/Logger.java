@@ -1,4 +1,4 @@
-package com.dublikunt.astelfa.helper;
+package com.dublikunt.astelfa.helper.common;
 
 import com.dublikunt.astelfa.Astelfa;
 import org.apache.logging.log4j.LogManager;

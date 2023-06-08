@@ -1,7 +1,7 @@
 package com.dublikunt.astelfa.integration;
 
 import com.dublikunt.astelfa.Astelfa;
-import com.dublikunt.astelfa.helper.LogType;
+import com.dublikunt.astelfa.helper.common.LogType;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
 import net.minecraft.client.gui.screen.Screen;

@@ -1,6 +1,10 @@
 {
   "variants": {
-    "powered=false": { "model": "astelfa:block/silver_wood_pressure_plate" },
-    "powered=true": { "model": "astelfa:block/silver_wood_pressure_plate_down" }
+    "powered=false": {
+      "model": "astelfa:block/silver_wood_pressure_plate"
+    },
+    "powered=true": {
+      "model": "astelfa:block/silver_wood_pressure_plate_down"
+    }
   }
 }

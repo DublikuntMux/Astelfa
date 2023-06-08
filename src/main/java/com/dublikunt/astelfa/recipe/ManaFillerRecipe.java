@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.recipe.*;
 import net.minecraft.registry.DynamicRegistryManager;
@@ -58,7 +57,7 @@ public class ManaFillerRecipe implements Recipe<SimpleInventory> {
         return id;
     }
 
-    public int getManaAmount(){
+    public int getManaAmount() {
         return manaAmount;
     }
 

@@ -2,7 +2,6 @@
   "recipes": [
     "emi:fill_bucket/astelfa/mana_fluid",
     "emi:stripping/astelfa/stripped_silver_log/from/astelfa/silver_log",
-
     "astelfa:matter1",
     "astelfa:matter2",
     "astelfa:matter3",
@@ -11,7 +10,7 @@
     "astelfa:matter6",
     "astelfa:mana_filler",
     "astelfa:infuse_table",
-
+    "astelfa:mana_ingot",
     "astelfa:carved_silver_wood",
     "astelfa:block.astelfa.silver_planks_1",
     "astelfa:silver_wood_button",
@@ -24,7 +23,6 @@
     "astelfa:silver_wood",
     "astelfa:silver_wood_stairs",
     "astelfa:silver_wood_slab",
-
     "astelfa:philosophers_stone_infuse_table"
   ]
 }

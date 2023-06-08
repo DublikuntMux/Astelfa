@@ -26,7 +26,7 @@ public class LootTableModifiers {
 
     public static void modifyLootTables() {
         LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
-            if(BURIED_TREASURE_ID.equals(id) || DESERT_PYRAMID_ID.equals(id) || END_CITY_TREASURE_ID.equals(id)
+            if (BURIED_TREASURE_ID.equals(id) || DESERT_PYRAMID_ID.equals(id) || END_CITY_TREASURE_ID.equals(id)
                     || IGLOO_CHEST_ID.equals(id) || JUNGLE_TEMPLE_ID.equals(id) || WOODLAND_MANSION_ID.equals(id)) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))

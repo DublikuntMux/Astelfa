@@ -6,7 +6,7 @@ import com.dublikunt.astelfa.enchantment.ModEnchantments;
 import com.dublikunt.astelfa.entity.ModEntitys;
 import com.dublikunt.astelfa.fluid.ModFluids;
 import com.dublikunt.astelfa.generator.LootTableModifiers;
-import com.dublikunt.astelfa.helper.Logger;
+import com.dublikunt.astelfa.helper.common.Logger;
 import com.dublikunt.astelfa.item.ModItems;
 import com.dublikunt.astelfa.networking.ModMessages;
 import com.dublikunt.astelfa.particle.ModParticle;

@@ -45,7 +45,9 @@ public class ModItems {
 
     public static final PhilosophersStone PHILOSOPHERS_STONE = new PhilosophersStone(new FabricItemSettings().rarity(Rarity.RARE).maxCount(1));
 
-    public static final SpawnEggItem IRRITANT_EGG = new SpawnEggItem(ModEntitys.IRRITANT, 0x101B21, 0x009195, new FabricItemSettings());
+    public static final SpawnEggItem IRRITANT_EGG = new SpawnEggItem(ModEntitys.IRRITANT, 0x101B21,
+            0x009195, new FabricItemSettings());
+
     public static final ItemGroup MOD_GROUP = FabricItemGroup.builder(Helpers.id("item_group"))
             .icon(() -> new ItemStack(ModItems.MATTER_1))
             .build();

@@ -3,9 +3,7 @@
   "config.astelfa.category.1.title": "General config",
   "config.astelfa.category.1.log_type": "Log type for mod",
   "config.astelfa.category.1.log_type.tooltip": "Set logging type for mod.",
-
   "itemGroup.astelfa.item_group": "Astelfa Mod",
-
   "item.astelfa.matter1": "Red matter",
   "item.astelfa.matter2": "Yellow matter",
   "item.astelfa.matter3": "Green matter",
@@ -18,16 +16,13 @@
   "item.astelfa.philosophers_stone": "Philosopher's Stone",
   "item.astelfa.philosophers_stone.tooltip": "Let your imagination run wild.",
   "item.astelfa.mana_bucket": "Bucket of mana",
-
   "item.astelfa.hart_ring": "Hart ring",
   "item.astelfa.hart_ring.tooltip": "The demon's heart begins to beat in unison with yours.",
   "item.astelfa.ados_chains": "Ados chains",
   "item.astelfa.ados_chains.tooltip": "You feel how your body is filled with new strength.",
   "item.astelfa.ring_belt": "Ring belt",
   "item.astelfa.ring_belt.tooltip": "You decided that wearing a belt of rings is not such a bad idea.",
-
   "item.astelfa.irritant_egg": "Irritant spawn egg",
-
   "block.astelfa.infuse_table": "Infuse table",
   "block.astelfa.mana_filler": "Mana filler",
   "block.astelfa.sculk_statue": "Sculk Statue",
@@ -49,15 +44,11 @@
   "block.astelfa.silver_wood_slab": "Silver wood slab",
   "block.astelfa.mana_fluid_block": "Mana",
   "block.astelfa.mana_fluid": "Mana",
-
   "fluid.astelfa.mana_fluid": "Mana",
   "fluid.astelfa.flowing_mana_fluid": "Mana",
-
   "block.astelfa.mana_filler.tooltip.amount_capacity": "%s / %s mB",
   "block.astelfa.mana_filler.tooltip.amount": "%s mB",
-
   "entity.astelfa.irritant": "Irritant",
-
   "emi.category.astelfa.infuse_table": "Infusing",
   "emi.category.astelfa.mana_filler": "Mana filling",
   "emi.astelfa.mana_amount": "%s mB of Mana"

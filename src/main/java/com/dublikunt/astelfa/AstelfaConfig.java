@@ -1,6 +1,6 @@
 package com.dublikunt.astelfa;
 
-import com.dublikunt.astelfa.helper.LogType;
+import com.dublikunt.astelfa.helper.common.LogType;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.fabricmc.loader.api.FabricLoader;

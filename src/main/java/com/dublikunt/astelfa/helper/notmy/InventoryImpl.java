@@ -1,4 +1,4 @@
-package com.dublikunt.astelfa.helper;
+package com.dublikunt.astelfa.helper.notmy;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventories;

@@ -1,4 +1,4 @@
-package com.dublikunt.astelfa.helper;
+package com.dublikunt.astelfa.helper.common;
 
 public enum LogType {
     DEBUG,

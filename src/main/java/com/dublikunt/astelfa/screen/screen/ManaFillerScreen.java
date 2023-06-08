@@ -2,7 +2,6 @@ package com.dublikunt.astelfa.screen.screen;
 
 import com.dublikunt.astelfa.helper.FluidStack;
 import com.dublikunt.astelfa.helper.Helpers;
-import com.dublikunt.astelfa.helper.MouseUtil;
 import com.dublikunt.astelfa.renderer.fluid.FluidStackRenderer;
 import com.dublikunt.astelfa.screen.handler.ManaFillerScreenHandler;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -31,6 +30,7 @@ public class ManaFillerScreen extends HandledScreen<ManaFillerScreenHandler> {
         titleX = (backgroundWidth - textRenderer.getWidth(title)) / 2;
         assignFluidStackRenderer();
     }
+
     private void assignFluidStackRenderer() {
         fluidStackRenderer = new FluidStackRenderer(FluidStack.convertDropletsToMb(FluidConstants.BUCKET) * 20,
                 true, 16, 61);
@@ -38,7 +38,7 @@ public class ManaFillerScreen extends HandledScreen<ManaFillerScreenHandler> {
 
     private void renderFluidTooltip(MatrixStack matrices, int mouseX, int mouseY, int x, int y,
                                     FluidStack fluidStack, int offsetX, int offsetY, FluidStackRenderer renderer) {
-        if(isMouseAboveArea(mouseX, mouseY, x, y, offsetX, offsetY, renderer)) {
+        if (isMouseAboveArea(mouseX, mouseY, x, y, offsetX, offsetY, renderer)) {
             renderTooltip(matrices, renderer.getTooltip(fluidStack, TooltipContext.Default.BASIC),
                     Optional.empty(), mouseX - x, mouseY - y);
         }
@@ -81,6 +81,6 @@ public class ManaFillerScreen extends HandledScreen<ManaFillerScreenHandler> {
     }
 
     private boolean isMouseAboveArea(int pMouseX, int pMouseY, int x, int y, int offsetX, int offsetY, @NotNull FluidStackRenderer renderer) {
-        return MouseUtil.isMouseOver(pMouseX, pMouseY, x + offsetX, y + offsetY, renderer.getWidth(), renderer.getHeight());
+        return Helpers.isMouseOver(pMouseX, pMouseY, x + offsetX, y + offsetY, renderer.getWidth(), renderer.getHeight());
     }
 }

@@ -1,4 +1,4 @@
-package com.dublikunt.astelfa.helper;
+package com.dublikunt.astelfa.helper.notmy;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;

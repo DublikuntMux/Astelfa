@@ -1,7 +1,7 @@
 package com.dublikunt.astelfa.renderer.fluid;
 
 import com.dublikunt.astelfa.helper.FluidStack;
-import com.dublikunt.astelfa.helper.IIngredientRenderer;
+import com.dublikunt.astelfa.helper.notmy.IIngredientRenderer;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.transfer.v1.client.fluid.FluidVariantRendering;
@@ -22,7 +22,6 @@ import net.minecraft.util.Formatting;
 import org.jetbrains.annotations.NotNull;
 import org.spongepowered.include.com.google.common.base.Preconditions;
 
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,12 +30,6 @@ public class FluidStackRenderer implements IIngredientRenderer<FluidStack> {
     private final TooltipMode tooltipMode;
     private final int width;
     private final int height;
-
-    enum TooltipMode {
-        SHOW_AMOUNT,
-        SHOW_AMOUNT_AND_CAPACITY,
-        ITEM_LIST
-    }
 
     public FluidStackRenderer() {
         this(FluidStack.convertDropletsToMb(FluidConstants.BUCKET), TooltipMode.SHOW_AMOUNT_AND_CAPACITY, 16, 16);
@@ -123,5 +116,11 @@ public class FluidStackRenderer implements IIngredientRenderer<FluidStack> {
     @Override
     public int getHeight() {
         return height;
+    }
+
+    enum TooltipMode {
+        SHOW_AMOUNT,
+        SHOW_AMOUNT_AND_CAPACITY,
+        ITEM_LIST
     }
 }

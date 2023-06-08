@@ -18,10 +18,10 @@ public class FluidSyncS2CPacket {
         long fluidLevel = buf.readLong();
         BlockPos position = buf.readBlockPos();
 
-        if(client.world.getBlockEntity(position) instanceof ManaFillerBlockEntity blockEntity) {
+        if (client.world.getBlockEntity(position) instanceof ManaFillerBlockEntity blockEntity) {
             blockEntity.setFluidLevel(variant, fluidLevel);
 
-            if(client.player.currentScreenHandler instanceof ManaFillerScreenHandler screenHandler &&
+            if (client.player.currentScreenHandler instanceof ManaFillerScreenHandler screenHandler &&
                     screenHandler.blockEntity.getPos().equals(position)) {
                 blockEntity.setFluidLevel(variant, fluidLevel);
                 screenHandler.setFluid(new FluidStack(variant, fluidLevel));

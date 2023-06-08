@@ -18,8 +18,8 @@ import org.jetbrains.annotations.NotNull;
 public class ManaFillerScreenHandler extends ScreenHandler {
     public final ManaFillerBlockEntity blockEntity;
     private final Inventory inventory;
-    public FluidStack fluidStack;
     private final PropertyDelegate propertyDelegate;
+    public FluidStack fluidStack;
 
     public ManaFillerScreenHandler(int syncId, PlayerInventory inventory, @NotNull PacketByteBuf packetByteBuf) {
         this(syncId, inventory, inventory.player.getWorld().getBlockEntity(packetByteBuf.readBlockPos()),

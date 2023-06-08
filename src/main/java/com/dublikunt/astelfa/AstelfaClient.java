@@ -4,7 +4,7 @@ import com.dublikunt.astelfa.block.ModBlockEntities;
 import com.dublikunt.astelfa.block.ModBlocks;
 import com.dublikunt.astelfa.entity.ModEntitys;
 import com.dublikunt.astelfa.fluid.ModFluids;
-import com.dublikunt.astelfa.helper.Logger;
+import com.dublikunt.astelfa.helper.common.Logger;
 import com.dublikunt.astelfa.networking.ModMessages;
 import com.dublikunt.astelfa.particle.ModParticle;
 import com.dublikunt.astelfa.renderer.block.InfuseTableBlockEntityRenderer;
