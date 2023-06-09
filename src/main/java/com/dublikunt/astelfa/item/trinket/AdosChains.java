@@ -17,7 +17,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public class AdosChains extends TrinketItem {
-    private final int MAX_FLY_TIME = 60 * 20;
     private double currentFlyTime = 0;
 
     public AdosChains(Settings settings) {
@@ -38,6 +37,7 @@ public class AdosChains extends TrinketItem {
             player.getAbilities().allowFlying = true;
             player.sendAbilitiesUpdate();
 
+            int MAX_FLY_TIME = 60 * 20;
             if (player.getAbilities().flying && !(currentFlyTime >= MAX_FLY_TIME)) {
                 currentFlyTime++;
 

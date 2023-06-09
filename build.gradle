@@ -13,7 +13,9 @@ repositories {
     maven { url "https://maven.terraformersmc.com/releases/" }
     maven { url "https://ladysnake.jfrog.io/artifactory/mods" }
     maven { url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
-    maven { url "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/" }
+    maven { url "https://cursemaven.com"
+        content { includeGroup "curse.maven" }
+    }
 }
 
 loom {
@@ -25,7 +27,20 @@ loom {
             vmArg "-Dfabric-api.datagen.output-dir=${file("src/main/generated")}"
             vmArg "-Dfabric-api.datagen.modid=${mod_id}"
 
+            ideConfigGenerated true
             runDir "build/datagen"
+        }
+        client {
+            client()
+            setConfigName "Fabric Client"
+            ideConfigGenerated true
+            runDir "run"
+        }
+        server {
+            server()
+            setConfigName "Fabric Server"
+            ideConfigGenerated true
+            runDir "run"
         }
     }
 }
@@ -54,8 +69,10 @@ dependencies {
         exclude(group: "net.fabricmc.fabric-api")
     }
 
-    modCompileOnly "dev.emi:emi-fabric:${emi_version}:api"
+    modLocalRuntime "curse.maven:jade-324717:4561717"
+    modLocalRuntime "curse.maven:language-reload-527334:4572883"
 
+    modCompileOnly "dev.emi:emi-fabric:${emi_version}:api"
     modLocalRuntime "dev.emi:emi-fabric:${emi_version}"
 }
 

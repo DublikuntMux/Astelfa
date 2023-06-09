@@ -20,12 +20,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.List;
 
 @Mixin(SonicBoomTask.class)
-public class WardenSonicAttackMixin {
+public class SonicBoomTaskMixin {
     private static boolean entityHasSonicDeflect(LivingEntity entity) {
         return EnchantmentHelper.getEquipmentLevel(ModEnchantments.SONIC_DEFLECT_ENCHANTMENT, entity) > 0;
     }
 
-    @Inject(method = "method_43265(Lnet/minecraft/entity/mob/WardenEntity;Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/entity/LivingEntity;)V", at = @At("HEAD"))
+    @Inject(at = @At("HEAD"), method = "method_43265(Lnet/minecraft/entity/mob/WardenEntity;Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/entity/LivingEntity;)V")
     private static void sonicDeflect$injectIntoAttack(WardenEntity warden, ServerWorld server, LivingEntity damagedEntity, CallbackInfo ci) {
         if (entityHasSonicDeflect(damagedEntity)) {
             Vec3d targetLookingVector = damagedEntity.getRotationVector();

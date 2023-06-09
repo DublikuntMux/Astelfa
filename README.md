@@ -18,6 +18,8 @@ Mod in early development and not ready for use in the game.
 - [x] New items
 - [x] New crafting stations
 - [x] New decorative blocks
+- [x] New enchantments
+- [x] New curses
 - [ ] New bosses
 - [ ] New world generation
 - [ ] New equipment

@@ -13,8 +13,8 @@ import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
+import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.book.RecipeCategory;
-import net.minecraft.registry.tag.ItemTags;
 
 import java.util.function.Consumer;
 
@@ -31,6 +31,7 @@ public class RecipeGenerator extends FabricRecipeProvider {
         offerMatter(exporter, ModItems.MATTER_2, ModItems.MATTER_3, ModItems.MATTER_4);
         offerMatter(exporter, ModItems.MATTER_3, ModItems.MATTER_4, ModItems.MATTER_5);
         offerMatter(exporter, ModItems.MATTER_4, ModItems.MATTER_5, ModItems.MATTER_6);
+        offerTorch(exporter, ModItems.ESSENTIAL_FUEL, ModBlocks.AQUATIC_TORCH);
 
         offerWood(exporter, ModBlocks.SILVER_WOOD, ModBlocks.SILVER_LOG, ModBlocks.STRIPPED_SILVER_WOOD,
                 ModBlocks.STRIPPED_SILVER_LOG, ModBlocks.SILVER_PLANKS, ModBlocks.SILVER_WOOD_BUTTON,
@@ -48,21 +49,21 @@ public class RecipeGenerator extends FabricRecipeProvider {
                 .offerTo(exporter);
 
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.MANA_FILLER_BLOCK)
-                .pattern("I I")
+                .pattern("ICI")
                 .pattern("WGW")
                 .pattern("WWW")
                 .input('G', Blocks.GLASS)
                 .input('W', ModBlocks.STRIPPED_SILVER_LOG)
                 .input('I', Items.AMETHYST_SHARD)
+                .input('C', Blocks.RED_CARPET)
                 .criterion(FabricRecipeProvider.hasItem(ModBlocks.SILVER_LOG),
                         FabricRecipeProvider.conditionsFromItem(ModBlocks.SILVER_LOG))
                 .offerTo(exporter);
 
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.INFUSING_TABLE_BLOCK)
-                .pattern("CAC")
+                .pattern("AAA")
                 .pattern("PPP")
                 .pattern("W W")
-                .input('C', ItemTags.CANDLES)
                 .input('A', Blocks.AMETHYST_BLOCK)
                 .input('P', ModBlocks.SILVER_PLANKS)
                 .input('W', ModBlocks.STRIPPED_SILVER_LOG)
@@ -172,6 +173,16 @@ public class RecipeGenerator extends FabricRecipeProvider {
                 .pattern("###")
                 .input('#', input)
                 .criterion(FabricRecipeProvider.hasItem(input), FabricRecipeProvider.conditionsFromItem(input))
+                .offerTo(exporter);
+    }
+
+    private void offerTorch(Consumer<RecipeJsonProvider> exporter, ItemConvertible ingredient, ItemConvertible output) {
+        ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, output, 4)
+                .pattern("X")
+                .pattern("S")
+                .input('R', ingredient)
+                .input('S', Items.STICK)
+                .criterion(FabricRecipeProvider.hasItem(ingredient), FabricRecipeProvider.conditionsFromItem(ingredient))
                 .offerTo(exporter);
     }
 }

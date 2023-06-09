@@ -26,7 +26,7 @@ public class ModelGenerator extends FabricModelProvider {
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.CARVED_SILVER_WOOD);
 
         blockStateModelGenerator.registerTintableCross(ModBlocks.SILVER_SAPLING, BlockStateModelGenerator.TintType.NOT_TINTED);
-
+        blockStateModelGenerator.registerTorch(ModBlocks.AQUATIC_TORCH, ModBlocks.AQUATIC_WALL_TORCH);
     }
 
     @Override
@@ -38,6 +38,7 @@ public class ModelGenerator extends FabricModelProvider {
         itemModelGenerator.register(ModItems.MATTER_5, Models.GENERATED);
         itemModelGenerator.register(ModItems.MATTER_6, Models.GENERATED);
         itemModelGenerator.register(ModItems.MANA_INGOT, Models.GENERATED);
+        itemModelGenerator.register(ModItems.ESSENTIAL_FUEL, Models.GENERATED);
         itemModelGenerator.register(ModItems.ADOS_CHAINS, Models.GENERATED);
         itemModelGenerator.register(ModItems.HART_RING, Models.GENERATED);
         itemModelGenerator.register(ModItems.RING_BELT, Models.GENERATED);

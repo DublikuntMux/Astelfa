@@ -1,9 +1,11 @@
 {
-  "config.astelfa.title": "Astelfa Mod config",
+  "config.astelfa.title": "Astelfa config",
   "config.astelfa.category.1.title": "General config",
   "config.astelfa.category.1.log_type": "Log type for mod",
   "config.astelfa.category.1.log_type.tooltip": "Set logging type for mod.",
+
   "itemGroup.astelfa.item_group": "Astelfa Mod",
+
   "item.astelfa.matter1": "Red matter",
   "item.astelfa.matter2": "Yellow matter",
   "item.astelfa.matter3": "Green matter",
@@ -16,13 +18,14 @@
   "item.astelfa.philosophers_stone": "Philosopher's Stone",
   "item.astelfa.philosophers_stone.tooltip": "Let your imagination run wild.",
   "item.astelfa.mana_bucket": "Bucket of mana",
+
   "item.astelfa.hart_ring": "Hart ring",
   "item.astelfa.hart_ring.tooltip": "The demon's heart begins to beat in unison with yours.",
   "item.astelfa.ados_chains": "Ados chains",
   "item.astelfa.ados_chains.tooltip": "You feel how your body is filled with new strength.",
   "item.astelfa.ring_belt": "Ring belt",
   "item.astelfa.ring_belt.tooltip": "You decided that wearing a belt of rings is not such a bad idea.",
-  "item.astelfa.irritant_egg": "Irritant spawn egg",
+
   "block.astelfa.infuse_table": "Infuse table",
   "block.astelfa.mana_filler": "Mana filler",
   "block.astelfa.sculk_statue": "Sculk Statue",
@@ -42,13 +45,28 @@
   "block.astelfa.silver_wood_fence_gate": "Silver wood fence gate",
   "block.astelfa.silver_wood_stairs": "Silver wood stairs",
   "block.astelfa.silver_wood_slab": "Silver wood slab",
+  "block.astelfa.aquatic_torch": "Aquatic torch",
+
   "block.astelfa.mana_fluid_block": "Mana",
   "block.astelfa.mana_fluid": "Mana",
   "fluid.astelfa.mana_fluid": "Mana",
   "fluid.astelfa.flowing_mana_fluid": "Mana",
+
+  "item.astelfa.irritant_egg": "Irritant spawn egg",
+  "entity.astelfa.irritant": "Irritant",
+
+  "enchantment.astelfa.sonic_deflect": "Sonic deflect",
+  "enchantment.astelfa.ender_eyes": "Ender eyes",
+  "enchantment.astelfa.hungry": "Hungry",
+  "enchantment.astelfa.illusion_curse": "Curse of Illusion",
+  "enchantment.astelfa.loose_curse": "Curse of Loose",
+  "enchantment.astelfa.blood_hungry": "Blood hungry",
+  "enchantment.astelfa.item_switch": "Item switching",
+  "enchantment.astelfa.climbing_curse": "Curse of Climbing",
+
   "block.astelfa.mana_filler.tooltip.amount_capacity": "%s / %s mB",
   "block.astelfa.mana_filler.tooltip.amount": "%s mB",
-  "entity.astelfa.irritant": "Irritant",
+
   "emi.category.astelfa.infuse_table": "Infusing",
   "emi.category.astelfa.mana_filler": "Mana filling",
   "emi.astelfa.mana_amount": "%s mB of Mana"

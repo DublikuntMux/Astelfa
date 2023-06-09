@@ -1,4 +1,4 @@
-package com.dublikunt.astelfa.enchantment;
+package com.dublikunt.astelfa.enchantment.encant;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
@@ -6,7 +6,7 @@ import net.minecraft.entity.EquipmentSlot;
 
 public class SonicDeflectEnchantment extends Enchantment {
     public SonicDeflectEnchantment() {
-        super(Rarity.RARE, EnchantmentTarget.ARMOR_CHEST, new EquipmentSlot[]{EquipmentSlot.CHEST});
+        super(Rarity.VERY_RARE, EnchantmentTarget.ARMOR_CHEST, new EquipmentSlot[]{EquipmentSlot.CHEST});
     }
 
     @Override

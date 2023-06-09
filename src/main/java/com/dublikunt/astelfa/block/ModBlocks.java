@@ -3,9 +3,7 @@ package com.dublikunt.astelfa.block;
 import com.dublikunt.astelfa.block.common.SparkleLeavesBlock;
 import com.dublikunt.astelfa.block.common.SparklePillarBlock;
 import com.dublikunt.astelfa.block.common.SparkleSaplingBlock;
-import com.dublikunt.astelfa.block.custom.InfuseTableBlock;
-import com.dublikunt.astelfa.block.custom.ManaFillerBlock;
-import com.dublikunt.astelfa.block.custom.SculkStatueBlock;
+import com.dublikunt.astelfa.block.custom.*;
 import com.dublikunt.astelfa.helper.Helpers;
 import com.dublikunt.astelfa.item.ModItems;
 import com.dublikunt.astelfa.world.feature.tree.SilverWoodSaplingGenerator;
@@ -17,6 +15,7 @@ import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.minecraft.block.*;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
@@ -70,8 +69,13 @@ public class ModBlocks {
             FabricBlockSettings.copyOf(SILVER_PLANKS));
     public static final SlabBlock SILVER_WOOD_SLAB = new SlabBlock(FabricBlockSettings.of(Material.WOOD,
             SILVER_PLANKS.getDefaultMapColor()).requiresTool().strength(1.5F, 6.0F));
+    public static final AquaticTorchBlock AQUATIC_TORCH = new AquaticTorchBlock(FabricBlockSettings.of(Material.DECORATION)
+            .noCollision().breakInstantly().luminance(15).sounds(BlockSoundGroup.WOOD), ParticleTypes.FLAME);
+    public static final AquaticWallTorchBlock AQUATIC_WALL_TORCH = new AquaticWallTorchBlock(FabricBlockSettings.of(Material.DECORATION)
+            .noCollision().breakInstantly().luminance(15).sounds(BlockSoundGroup.WOOD), ParticleTypes.FLAME);
 
-    public static Map<String, Block> BLOCKS = new LinkedHashMap<>();
+    public static final Map<String, Block> BLOCKS = new LinkedHashMap<>();
+    public static final Map<String, Block> BLOCKS_WITHOUT_ITEM = new LinkedHashMap<>();
 
     static {
         BLOCKS.put("infuse_table", INFUSING_TABLE_BLOCK);
@@ -95,6 +99,9 @@ public class ModBlocks {
         BLOCKS.put("silver_wood_fence_gate", SILVER_WOOD_FENCE_GATE);
         BLOCKS.put("silver_wood_stairs", SILVER_WOOD_STAIRS);
         BLOCKS.put("silver_wood_slab", SILVER_WOOD_SLAB);
+
+        BLOCKS_WITHOUT_ITEM.put("aquatic_torch", AQUATIC_TORCH);
+        BLOCKS_WITHOUT_ITEM.put("aquatic_wall_torch", AQUATIC_WALL_TORCH);
     }
 
     public static void register() {
@@ -103,6 +110,12 @@ public class ModBlocks {
             Item item = Registry.register(Registries.ITEM, Helpers.id(block.getKey()),
                     new BlockItem(block.getValue(), new FabricItemSettings()));
             ItemGroupEvents.modifyEntriesEvent(ModItems.MOD_GROUP).register(entries -> entries.add(item));
+        }
+    }
+
+    public static void registerWithoutItem() {
+        for (Map.Entry<String, Block> block : BLOCKS_WITHOUT_ITEM.entrySet()) {
+            Registry.register(Registries.BLOCK, Helpers.id(block.getKey()), block.getValue());
         }
     }
 

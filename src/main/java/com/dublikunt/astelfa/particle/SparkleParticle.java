@@ -50,7 +50,7 @@ public class SparkleParticle extends SpriteBillboardParticle {
     public record Factory(SpriteProvider spriteProvider) implements ParticleFactory<DefaultParticleType> {
         @Override
         public @NotNull Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
-            SparkleParticle sparkleParticle = new SparkleParticle(clientWorld, d, e, f, g, h, i, this.spriteProvider);
+            @NotNull SparkleParticle sparkleParticle = new SparkleParticle(clientWorld, d, e, f, g, h, i, this.spriteProvider);
             sparkleParticle.setAlpha(1.0f);
             return sparkleParticle;
         }

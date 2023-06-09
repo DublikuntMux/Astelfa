@@ -47,6 +47,26 @@ public class ManaFillerBlockEntity extends BlockEntity implements ExtendedScreen
     private int progress = 0;
     private int maxProgress = 100;
 
+    public final SingleVariantStorage<FluidVariant> fluidStorage = new SingleVariantStorage<>() {
+        @Override
+        protected FluidVariant getBlankVariant() {
+            return FluidVariant.blank();
+        }
+
+        @Override
+        protected long getCapacity(FluidVariant variant) {
+            return FluidStack.convertDropletsToMb(FluidConstants.BUCKET) * 20;
+        }
+
+        @Override
+        protected void onFinalCommit() {
+            markDirty();
+            if (!world.isClient()) {
+                sendFluidPacket();
+            }
+        }
+    };
+
     public ManaFillerBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.MANA_FILLER_BLOCK_ENTITY_TYPE, pos, state);
 
@@ -70,25 +90,7 @@ public class ManaFillerBlockEntity extends BlockEntity implements ExtendedScreen
                 return 2;
             }
         };
-    }    public final SingleVariantStorage<FluidVariant> fluidStorage = new SingleVariantStorage<>() {
-        @Override
-        protected FluidVariant getBlankVariant() {
-            return FluidVariant.blank();
-        }
-
-        @Override
-        protected long getCapacity(FluidVariant variant) {
-            return FluidStack.convertDropletsToMb(FluidConstants.BUCKET) * 20;
-        }
-
-        @Override
-        protected void onFinalCommit() {
-            markDirty();
-            if (!world.isClient()) {
-                sendFluidPacket();
-            }
-        }
-    };
+    }
 
     public static void tick(@NotNull World world, BlockPos blockPos, BlockState state, ManaFillerBlockEntity entity) {
         if (world.isClient()) {
@@ -264,30 +266,4 @@ public class ManaFillerBlockEntity extends BlockEntity implements ExtendedScreen
     public void writeScreenOpeningData(ServerPlayerEntity player, @NotNull PacketByteBuf buf) {
         buf.writeBlockPos(this.pos);
     }
-
-    public void setInventory(@NotNull DefaultedList<ItemStack> inventory) {
-        for (int i = 0; i < inventory.size(); i++) {
-            this.inventory.set(i, inventory.get(i));
-        }
-    }
-
-    @Override
-    public void markDirty() {
-        if (!world.isClient()) {
-            PacketByteBuf data = PacketByteBufs.create();
-            data.writeInt(inventory.size());
-            for (ItemStack itemStack : inventory) {
-                data.writeItemStack(itemStack);
-            }
-            data.writeBlockPos(getPos());
-
-            for (ServerPlayerEntity player : PlayerLookup.tracking((ServerWorld) world, getPos())) {
-                ServerPlayNetworking.send(player, ModMessages.ITEM_SYNC, data);
-            }
-        }
-
-        super.markDirty();
-    }
-
-
 }

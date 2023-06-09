@@ -16,15 +16,18 @@ import com.dublikunt.astelfa.world.gen.ModWorldGen;
 import net.fabricmc.api.ModInitializer;
 import software.bernie.geckolib.GeckoLib;
 
+import java.util.Random;
+
 public class Astelfa implements ModInitializer {
     public static final String MOD_ID = "astelfa";
     public static final String MOD_NAME = "Astelfa Mod";
 
-    public static AstelfaConfig config = null;
+    public static final Random RANDOM = new Random();
+
+    public static final AstelfaConfig config = AstelfaConfig.load();
 
     @Override
     public void onInitialize() {
-        config = AstelfaConfig.load();
         Logger.debug("Mod loading start...");
 
         GeckoLib.initialize();
@@ -33,6 +36,7 @@ public class Astelfa implements ModInitializer {
         ModParticle.registerServer();
         ModItems.register();
         ModBlocks.register();
+        ModBlocks.registerWithoutItem();
         ModBlocks.registerFlammableBlocks();
         ModBlocks.registerStrippables();
         ModBlockEntities.register();

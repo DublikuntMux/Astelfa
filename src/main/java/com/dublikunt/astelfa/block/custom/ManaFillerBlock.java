@@ -36,10 +36,10 @@ public class ManaFillerBlock extends BlockWithEntity implements BlockEntityProvi
 
     private static final VoxelShape SHAPE = Stream.of(
             Block.createCuboidShape(0, 0, 0, 16, 10, 16),
-            Block.createCuboidShape(1.5, 10, 3, 3.5, 16, 5),
-            Block.createCuboidShape(1.5, 10, 12, 3.5, 16, 14),
-            Block.createCuboidShape(12.25, 10, 2.75, 14.25, 16, 4.75),
-            Block.createCuboidShape(12.25, 10, 12, 14.25, 16, 14)
+            Block.createCuboidShape(2, 10, 2, 4, 16, 4),
+            Block.createCuboidShape(12, 10, 12, 14, 16, 14),
+            Block.createCuboidShape(2, 10, 12, 4, 16, 14),
+            Block.createCuboidShape(12, 10, 2, 14, 16, 4)
     ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get();
 
     public ManaFillerBlock(Settings settings) {

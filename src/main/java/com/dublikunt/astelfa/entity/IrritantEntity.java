@@ -77,16 +77,16 @@ public class IrritantEntity extends AmbientEntity implements GeoEntity {
             );
         }
 
-        double d = (double) this.hangingPosition.getX() + 0.5 - this.getX();
-        double e = (double) this.hangingPosition.getY() + 0.1 - this.getY();
-        double f = (double) this.hangingPosition.getZ() + 0.5 - this.getZ();
-        Vec3d vec3d = this.getVelocity();
-        Vec3d vec3d2 = vec3d.add((Math.signum(d) * 0.5 - vec3d.x) * 0.1F, (Math.signum(e) * 0.7F - vec3d.y) * 0.1F, (Math.signum(f) * 0.5 - vec3d.z) * 0.1F);
-        this.setVelocity(vec3d2);
-        float g = (float) (MathHelper.atan2(vec3d2.z, vec3d2.x) * 180.0F / (float) Math.PI) - 90.0F;
-        float h = MathHelper.wrapDegrees(g - this.getYaw());
+        double x = this.hangingPosition.getX() + 0.5 - this.getX();
+        double y = this.hangingPosition.getY() + 0.1 - this.getY();
+        double z = this.hangingPosition.getZ() + 0.5 - this.getZ();
+        Vec3d velocity = this.getVelocity();
+        Vec3d newVelocity = velocity.add((Math.signum(x) * 0.5 - velocity.x) * 0.1F, (Math.signum(y) * 0.7F - velocity.y) * 0.1F, (Math.signum(z) * 0.5 - velocity.z) * 0.1F);
+        this.setVelocity(newVelocity);
+        float atan = (float) (MathHelper.atan2(newVelocity.z, newVelocity.x) * 180.0F / (float) Math.PI) - 90.0F;
+        float degrees = MathHelper.wrapDegrees(atan - this.getYaw());
         this.forwardSpeed = 0.5F;
-        this.setYaw(this.getYaw() + h);
+        this.setYaw(this.getYaw() + degrees);
     }
 
     @Nullable

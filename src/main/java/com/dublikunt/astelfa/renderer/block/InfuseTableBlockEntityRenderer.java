@@ -16,19 +16,19 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RotationAxis;
 import net.minecraft.world.LightType;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 
 public class InfuseTableBlockEntityRenderer implements BlockEntityRenderer<InfuseTableBlockEntity> {
     public InfuseTableBlockEntityRenderer(BlockEntityRendererFactory.Context context) {
-
     }
 
     @Override
-    public void render(InfuseTableBlockEntity entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
+    public void render(@NotNull InfuseTableBlockEntity entity, float tickDelta, @NotNull MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
         ItemRenderer itemRenderer = MinecraftClient.getInstance().getItemRenderer();
 
         ItemStack itemStack = entity.getRenderStack();
         matrices.push();
-        matrices.translate(0.49f, 0.82f, 0.49f);
+        matrices.translate(0.49f, 1.82f, 0.49f);
         matrices.scale(0.4f, 0.4f, 0.4f);
         matrices.multiply(RotationAxis.POSITIVE_X.rotation(1.5708f));
 
@@ -44,7 +44,7 @@ public class InfuseTableBlockEntityRenderer implements BlockEntityRenderer<Infus
         matrices.pop();
     }
 
-    private int getLightLevel(World world, BlockPos pos) {
+    private int getLightLevel(@NotNull World world, BlockPos pos) {
         int bLight = world.getLightLevel(LightType.BLOCK, pos);
         int sLight = world.getLightLevel(LightType.SKY, pos);
         return LightmapTextureManager.pack(bLight, sLight);

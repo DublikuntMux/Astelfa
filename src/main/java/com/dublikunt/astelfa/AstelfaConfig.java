@@ -15,9 +15,6 @@ public class AstelfaConfig {
     public LogType logType = LogType.INFO;
     private transient File file;
 
-    private AstelfaConfig() {
-    }
-
     public static AstelfaConfig load() {
         File file = new File(
                 FabricLoader.getInstance().getConfigDir().toString(),
@@ -49,6 +46,7 @@ public class AstelfaConfig {
             String json = gson.toJson(this, AstelfaConfig.class);
             FileWriter newFile = new FileWriter(file.getAbsolutePath());
             newFile.write(json);
+            newFile.flush();
             newFile.close();
         } catch (IOException e) {
             e.printStackTrace();
