@@ -255,4 +255,12 @@ public class ManaFillerBlockEntity extends BlockEntity implements ExtendedScreen
     public void writeScreenOpeningData(ServerPlayerEntity player, @NotNull PacketByteBuf buf) {
         buf.writeBlockPos(this.pos);
     }
+
+    public ItemStack getRenderStack() {
+        if (this.getStack(2).isEmpty()) {
+            return this.getStack(0);
+        } else {
+            return this.getStack(2);
+        }
+    }
 }

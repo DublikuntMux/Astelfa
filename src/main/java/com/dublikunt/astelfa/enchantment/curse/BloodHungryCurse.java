@@ -17,7 +17,7 @@ public class BloodHungryCurse extends Enchantment {
     @Override
     public void onUserDamaged(LivingEntity user, Entity attacker, int level) {
         if (attacker != null
-                && Astelfa.RANDOM.nextInt(5) == 0
+                && Astelfa.RANDOM.nextInt(Astelfa.config.hungryChange) == 0
                 && level > 0
                 && user instanceof PlayerEntity player
                 && player.getHealth() > 1) {

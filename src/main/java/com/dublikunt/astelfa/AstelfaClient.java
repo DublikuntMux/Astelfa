@@ -8,6 +8,7 @@ import com.dublikunt.astelfa.helper.common.Logger;
 import com.dublikunt.astelfa.networking.ModMessages;
 import com.dublikunt.astelfa.particle.ModParticle;
 import com.dublikunt.astelfa.renderer.block.InfuseTableBlockEntityRenderer;
+import com.dublikunt.astelfa.renderer.block.ManaFillerBlockEntityRenderer;
 import com.dublikunt.astelfa.screen.ModScreenHandlers;
 import com.dublikunt.astelfa.screen.screen.InfuseTableScreen;
 import com.dublikunt.astelfa.screen.screen.ManaFillerScreen;
@@ -43,6 +44,7 @@ public class AstelfaClient implements ClientModInitializer {
         HandledScreens.register(ModScreenHandlers.INFUSE_TABLE_SCREEN_HANDLER, InfuseTableScreen::new);
         HandledScreens.register(ModScreenHandlers.MANA_FILLER_SCREEN_HANDLER, ManaFillerScreen::new);
         BlockEntityRendererFactories.register(ModBlockEntities.INFUSE_TABLE_BLOCK_ENTITY_TYPE, InfuseTableBlockEntityRenderer::new);
+        BlockEntityRendererFactories.register(ModBlockEntities.MANA_FILLER_BLOCK_ENTITY_TYPE, ManaFillerBlockEntityRenderer::new);
 
         FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.STILL_MANA_FLUID, ModFluids.FLOWING_MANA_FLUID,
                 new SimpleFluidRenderHandler(

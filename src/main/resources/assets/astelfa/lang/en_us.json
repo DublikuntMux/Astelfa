@@ -1,8 +1,17 @@
 {
   "config.astelfa.title": "Astelfa config",
   "config.astelfa.category.1.title": "General config",
+  "config.astelfa.category.2.title": "Change config",
   "config.astelfa.category.1.log_type": "Log type for mod",
   "config.astelfa.category.1.log_type.tooltip": "Set logging type for mod.",
+  "config.astelfa.category.2.change_lose": "Loose curse use change",
+  "config.astelfa.category.2.change_lose.tooltip": "Curse Chance",
+  "config.astelfa.category.2.hungry_change": "Hungry and blood hungry enchantment use change",
+  "config.astelfa.category.2.hungry_change.tooltip": "Curse Chance",
+  "config.astelfa.category.2.illusion_change": "Illusion curse use change",
+  "config.astelfa.category.2.illusion_change.tooltip": "Curse Chance",
+  "config.astelfa.category.2.climbing_change": "Climbing curse use change",
+  "config.astelfa.category.2.climbing_change.tooltip": "Curse Chance",
 
   "itemGroup.astelfa.item_group": "Astelfa Mod",
 

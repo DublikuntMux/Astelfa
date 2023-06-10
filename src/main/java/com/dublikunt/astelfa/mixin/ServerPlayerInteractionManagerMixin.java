@@ -23,7 +23,7 @@ public class ServerPlayerInteractionManagerMixin {
 
     @Inject(at = @At("RETURN"), method = "tryBreakBlock")
     public void onBlockBreak(BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
-        if (Astelfa.RANDOM.nextInt(30) == 0 &&
+        if (Astelfa.RANDOM.nextInt(Astelfa.config.loseChange) == 0 &&
                 EnchantmentHelper.getLevel(ModEnchantments.LOOSE_CURSE, player.getMainHandStack()) > 0) {
             player.dropItem(player.getMainHandStack(), true);
             player.setStackInHand(Hand.MAIN_HAND, ItemStack.EMPTY);

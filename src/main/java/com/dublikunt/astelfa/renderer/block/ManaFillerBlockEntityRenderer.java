@@ -2,6 +2,7 @@ package com.dublikunt.astelfa.renderer.block;
 
 import com.dublikunt.astelfa.block.custom.InfuseTableBlock;
 import com.dublikunt.astelfa.block.entity.InfuseTableBlockEntity;
+import com.dublikunt.astelfa.block.entity.ManaFillerBlockEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.LightmapTextureManager;
 import net.minecraft.client.render.OverlayTexture;
@@ -18,18 +19,18 @@ import net.minecraft.world.LightType;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
-public class InfuseTableBlockEntityRenderer implements BlockEntityRenderer<InfuseTableBlockEntity> {
-    public InfuseTableBlockEntityRenderer(BlockEntityRendererFactory.Context context) {
+public class ManaFillerBlockEntityRenderer implements BlockEntityRenderer<ManaFillerBlockEntity> {
+    public ManaFillerBlockEntityRenderer(BlockEntityRendererFactory.Context context) {
     }
 
     @Override
-    public void render(@NotNull InfuseTableBlockEntity entity, float tickDelta, @NotNull MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
+    public void render(@NotNull ManaFillerBlockEntity entity, float tickDelta, @NotNull MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
         ItemRenderer itemRenderer = MinecraftClient.getInstance().getItemRenderer();
 
         ItemStack itemStack = entity.getRenderStack();
         matrices.push();
-        matrices.translate(0.49f, 0.82f, 0.49f);
-        matrices.scale(0.4f, 0.4f, 0.4f);
+        matrices.translate(0.49f, 0.75f, 0.49f);
+        matrices.scale(0.35f, 0.35f, 0.35f);
         matrices.multiply(RotationAxis.POSITIVE_X.rotation(1.5708f));
 
         switch (entity.getCachedState().get(InfuseTableBlock.FACING)) {

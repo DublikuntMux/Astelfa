@@ -27,7 +27,7 @@ public class PlayerEntityMixin {
 
     private void CurseTick(@NotNull PlayerEntity player) {
         if (player.world.isClient) {
-            if (Astelfa.RANDOM.nextInt(1000) == 0) {
+            if (Astelfa.RANDOM.nextInt(Astelfa.config.illusionChange) == 0) {
                 for (ItemStack armor : player.getArmorItems()) {
                     if (!armor.isEmpty() && EnchantmentHelper.getLevel(ModEnchantments.ILLUSION_CURSE, armor) > 0) {
                         player.world
@@ -40,7 +40,7 @@ public class PlayerEntityMixin {
                     }
                 }
             }
-            if (Astelfa.RANDOM.nextInt(100) == 0) {
+            if (Astelfa.RANDOM.nextInt(Astelfa.config.climbingChange) == 0) {
                 ItemStack armor = player.getEquippedStack(EquipmentSlot.FEET);
                 if (!armor.isEmpty() && EnchantmentHelper.getLevel(ModEnchantments.CLIMBING_CURSE, armor) > 0) {
                     BlockState state = player.getBlockStateAtPos();

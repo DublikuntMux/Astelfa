@@ -19,7 +19,8 @@ public class ItemSwitchCurse extends Enchantment {
 
     @Override
     public void onTargetDamaged(LivingEntity user, Entity target, int level) {
-        if (Astelfa.RANDOM.nextInt(20) == 0 && target != null && level > 0 && user instanceof PlayerEntity playerEntity) {
+        if (Astelfa.RANDOM.nextInt(Astelfa.config.switchChange) == 0 && target != null && level > 0
+                && user instanceof PlayerEntity playerEntity) {
             ItemStack mainHand = playerEntity.getMainHandStack();
             playerEntity.setStackInHand(Hand.MAIN_HAND, playerEntity.getOffHandStack());
             playerEntity.setStackInHand(Hand.OFF_HAND, mainHand);
