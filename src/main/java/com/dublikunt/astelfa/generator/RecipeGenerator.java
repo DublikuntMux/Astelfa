@@ -178,7 +178,7 @@ public class RecipeGenerator extends FabricRecipeProvider {
 
     private void offerTorch(Consumer<RecipeJsonProvider> exporter, ItemConvertible ingredient, ItemConvertible output) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, output, 4)
-                .pattern("X")
+                .pattern("R")
                 .pattern("S")
                 .input('R', ingredient)
                 .input('S', Items.STICK)

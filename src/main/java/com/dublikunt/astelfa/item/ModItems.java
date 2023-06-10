@@ -65,11 +65,14 @@ public class ModItems {
         ITEMS.put("matter6", MATTER_6);
         ITEMS.put("mana_ingot", MANA_INGOT);
         ITEMS.put("essential_fuel", ESSENTIAL_FUEL);
+
         ITEMS.put("hart_ring", HART_RING);
         ITEMS.put("ados_chains", ADOS_CHAINS);
         ITEMS.put("philosophers_stone", PHILOSOPHERS_STONE);
         ITEMS.put("ring_belt", RING_BELT);
+
         ITEMS.put("irritant_egg", IRRITANT_EGG);
+
         ITEMS.put("aquatic_torch", AQUATIC_TORCH_ITEM);
     }
 

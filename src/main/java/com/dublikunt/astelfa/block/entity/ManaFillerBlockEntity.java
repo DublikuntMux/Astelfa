@@ -102,7 +102,6 @@ public class ManaFillerBlockEntity extends BlockEntity implements ExtendedScreen
             markDirty(world, blockPos, state);
             if (entity.progress >= entity.maxProgress) {
                 craftItem(entity);
-                extractFluid(entity);
             }
         } else {
             entity.resetProgress();
@@ -128,6 +127,12 @@ public class ManaFillerBlockEntity extends BlockEntity implements ExtendedScreen
                     entity.getStack(2).getCount() + 1));
 
             entity.resetProgress();
+
+            try(Transaction transaction = Transaction.openOuter()) {
+                entity.fluidStorage.extract(FluidVariant.of(ModFluids.STILL_MANA_FLUID),
+                        recipe.get().getManaAmount(), transaction);
+                transaction.commit();
+            }
         }
     }
 
@@ -153,24 +158,8 @@ public class ManaFillerBlockEntity extends BlockEntity implements ExtendedScreen
         return inventory.getStack(2).getMaxCount() > inventory.getStack(2).getCount();
     }
 
-    private static void extractFluid(@NotNull ManaFillerBlockEntity entity) {
-        SimpleInventory inventory = new SimpleInventory(entity.size());
-        for (int i = 0; i < entity.size(); i++) {
-            inventory.setStack(i, entity.getStack(i));
-        }
-
-        Optional<ManaFillerRecipe> match = entity.getWorld().getRecipeManager()
-                .getFirstMatch(ManaFillerRecipe.Type.INSTANCE, inventory, entity.getWorld());
-
-        try (Transaction transaction = Transaction.openOuter()) {
-            entity.fluidStorage.extract(FluidVariant.of(ModFluids.STILL_MANA_FLUID),
-                    match.get().getManaAmount(), transaction);
-            transaction.commit();
-        }
-    }
-
     private static void transferFluidToFluidStorage(@NotNull ManaFillerBlockEntity entity) {
-        try (Transaction transaction = Transaction.openOuter()) {
+        try(Transaction transaction = Transaction.openOuter()) {
             entity.fluidStorage.insert(FluidVariant.of(ModFluids.STILL_MANA_FLUID),
                     FluidStack.convertDropletsToMb(FluidConstants.BUCKET), transaction);
             transaction.commit();

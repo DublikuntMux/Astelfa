@@ -3,7 +3,7 @@
   "input": {
     "item": "minecraft:iron_ingot"
   },
-  "mana_amount": 100,
+  "mana_amount": 300,
   "output": {
     "item": "astelfa:mana_ingot"
   }
