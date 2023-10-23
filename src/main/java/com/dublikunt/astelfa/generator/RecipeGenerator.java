@@ -107,7 +107,7 @@ public class RecipeGenerator extends FabricRecipeProvider {
                 .input(input)
                 .group("planks")
                 .criterion(FabricRecipeProvider.hasItem(input), FabricRecipeProvider.conditionsFromItem(input))
-                .offerTo(exporter, new Identifier(getRecipeName(output)));
+                .offerTo(exporter, new Identifier(getRecipeName(output) + id));
     }
 
     private void offerButton(RecipeExporter exporter, ItemConvertible output, ItemConvertible input) {

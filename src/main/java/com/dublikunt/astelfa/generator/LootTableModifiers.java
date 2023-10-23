@@ -33,6 +33,7 @@ public class LootTableModifiers {
                         .conditionally(RandomChanceLootCondition.builder(0.20f))
                         .with(ItemEntry.builder(ModItems.MANA_INGOT))
                         .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 4.0f)).build());
+
                 tableBuilder.pool(poolBuilder.build());
             }
         });

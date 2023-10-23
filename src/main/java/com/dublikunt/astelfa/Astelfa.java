@@ -7,6 +7,7 @@ import com.dublikunt.astelfa.entity.ModEntitys;
 import com.dublikunt.astelfa.fluid.ModFluids;
 import com.dublikunt.astelfa.generator.LootTableModifiers;
 import com.dublikunt.astelfa.helper.common.Logger;
+import com.dublikunt.astelfa.item.ModItemGroup;
 import com.dublikunt.astelfa.item.ModItems;
 import com.dublikunt.astelfa.networking.ModMessages;
 import com.dublikunt.astelfa.particle.ModParticle;
@@ -34,8 +35,7 @@ public class Astelfa implements ModInitializer {
 
         ModMessages.registerC2SPackets();
         ModParticle.registerServer();
-        ModItems.registerGroup();
-        ModBlocks.registerWithoutItem();
+        ModItemGroup.registerGroup();
         ModBlocks.registerFlammableBlocks();
         ModBlocks.registerStrippables();
         ModBlockEntities.register();

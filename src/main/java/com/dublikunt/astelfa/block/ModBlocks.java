@@ -5,6 +5,7 @@ import com.dublikunt.astelfa.block.common.SparklePillarBlock;
 import com.dublikunt.astelfa.block.common.SparkleSaplingBlock;
 import com.dublikunt.astelfa.block.custom.*;
 import com.dublikunt.astelfa.helper.Helpers;
+import com.dublikunt.astelfa.item.ModItemGroup;
 import com.dublikunt.astelfa.item.ModItems;
 import com.dublikunt.astelfa.world.feature.tree.SilverWoodSaplingGenerator;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -25,98 +26,67 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class ModBlocks {
-    public static final InfuseTableBlock INFUSING_TABLE_BLOCK = new InfuseTableBlock(
-            FabricBlockSettings.copyOf(Blocks.STONE).strength(2f).requiresTool().nonOpaque());
-    public static final ManaFillerBlock MANA_FILLER_BLOCK = new ManaFillerBlock(
-            FabricBlockSettings.copyOf(Blocks.STONE).nonOpaque());
-    public static final SculkStatueBlock SCULK_STATUE_BLOCK = new SculkStatueBlock(
-            FabricBlockSettings.copyOf(Blocks.SCULK).strength(3f).requiresTool().nonOpaque());
+    public static final InfuseTableBlock INFUSING_TABLE_BLOCK = registerBlock(new InfuseTableBlock(
+            FabricBlockSettings.copyOf(Blocks.STONE).strength(2f).requiresTool().nonOpaque()), "infuse_table");
+    public static final ManaFillerBlock MANA_FILLER_BLOCK = registerBlock(new ManaFillerBlock(
+            FabricBlockSettings.copyOf(Blocks.STONE).nonOpaque()), "mana_filler");
+    public static final SculkStatueBlock SCULK_STATUE_BLOCK =registerBlock( new SculkStatueBlock(
+            FabricBlockSettings.copyOf(Blocks.SCULK).strength(3f).requiresTool().nonOpaque()), "sculk_statue");
 
-    public static final SparklePillarBlock SILVER_LOG = new SparklePillarBlock(FabricBlockSettings.copyOf(
-            Blocks.OAK_LOG).mapColor(DyeColor.LIGHT_GRAY));
-    public static final SparklePillarBlock SILVER_WOOD = new SparklePillarBlock(FabricBlockSettings.copyOf(
-            Blocks.OAK_WOOD).mapColor(DyeColor.LIGHT_GRAY));
-    public static final SparklePillarBlock STRIPPED_SILVER_LOG = new SparklePillarBlock(FabricBlockSettings.copyOf(
-            Blocks.STRIPPED_OAK_LOG).mapColor(DyeColor.LIGHT_GRAY));
-    public static final SparklePillarBlock STRIPPED_SILVER_WOOD = new SparklePillarBlock(FabricBlockSettings.copyOf(
-            Blocks.STRIPPED_OAK_WOOD).mapColor(DyeColor.LIGHT_GRAY));
-    public static final SparkleLeavesBlock SILVER_LEAVES = new SparkleLeavesBlock(FabricBlockSettings.copyOf(Blocks.OAK_LEAVES)
-            .mapColor(DyeColor.LIGHT_GRAY));
-    public static final SparkleSaplingBlock SILVER_SAPLING = new SparkleSaplingBlock(new SilverWoodSaplingGenerator(),
+    public static final SparklePillarBlock SILVER_LOG = registerBlock(new SparklePillarBlock(FabricBlockSettings.copyOf(
+            Blocks.OAK_LOG).mapColor(DyeColor.LIGHT_GRAY)), "silver_log");
+    public static final SparklePillarBlock SILVER_WOOD = registerBlock(new SparklePillarBlock(FabricBlockSettings.copyOf(
+            Blocks.OAK_WOOD).mapColor(DyeColor.LIGHT_GRAY)), "silver_wood");
+    public static final SparklePillarBlock STRIPPED_SILVER_LOG = registerBlock(new SparklePillarBlock(FabricBlockSettings.copyOf(
+            Blocks.STRIPPED_OAK_LOG).mapColor(DyeColor.LIGHT_GRAY)), "stripped_silver_log");
+    public static final SparklePillarBlock STRIPPED_SILVER_WOOD = registerBlock(new SparklePillarBlock(FabricBlockSettings.copyOf(
+            Blocks.STRIPPED_OAK_WOOD).mapColor(DyeColor.LIGHT_GRAY)), "stripped_silver_wood");
+    public static final SparkleLeavesBlock SILVER_LEAVES = registerBlock(new SparkleLeavesBlock(FabricBlockSettings.copyOf(Blocks.OAK_LEAVES)
+            .mapColor(DyeColor.LIGHT_GRAY)), "silver_leaves");
+    public static final SparkleSaplingBlock SILVER_SAPLING = registerBlock(new SparkleSaplingBlock(new SilverWoodSaplingGenerator(),
             FabricBlockSettings.copyOf(Blocks.OAK_SAPLING)
-                    .mapColor(DyeColor.LIGHT_GRAY));
+                    .mapColor(DyeColor.LIGHT_GRAY)), "silver_sapling");
 
-    public static final Block SILVER_PLANKS = new Block(FabricBlockSettings.copyOf(Blocks.OAK_PLANKS)
-            .mapColor(DyeColor.LIGHT_GRAY));
-    public static final Block CARVED_SILVER_WOOD = new Block(FabricBlockSettings.copyOf(Blocks.OAK_PLANKS)
-            .mapColor(DyeColor.LIGHT_GRAY));
-    public static final ButtonBlock SILVER_WOOD_BUTTON = new ButtonBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD)
-            .noCollision().strength(0.5F), BlockSetType.OAK, 30, true);
-    public static final DoorBlock SILVER_WOOD_DOOR = new DoorBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD).
-            mapColor(SILVER_PLANKS.getDefaultMapColor()).strength(3.0F).nonOpaque(), BlockSetType.OAK);
-    public static final TrapdoorBlock SILVER_WOOD_TRAPDOOR = new TrapdoorBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD).
-            mapColor(SILVER_PLANKS.getDefaultMapColor()).strength(3.0F).nonOpaque(), BlockSetType.OAK);
-    public static final PressurePlateBlock SILVER_WOOD_PRESSURE_PLATE = new PressurePlateBlock(
+    public static final Block SILVER_PLANKS = registerBlock(new Block(FabricBlockSettings.copyOf(Blocks.OAK_PLANKS)
+            .mapColor(DyeColor.LIGHT_GRAY)), "silver_planks");
+    public static final Block CARVED_SILVER_WOOD = registerBlock(new Block(FabricBlockSettings.copyOf(Blocks.OAK_PLANKS)
+            .mapColor(DyeColor.LIGHT_GRAY)), "carved_silver_wood");
+    public static final ButtonBlock SILVER_WOOD_BUTTON = registerBlock(new ButtonBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD)
+            .noCollision().strength(0.5F), BlockSetType.OAK, 30, true), "silver_wood_button");
+    public static final DoorBlock SILVER_WOOD_DOOR = registerBlock(new DoorBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD).
+            mapColor(SILVER_PLANKS.getDefaultMapColor()).strength(3.0F).nonOpaque(), BlockSetType.OAK), "silver_wood_door");
+    public static final TrapdoorBlock SILVER_WOOD_TRAPDOOR = registerBlock(new TrapdoorBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD).
+            mapColor(SILVER_PLANKS.getDefaultMapColor()).strength(3.0F).nonOpaque(), BlockSetType.OAK), "silver_wood_trapdoor");
+    public static final PressurePlateBlock SILVER_WOOD_PRESSURE_PLATE = registerBlock(new PressurePlateBlock(
             PressurePlateBlock.ActivationRule.EVERYTHING,
             FabricBlockSettings.copyOf(Blocks.OAK_WOOD).mapColor(SILVER_PLANKS.getDefaultMapColor()).noCollision().strength(0.5F),
             BlockSetType.OAK
-    );
-    public static final FenceBlock SILVER_WOOD_FENCE = new FenceBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD).
-            mapColor(SILVER_PLANKS.getDefaultMapColor()).strength(2.0F, 3.0F).sounds(BlockSoundGroup.WOOD));
-    public static final FenceGateBlock SILVER_WOOD_FENCE_GATE = new FenceGateBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD).
-            mapColor(SILVER_PLANKS.getDefaultMapColor()).strength(2.0F, 3.0F), WoodType.OAK);
-    public static final StairsBlock SILVER_WOOD_STAIRS = new StairsBlock(SILVER_PLANKS.getDefaultState(),
-            FabricBlockSettings.copyOf(SILVER_PLANKS));
-    public static final SlabBlock SILVER_WOOD_SLAB = new SlabBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD).
-            mapColor(SILVER_PLANKS.getDefaultMapColor()).requiresTool().strength(1.5F, 6.0F));
-    public static final AquaticTorchBlock AQUATIC_TORCH = new AquaticTorchBlock(FabricBlockSettings.copyOf(Blocks.TORCH)
-            .noCollision().breakInstantly().luminance(15).sounds(BlockSoundGroup.WOOD), ParticleTypes.FLAME);
-    public static final AquaticWallTorchBlock AQUATIC_WALL_TORCH = new AquaticWallTorchBlock(FabricBlockSettings.copyOf(Blocks.TORCH)
-            .noCollision().breakInstantly().luminance(15).sounds(BlockSoundGroup.WOOD), ParticleTypes.FLAME);
+    ), "silver_wood_pressure_pate");
+    public static final FenceBlock SILVER_WOOD_FENCE = registerBlock(new FenceBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD).
+            mapColor(SILVER_PLANKS.getDefaultMapColor()).strength(2.0F, 3.0F).sounds(BlockSoundGroup.WOOD)), "silver_wood_fence");
+    public static final FenceGateBlock SILVER_WOOD_FENCE_GATE = registerBlock(new FenceGateBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD).
+            mapColor(SILVER_PLANKS.getDefaultMapColor()).strength(2.0F, 3.0F), WoodType.OAK), "silver_wood_fence_gate");
+    public static final StairsBlock SILVER_WOOD_STAIRS = registerBlock(new StairsBlock(SILVER_PLANKS.getDefaultState(),
+            FabricBlockSettings.copyOf(SILVER_PLANKS)), "silver_wood_stairs");
+    public static final SlabBlock SILVER_WOOD_SLAB = registerBlock(new SlabBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD).
+            mapColor(SILVER_PLANKS.getDefaultMapColor()).requiresTool().strength(1.5F, 6.0F)), "silver_wood_slab");
+    public static final AquaticTorchBlock AQUATIC_TORCH = registerBlockWithoutItem(new AquaticTorchBlock(FabricBlockSettings.copyOf(Blocks.TORCH)
+            .noCollision().breakInstantly().luminance(15).sounds(BlockSoundGroup.WOOD), ParticleTypes.FLAME), "aquatic_torch");
+    public static final AquaticWallTorchBlock AQUATIC_WALL_TORCH = registerBlockWithoutItem(new AquaticWallTorchBlock(FabricBlockSettings.copyOf(Blocks.TORCH)
+            .noCollision().breakInstantly().luminance(15).sounds(BlockSoundGroup.WOOD), ParticleTypes.FLAME), "aquatic_wall_torch");
 
-    public static final Map<String, Block> BLOCKS = new LinkedHashMap<>();
-    public static final Map<String, Block> BLOCKS_WITHOUT_ITEM = new LinkedHashMap<>();
-
-    static {
-        BLOCKS.put("infuse_table", INFUSING_TABLE_BLOCK);
-        BLOCKS.put("mana_filler", MANA_FILLER_BLOCK);
-        BLOCKS.put("sculk_statue", SCULK_STATUE_BLOCK);
-
-        BLOCKS.put("silver_log", SILVER_LOG);
-        BLOCKS.put("silver_wood", SILVER_WOOD);
-        BLOCKS.put("stripped_silver_log", STRIPPED_SILVER_LOG);
-        BLOCKS.put("stripped_silver_wood", STRIPPED_SILVER_WOOD);
-        BLOCKS.put("silver_leaves", SILVER_LEAVES);
-        BLOCKS.put("silver_sapling", SILVER_SAPLING);
-
-        BLOCKS.put("silver_planks", SILVER_PLANKS);
-        BLOCKS.put("carved_silver_wood", CARVED_SILVER_WOOD);
-        BLOCKS.put("silver_wood_button", SILVER_WOOD_BUTTON);
-        BLOCKS.put("silver_wood_door", SILVER_WOOD_DOOR);
-        BLOCKS.put("silver_wood_trapdoor", SILVER_WOOD_TRAPDOOR);
-        BLOCKS.put("silver_wood_pressure_plate", SILVER_WOOD_PRESSURE_PLATE);
-        BLOCKS.put("silver_wood_fence", SILVER_WOOD_FENCE);
-        BLOCKS.put("silver_wood_fence_gate", SILVER_WOOD_FENCE_GATE);
-        BLOCKS.put("silver_wood_stairs", SILVER_WOOD_STAIRS);
-        BLOCKS.put("silver_wood_slab", SILVER_WOOD_SLAB);
-
-        BLOCKS_WITHOUT_ITEM.put("aquatic_torch", AQUATIC_TORCH);
-        BLOCKS_WITHOUT_ITEM.put("aquatic_wall_torch", AQUATIC_WALL_TORCH);
+    private static <T extends Block> T registerBlock(T block, String name) {
+        registerBlockItem(block, name);
+        return Registry.register(Registries.BLOCK, Helpers.id(name), block);
     }
 
-    public static void register() {
-        for (Map.Entry<String, Block> block : BLOCKS.entrySet()) {
-            Registry.register(Registries.BLOCK, Helpers.id(block.getKey()), block.getValue());
-            Item item = Registry.register(Registries.ITEM, Helpers.id(block.getKey()),
-                    new BlockItem(block.getValue(), new FabricItemSettings()));
-            ItemGroupEvents.modifyEntriesEvent(ModItems.MOD_GROUP).register(entries -> entries.add(item));
-        }
+    private static <T extends Block> T registerBlockWithoutItem(T block, String name) {
+        return Registry.register(Registries.BLOCK, Helpers.id(name), block);
     }
 
-    public static void registerWithoutItem() {
-        for (Map.Entry<String, Block> block : BLOCKS_WITHOUT_ITEM.entrySet()) {
-            Registry.register(Registries.BLOCK, Helpers.id(block.getKey()), block.getValue());
-        }
+    private static <T extends Block> Item registerBlockItem(T block, String name) {
+        return Registry.register(Registries.ITEM, Helpers.id(name),
+                new BlockItem(block, new FabricItemSettings()));
     }
 
     public static void registerFlammableBlocks() {

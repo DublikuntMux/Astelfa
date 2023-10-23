@@ -25,69 +25,36 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class ModItems {
-    public static final TooltipItem MATTER_1 = new TooltipItem(Text.translatable("item.astelfa.matter.tooltip")
-            .formatted(Formatting.RED), new FabricItemSettings());
-    public static final TooltipItem MATTER_2 = new TooltipItem(Text.translatable("item.astelfa.matter.tooltip")
-            .formatted(Formatting.YELLOW), new FabricItemSettings());
-    public static final TooltipItem MATTER_3 = new TooltipItem(Text.translatable("item.astelfa.matter.tooltip")
-            .formatted(Formatting.GREEN), new FabricItemSettings().rarity(Rarity.RARE));
-    public static final TooltipItem MATTER_4 = new TooltipItem(Text.translatable("item.astelfa.matter.tooltip")
-            .formatted(Formatting.AQUA), new FabricItemSettings().rarity(Rarity.RARE));
-    public static final TooltipItem MATTER_5 = new TooltipItem(Text.translatable("item.astelfa.matter.tooltip")
-            .formatted(Formatting.DARK_PURPLE), new FabricItemSettings().rarity(Rarity.EPIC));
-    public static final TooltipItem MATTER_6 = new TooltipItem(Text.translatable("item.astelfa.matter.tooltip")
-            .formatted(Formatting.WHITE), new FabricItemSettings().rarity(Rarity.EPIC));
-    public static final TooltipItem MANA_INGOT = new TooltipItem(Text.translatable("item.astelfa.mana_ingot.tooltip"),
-            new FabricItemSettings());
-    public static final TooltipItem ESSENTIAL_FUEL = new TooltipItem(Text.translatable("item.astelfa.essential_fuel.tooltip"),
-            new FabricItemSettings());
+    public static final TooltipItem MATTER_1 = registerItem(new TooltipItem(Text.translatable("item.astelfa.matter.tooltip")
+            .formatted(Formatting.RED), new FabricItemSettings()), "matter1");
+    public static final TooltipItem MATTER_2 = registerItem(new TooltipItem(Text.translatable("item.astelfa.matter.tooltip")
+            .formatted(Formatting.YELLOW), new FabricItemSettings()), "matter2");
+    public static final TooltipItem MATTER_3 = registerItem(new TooltipItem(Text.translatable("item.astelfa.matter.tooltip")
+            .formatted(Formatting.GREEN), new FabricItemSettings().rarity(Rarity.RARE)), "matter3");
+    public static final TooltipItem MATTER_4 = registerItem(new TooltipItem(Text.translatable("item.astelfa.matter.tooltip")
+            .formatted(Formatting.AQUA), new FabricItemSettings().rarity(Rarity.RARE)), "matter4");
+    public static final TooltipItem MATTER_5 = registerItem(new TooltipItem(Text.translatable("item.astelfa.matter.tooltip")
+            .formatted(Formatting.DARK_PURPLE), new FabricItemSettings().rarity(Rarity.EPIC)), "matter5");
+    public static final TooltipItem MATTER_6 = registerItem(new TooltipItem(Text.translatable("item.astelfa.matter.tooltip")
+            .formatted(Formatting.WHITE), new FabricItemSettings().rarity(Rarity.EPIC)), "matter6");
+    public static final TooltipItem MANA_INGOT = registerItem(new TooltipItem(Text.translatable("item.astelfa.mana_ingot.tooltip"),
+            new FabricItemSettings()), "mana_ingot");
+    public static final TooltipItem ESSENTIAL_FUEL = registerItem(new TooltipItem(Text.translatable("item.astelfa.essential_fuel.tooltip"),
+            new FabricItemSettings()), "essential_fuel");
 
-    public static final HartRing HART_RING = new HartRing(new FabricItemSettings().rarity(Rarity.RARE));
-    public static final AdosChains ADOS_CHAINS = new AdosChains(new FabricItemSettings().rarity(Rarity.RARE));
-    public static final RingBelt RING_BELT = new RingBelt(new FabricItemSettings());
+    public static final HartRing HART_RING = registerItem(new HartRing(new FabricItemSettings().rarity(Rarity.RARE)), "hart_ring");
+    public static final AdosChains ADOS_CHAINS = registerItem(new AdosChains(new FabricItemSettings().rarity(Rarity.RARE)), "ados_chains");
+    public static final RingBelt RING_BELT = registerItem(new RingBelt(new FabricItemSettings()), "ring_belt");
 
-    public static final PhilosophersStone PHILOSOPHERS_STONE = new PhilosophersStone(new FabricItemSettings().rarity(Rarity.RARE).maxCount(1));
+    public static final PhilosophersStone PHILOSOPHERS_STONE = registerItem(new PhilosophersStone(new FabricItemSettings().rarity(Rarity.RARE).maxCount(1)),
+            "philosophers_stone");
 
-    public static final SpawnEggItem IRRITANT_EGG = new SpawnEggItem(ModEntitys.IRRITANT, 0x101B21,
-            0x009195, new FabricItemSettings());
-    public static final VerticallyAttachableBlockItem AQUATIC_TORCH_ITEM = new VerticallyAttachableBlockItem(ModBlocks.AQUATIC_TORCH, ModBlocks.AQUATIC_WALL_TORCH,
-            new Item.Settings(), Direction.DOWN);
+    public static final SpawnEggItem IRRITANT_EGG = registerItem(new SpawnEggItem(ModEntitys.IRRITANT, 0x101B21,
+            0x009195, new FabricItemSettings()), "irritant_egg");
+    public static final VerticallyAttachableBlockItem AQUATIC_TORCH_ITEM = registerItem(new VerticallyAttachableBlockItem(ModBlocks.AQUATIC_TORCH, ModBlocks.AQUATIC_WALL_TORCH,
+            new Item.Settings(), Direction.DOWN), "aquatic_torch");
 
-    public static final RegistryKey<ItemGroup> MOD_GROUP = RegistryKey.of(RegistryKeys.ITEM_GROUP, Helpers.id("item_group"));
-
-    public static final Map<String, Item> ITEMS = new LinkedHashMap<>();
-
-    static {
-        ITEMS.put("matter1", MATTER_1);
-        ITEMS.put("matter2", MATTER_2);
-        ITEMS.put("matter3", MATTER_3);
-        ITEMS.put("matter4", MATTER_4);
-        ITEMS.put("matter5", MATTER_5);
-        ITEMS.put("matter6", MATTER_6);
-        ITEMS.put("mana_ingot", MANA_INGOT);
-        ITEMS.put("essential_fuel", ESSENTIAL_FUEL);
-
-        ITEMS.put("hart_ring", HART_RING);
-        ITEMS.put("ados_chains", ADOS_CHAINS);
-        ITEMS.put("philosophers_stone", PHILOSOPHERS_STONE);
-        ITEMS.put("ring_belt", RING_BELT);
-
-        ITEMS.put("irritant_egg", IRRITANT_EGG);
-
-        ITEMS.put("aquatic_torch", AQUATIC_TORCH_ITEM);
-    }
-
-    public static void registerGroup() {
-        Registry.register(Registries.ITEM_GROUP, MOD_GROUP, FabricItemGroup.builder()
-                .icon(() -> new ItemStack(MATTER_1))
-                .displayName(Text.translatable("itemGroup.astelfa.item_group"))
-                .build());
-    }
-
-    public static void register() {
-        for (Map.Entry<String, Item> item : ITEMS.entrySet()) {
-            Registry.register(Registries.ITEM, Helpers.id(item.getKey()), item.getValue());
-            ItemGroupEvents.modifyEntriesEvent(MOD_GROUP).register(content -> content.add(item.getValue()));
-        }
+    private static <T extends Item> T registerItem(T item, String name) {
+        return Registry.register(Registries.ITEM, Helpers.id(name), item);
     }
 }
