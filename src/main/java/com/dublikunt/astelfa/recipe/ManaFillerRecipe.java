@@ -32,7 +32,8 @@ public class ManaFillerRecipe implements Recipe<SimpleInventory> {
         if (world.isClient()) {
             return false;
         }
-        return recipeItems.get(0).test(inventory.getStack(0)) && recipeItems.get(1).test(inventory.getStack(1));
+        boolean hasCatalyst = recipeItems.size() == 2;
+        return recipeItems.get(0).test(inventory.getStack(0)) && (hasCatalyst ? recipeItems.get(1).test(inventory.getStack(1)) : Ingredient.empty().test(inventory.getStack(1)));
     }
 
     @Override
@@ -58,8 +59,8 @@ public class ManaFillerRecipe implements Recipe<SimpleInventory> {
         return manaAmount;
     }
 
-    public DefaultedList<Ingredient> getInputs() {
-        return this.getIngredients();
+    public List<Ingredient> getInputs() {
+        return recipeItems;
     }
 
     @Override
@@ -85,7 +86,7 @@ public class ManaFillerRecipe implements Recipe<SimpleInventory> {
         public static final String ID = "mana_filler";
 
         public static final Codec<ManaFillerRecipe> CODEC = RecordCodecBuilder.create(in -> in.group(
-                validateAmount(Ingredient.DISALLOW_EMPTY_CODEC, 2).fieldOf("ingredients").forGetter(ManaFillerRecipe::getIngredients),
+                validateAmount(Ingredient.DISALLOW_EMPTY_CODEC, 2).fieldOf("ingredients").forGetter(ManaFillerRecipe::getInputs),
                 RecipeCodecs.CRAFTING_RESULT.fieldOf("output").forGetter(r -> r.output),
                 Codecs.POSITIVE_INT.fieldOf("mana_amount").forGetter(ManaFillerRecipe::getManaAmount)
         ).apply(in, ManaFillerRecipe::new));

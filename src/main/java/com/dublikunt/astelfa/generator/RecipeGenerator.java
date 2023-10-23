@@ -1,7 +1,6 @@
 package com.dublikunt.astelfa.generator;
 
 import com.dublikunt.astelfa.block.ModBlocks;
-import com.dublikunt.astelfa.helper.Helpers;
 import com.dublikunt.astelfa.item.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;

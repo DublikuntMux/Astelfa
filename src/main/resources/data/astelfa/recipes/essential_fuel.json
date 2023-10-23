@@ -1,8 +1,10 @@
 {
   "type": "astelfa:mana_filler",
-  "input": {
-    "item": "minecraft:coal"
-  },
+  "ingredients": [
+    {
+      "item": "minecraft:coal"
+    }
+  ],
   "mana_amount": 100,
   "output": {
     "item": "astelfa:essential_fuel"

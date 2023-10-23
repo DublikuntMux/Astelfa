@@ -27,8 +27,10 @@ public class AstelfaClient implements ClientModInitializer {
     public void onInitializeClient() {
         Logger.debug("Mod client loading...");
 
+        Logger.debug("Register Geckolib networking.");
         GeckoLibNetwork.registerClientReceiverPackets();
 
+        Logger.debug("Register block renderers.");
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.SILVER_LEAVES, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.SILVER_SAPLING, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.SILVER_WOOD_DOOR, RenderLayer.getCutout());
@@ -37,22 +39,28 @@ public class AstelfaClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.AQUATIC_TORCH, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.AQUATIC_WALL_TORCH, RenderLayer.getCutout());
 
+        Logger.debug("Register S2C packets.");
         ModMessages.registerS2CPackets();
+        Logger.debug("Register entity renderers.");
         ModEntitys.registerRenderer();
+        Logger.debug("Register particles on client.");
         ModParticle.registerClient();
 
+        Logger.debug("Register screens.");
         HandledScreens.register(ModScreenHandlers.INFUSE_TABLE_SCREEN_HANDLER, InfuseTableScreen::new);
         HandledScreens.register(ModScreenHandlers.MANA_FILLER_SCREEN_HANDLER, ManaFillerScreen::new);
+
+        Logger.debug("Register block entity renderers.");
         BlockEntityRendererFactories.register(ModBlockEntities.INFUSE_TABLE_BLOCK_ENTITY_TYPE, InfuseTableBlockEntityRenderer::new);
         BlockEntityRendererFactories.register(ModBlockEntities.MANA_FILLER_BLOCK_ENTITY_TYPE, ManaFillerBlockEntityRenderer::new);
 
+        Logger.debug("Register fluid renderers.");
         FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.STILL_MANA_FLUID, ModFluids.FLOWING_MANA_FLUID,
                 new SimpleFluidRenderHandler(
                         new Identifier("minecraft:block/water_still"),
                         new Identifier("minecraft:block/water_flow"),
                         0xA138C1E0
                 ));
-
         BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(),
                 ModFluids.STILL_MANA_FLUID, ModFluids.FLOWING_MANA_FLUID);
 

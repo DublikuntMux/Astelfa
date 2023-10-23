@@ -1,5 +1,6 @@
 package com.dublikunt.astelfa.fluid;
 
+import com.dublikunt.astelfa.item.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -77,7 +78,7 @@ public abstract class ManaFluid extends FlowableFluid {
 
     @Override
     public Item getBucketItem() {
-        return ModFluids.MANA_BUCKET;
+        return ModItems.MANA_BUCKET;
     }
 
     @Override

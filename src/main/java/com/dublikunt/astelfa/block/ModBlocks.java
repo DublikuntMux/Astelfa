@@ -5,11 +5,8 @@ import com.dublikunt.astelfa.block.common.SparklePillarBlock;
 import com.dublikunt.astelfa.block.common.SparkleSaplingBlock;
 import com.dublikunt.astelfa.block.custom.*;
 import com.dublikunt.astelfa.helper.Helpers;
-import com.dublikunt.astelfa.item.ModItemGroup;
-import com.dublikunt.astelfa.item.ModItems;
 import com.dublikunt.astelfa.world.feature.tree.SilverWoodSaplingGenerator;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
@@ -22,15 +19,12 @@ import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.DyeColor;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 public class ModBlocks {
     public static final InfuseTableBlock INFUSING_TABLE_BLOCK = registerBlock(new InfuseTableBlock(
             FabricBlockSettings.copyOf(Blocks.STONE).strength(2f).requiresTool().nonOpaque()), "infuse_table");
     public static final ManaFillerBlock MANA_FILLER_BLOCK = registerBlock(new ManaFillerBlock(
             FabricBlockSettings.copyOf(Blocks.STONE).nonOpaque()), "mana_filler");
-    public static final SculkStatueBlock SCULK_STATUE_BLOCK =registerBlock( new SculkStatueBlock(
+    public static final SculkStatueBlock SCULK_STATUE_BLOCK = registerBlock(new SculkStatueBlock(
             FabricBlockSettings.copyOf(Blocks.SCULK).strength(3f).requiresTool().nonOpaque()), "sculk_statue");
 
     public static final SparklePillarBlock SILVER_LOG = registerBlock(new SparklePillarBlock(FabricBlockSettings.copyOf(

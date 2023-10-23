@@ -16,6 +16,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -30,6 +31,7 @@ public abstract class EndermanEntityMixin extends HostileEntity {
         this.setPathfindingPenalty(PathNodeType.WATER, -1.0F);
     }
 
+    @Unique
     private static boolean hasEnderEyesEnchantment(@NotNull ItemStack item) {
         if (item.getItem() instanceof ArmorItem) {
             Map<Enchantment, Integer> itemEnchantments = EnchantmentHelper.get(item);

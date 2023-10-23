@@ -3,7 +3,7 @@
   "config.astelfa.category.1.title": "General config",
   "config.astelfa.category.2.title": "Change config",
   "config.astelfa.category.1.log_type": "Log type for mod",
-  "config.astelfa.category.1.log_type.tooltip": "Set logging type for mod.",
+  "config.astelfa.category.1.log_type.tooltip": "Set logging type for mod",
   "config.astelfa.category.2.change_lose": "Loose curse use change",
   "config.astelfa.category.2.change_lose.tooltip": "Curse Chance",
   "config.astelfa.category.2.hungry_change": "Hungry and blood hungry enchantment use change",
@@ -21,21 +21,21 @@
   "item.astelfa.matter4": "Blue matter",
   "item.astelfa.matter5": "Purple matter",
   "item.astelfa.matter6": "White matter",
-  "item.astelfa.matter.tooltip": "I am everything and nothing.",
+  "item.astelfa.matter.tooltip": "I am everything and nothing",
   "item.astelfa.mana_ingot": "Mana ingot",
-  "item.astelfa.mana_ingot.tooltip": "100% less water.",
+  "item.astelfa.mana_ingot.tooltip": "100% less water",
   "item.astelfa.philosophers_stone": "Philosopher's Stone",
-  "item.astelfa.philosophers_stone.tooltip": "Let your imagination run wild.",
+  "item.astelfa.philosophers_stone.tooltip": "Let your imagination run wild",
   "item.astelfa.mana_bucket": "Bucket of mana",
   "item.astelfa.essential_fuel": "Essential fuel",
-  "item.astelfa.essential_fuel.tooltip": "Almost out of potassium.",
+  "item.astelfa.essential_fuel.tooltip": "Almost out of potassium",
 
   "item.astelfa.hart_ring": "Hart ring",
-  "item.astelfa.hart_ring.tooltip": "The demon's heart begins to beat in unison with yours.",
+  "item.astelfa.hart_ring.tooltip": "The demon's heart begins to beat in unison with yours",
   "item.astelfa.ados_chains": "Ados chains",
-  "item.astelfa.ados_chains.tooltip": "You feel how your body is filled with new strength.",
+  "item.astelfa.ados_chains.tooltip": "You feel how your body is filled with new strength",
   "item.astelfa.ring_belt": "Ring belt",
-  "item.astelfa.ring_belt.tooltip": "You decided that wearing a belt of rings is not such a bad idea.",
+  "item.astelfa.ring_belt.tooltip": "You decided that wearing a belt of rings is not such a bad idea",
 
   "block.astelfa.infuse_table": "Infuse table",
   "block.astelfa.mana_filler": "Mana filler",
@@ -76,9 +76,5 @@
   "enchantment.astelfa.climbing_curse": "Curse of Climbing",
 
   "block.astelfa.mana_filler.tooltip.amount_capacity": "%s / %s mB",
-  "block.astelfa.mana_filler.tooltip.amount": "%s mB",
-
-  "emi.category.astelfa.infuse_table": "Infusing",
-  "emi.category.astelfa.mana_filler": "Mana filling",
-  "emi.astelfa.mana_amount": "%s mB of Mana"
+  "block.astelfa.mana_filler.tooltip.amount": "%s mB"
 }

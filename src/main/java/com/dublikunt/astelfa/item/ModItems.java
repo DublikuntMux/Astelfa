@@ -2,6 +2,7 @@ package com.dublikunt.astelfa.item;
 
 import com.dublikunt.astelfa.block.ModBlocks;
 import com.dublikunt.astelfa.entity.ModEntitys;
+import com.dublikunt.astelfa.fluid.ModFluids;
 import com.dublikunt.astelfa.helper.Helpers;
 import com.dublikunt.astelfa.item.animated.PhilosophersStone;
 import com.dublikunt.astelfa.item.common.TooltipItem;
@@ -9,20 +10,16 @@ import com.dublikunt.astelfa.item.trinket.AdosChains;
 import com.dublikunt.astelfa.item.trinket.HartRing;
 import com.dublikunt.astelfa.item.trinket.RingBelt;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.math.Direction;
-
-import java.util.LinkedHashMap;
-import java.util.Map;
+import org.jetbrains.annotations.NotNull;
 
 public class ModItems {
     public static final TooltipItem MATTER_1 = registerItem(new TooltipItem(Text.translatable("item.astelfa.matter.tooltip")
@@ -49,6 +46,8 @@ public class ModItems {
     public static final PhilosophersStone PHILOSOPHERS_STONE = registerItem(new PhilosophersStone(new FabricItemSettings().rarity(Rarity.RARE).maxCount(1)),
             "philosophers_stone");
 
+    public static final BucketItem MANA_BUCKET = registerItem(new BucketItem(ModFluids.STILL_MANA_FLUID, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)), "mana_bucket");
+
     public static final SpawnEggItem IRRITANT_EGG = registerItem(new SpawnEggItem(ModEntitys.IRRITANT, 0x101B21,
             0x009195, new FabricItemSettings()), "irritant_egg");
     public static final VerticallyAttachableBlockItem AQUATIC_TORCH_ITEM = registerItem(new VerticallyAttachableBlockItem(ModBlocks.AQUATIC_TORCH, ModBlocks.AQUATIC_WALL_TORCH,
@@ -56,5 +55,14 @@ public class ModItems {
 
     private static <T extends Item> T registerItem(T item, String name) {
         return Registry.register(Registries.ITEM, Helpers.id(name), item);
+    }
+
+    private static void addItemsToIngredientItemGroup(@NotNull FabricItemGroupEntries entries) {
+        entries.add(MANA_INGOT);
+        entries.add(ESSENTIAL_FUEL);
+    }
+
+    public static void registerModItems() {
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(ModItems::addItemsToIngredientItemGroup);
     }
 }

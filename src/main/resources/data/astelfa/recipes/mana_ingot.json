@@ -1,8 +1,10 @@
 {
   "type": "astelfa:mana_filler",
-  "input": {
-    "item": "minecraft:iron_ingot"
-  },
+  "ingredients": [
+    {
+      "item": "minecraft:iron_ingot"
+    }
+  ],
   "mana_amount": 300,
   "output": {
     "item": "astelfa:mana_ingot"

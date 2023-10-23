@@ -1,7 +1,6 @@
 package com.dublikunt.astelfa.generator;
 
 import com.dublikunt.astelfa.block.ModBlocks;
-import com.dublikunt.astelfa.fluid.ModFluids;
 import com.dublikunt.astelfa.item.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
@@ -42,6 +41,6 @@ public class ModelGenerator extends FabricModelProvider {
         itemModelGenerator.register(ModItems.ADOS_CHAINS, Models.GENERATED);
         itemModelGenerator.register(ModItems.HART_RING, Models.GENERATED);
         itemModelGenerator.register(ModItems.RING_BELT, Models.GENERATED);
-        itemModelGenerator.register(ModFluids.MANA_BUCKET, Models.GENERATED);
+        itemModelGenerator.register(ModItems.MANA_BUCKET, Models.GENERATED);
     }
 }

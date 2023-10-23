@@ -13,6 +13,7 @@ import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -21,6 +22,7 @@ import java.util.List;
 
 @Mixin(SonicBoomTask.class)
 public class SonicBoomTaskMixin {
+    @Unique
     private static boolean entityHasSonicDeflect(LivingEntity entity) {
         return EnchantmentHelper.getEquipmentLevel(ModEnchantments.SONIC_DEFLECT_ENCHANTMENT, entity) > 0;
     }

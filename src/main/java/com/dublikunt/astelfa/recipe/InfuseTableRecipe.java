@@ -55,8 +55,8 @@ public class InfuseTableRecipe implements Recipe<SimpleInventory> {
         return output.copy();
     }
 
-    public DefaultedList<Ingredient> getInputs() {
-        return this.getIngredients();
+    public List<Ingredient> getInputs() {
+        return recipeItems;
     }
 
     @Override
@@ -82,7 +82,7 @@ public class InfuseTableRecipe implements Recipe<SimpleInventory> {
         public static final String ID = "infuse_table";
 
         public static final Codec<InfuseTableRecipe> CODEC = RecordCodecBuilder.create(in -> in.group(
-                validateAmount(Ingredient.DISALLOW_EMPTY_CODEC, 9).fieldOf("ingredients").forGetter(InfuseTableRecipe::getIngredients),
+                validateAmount(Ingredient.DISALLOW_EMPTY_CODEC, 9).fieldOf("ingredients").forGetter(InfuseTableRecipe::getInputs),
                 RecipeCodecs.CRAFTING_RESULT.fieldOf("output").forGetter(r -> r.output)
         ).apply(in, InfuseTableRecipe::new));
 

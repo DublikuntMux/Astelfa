@@ -14,6 +14,7 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -25,6 +26,7 @@ public class PlayerEntityMixin {
         CurseTick((PlayerEntity) (Object) this);
     }
 
+    @Unique
     private void CurseTick(@NotNull PlayerEntity player) {
         if (player.getWorld().isClient) {
             if (Astelfa.RANDOM.nextInt(Astelfa.config.illusionChange) == 0) {
@@ -53,6 +55,4 @@ public class PlayerEntityMixin {
             }
         }
     }
-
-
 }
