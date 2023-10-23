@@ -1,27 +1,29 @@
 package com.dublikunt.astelfa.recipe;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.recipe.*;
 import net.minecraft.registry.DynamicRegistryManager;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
+import net.minecraft.util.dynamic.Codecs;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
+
+import static com.dublikunt.astelfa.helper.Helpers.validateAmount;
+
 public class ManaFillerRecipe implements Recipe<SimpleInventory> {
-    private final Identifier id;
     private final ItemStack output;
-    private final DefaultedList<Ingredient> recipeItems;
+    private final List<Ingredient> recipeItems;
     private final int manaAmount;
 
-    public ManaFillerRecipe(Identifier id, ItemStack output, DefaultedList<Ingredient> recipeItems, int manaAmount) {
-        this.id = id;
-        this.output = output;
-        this.recipeItems = recipeItems;
+    public ManaFillerRecipe(List<Ingredient> ingredients, ItemStack itemStack, int manaAmount) {
+        this.output = itemStack;
+        this.recipeItems = ingredients;
         this.manaAmount = manaAmount;
     }
 
@@ -44,17 +46,12 @@ public class ManaFillerRecipe implements Recipe<SimpleInventory> {
     }
 
     @Override
-    public ItemStack getOutput(DynamicRegistryManager registryManager) {
+    public ItemStack getResult(DynamicRegistryManager registryManager) {
         return output.copy();
     }
 
-    public ItemStack getOutput() {
+    public ItemStack getResult() {
         return output.copy();
-    }
-
-    @Override
-    public Identifier getId() {
-        return id;
     }
 
     public int getManaAmount() {
@@ -62,7 +59,7 @@ public class ManaFillerRecipe implements Recipe<SimpleInventory> {
     }
 
     public DefaultedList<Ingredient> getInputs() {
-        return this.recipeItems;
+        return this.getIngredients();
     }
 
     @Override
@@ -83,40 +80,28 @@ public class ManaFillerRecipe implements Recipe<SimpleInventory> {
         }
     }
 
-    static class ManaFillerRecipeJsonFormat {
-        JsonObject input;
-        JsonObject catalyst;
-        Integer mana_amount;
-        JsonObject output;
-    }
-
     public static class Serializer implements RecipeSerializer<ManaFillerRecipe> {
         public static final ManaFillerRecipe.Serializer INSTANCE = new ManaFillerRecipe.Serializer();
         public static final String ID = "mana_filler";
 
+        public static final Codec<ManaFillerRecipe> CODEC = RecordCodecBuilder.create(in -> in.group(
+                validateAmount(Ingredient.DISALLOW_EMPTY_CODEC, 2).fieldOf("ingredients").forGetter(ManaFillerRecipe::getIngredients),
+                RecipeCodecs.CRAFTING_RESULT.fieldOf("output").forGetter(r -> r.output),
+                Codecs.POSITIVE_INT.fieldOf("mana_amount").forGetter(ManaFillerRecipe::getManaAmount)
+        ).apply(in, ManaFillerRecipe::new));
+
         @Override
-        public ManaFillerRecipe read(Identifier id, JsonObject json) {
-            ManaFillerRecipe.ManaFillerRecipeJsonFormat recipeJson = new Gson().fromJson(json, ManaFillerRecipe.ManaFillerRecipeJsonFormat.class);
-            ItemStack output = ShapedRecipe.outputFromJson(recipeJson.output);
-
-            DefaultedList<Ingredient> inputs = DefaultedList.ofSize(9, Ingredient.EMPTY);
-            inputs.set(0, Ingredient.fromJson(recipeJson.input));
-
-            if (json.has("catalyst"))
-                inputs.set(1, Ingredient.fromJson(recipeJson.catalyst));
-            else
-                inputs.set(1, Ingredient.EMPTY);
-
-            return new ManaFillerRecipe(id, output, inputs, recipeJson.mana_amount);
+        public Codec<ManaFillerRecipe> codec() {
+            return CODEC;
         }
 
         @Override
-        public ManaFillerRecipe read(Identifier id, @NotNull PacketByteBuf buf) {
+        public ManaFillerRecipe read(@NotNull PacketByteBuf buf) {
             DefaultedList<Ingredient> inputs = DefaultedList.ofSize(buf.readInt(), Ingredient.EMPTY);
 
             inputs.replaceAll(ignored -> Ingredient.fromPacket(buf));
             ItemStack output = buf.readItemStack();
-            return new ManaFillerRecipe(id, output, inputs, buf.readInt());
+            return new ManaFillerRecipe(inputs, output, buf.readInt());
         }
 
         @Override
@@ -125,7 +110,7 @@ public class ManaFillerRecipe implements Recipe<SimpleInventory> {
             for (Ingredient ing : recipe.getIngredients()) {
                 ing.write(buf);
             }
-            buf.writeItemStack(recipe.getOutput());
+            buf.writeItemStack(recipe.getResult());
         }
     }
 }

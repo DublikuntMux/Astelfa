@@ -26,11 +26,11 @@ import java.util.Map;
 
 public class ModBlocks {
     public static final InfuseTableBlock INFUSING_TABLE_BLOCK = new InfuseTableBlock(
-            FabricBlockSettings.of(Material.METAL).strength(2f).requiresTool().nonOpaque());
+            FabricBlockSettings.copyOf(Blocks.STONE).strength(2f).requiresTool().nonOpaque());
     public static final ManaFillerBlock MANA_FILLER_BLOCK = new ManaFillerBlock(
-            FabricBlockSettings.of(Material.STONE).nonOpaque());
+            FabricBlockSettings.copyOf(Blocks.STONE).nonOpaque());
     public static final SculkStatueBlock SCULK_STATUE_BLOCK = new SculkStatueBlock(
-            FabricBlockSettings.of(Material.SCULK).strength(3f).requiresTool().nonOpaque());
+            FabricBlockSettings.copyOf(Blocks.SCULK).strength(3f).requiresTool().nonOpaque());
 
     public static final SparklePillarBlock SILVER_LOG = new SparklePillarBlock(FabricBlockSettings.copyOf(
             Blocks.OAK_LOG).mapColor(DyeColor.LIGHT_GRAY));
@@ -50,28 +50,28 @@ public class ModBlocks {
             .mapColor(DyeColor.LIGHT_GRAY));
     public static final Block CARVED_SILVER_WOOD = new Block(FabricBlockSettings.copyOf(Blocks.OAK_PLANKS)
             .mapColor(DyeColor.LIGHT_GRAY));
-    public static final ButtonBlock SILVER_WOOD_BUTTON = new ButtonBlock(FabricBlockSettings.of(Material.WOOD)
+    public static final ButtonBlock SILVER_WOOD_BUTTON = new ButtonBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD)
             .noCollision().strength(0.5F), BlockSetType.OAK, 30, true);
-    public static final DoorBlock SILVER_WOOD_DOOR = new DoorBlock(FabricBlockSettings.of(Material.WOOD,
-            SILVER_PLANKS.getDefaultMapColor()).strength(3.0F).nonOpaque(), BlockSetType.OAK);
-    public static final TrapdoorBlock SILVER_WOOD_TRAPDOOR = new TrapdoorBlock(FabricBlockSettings.of(Material.WOOD,
-            SILVER_PLANKS.getDefaultMapColor()).strength(3.0F).nonOpaque(), BlockSetType.OAK);
+    public static final DoorBlock SILVER_WOOD_DOOR = new DoorBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD).
+            mapColor(SILVER_PLANKS.getDefaultMapColor()).strength(3.0F).nonOpaque(), BlockSetType.OAK);
+    public static final TrapdoorBlock SILVER_WOOD_TRAPDOOR = new TrapdoorBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD).
+            mapColor(SILVER_PLANKS.getDefaultMapColor()).strength(3.0F).nonOpaque(), BlockSetType.OAK);
     public static final PressurePlateBlock SILVER_WOOD_PRESSURE_PLATE = new PressurePlateBlock(
             PressurePlateBlock.ActivationRule.EVERYTHING,
-            FabricBlockSettings.of(Material.WOOD, SILVER_PLANKS.getDefaultMapColor()).noCollision().strength(0.5F),
+            FabricBlockSettings.copyOf(Blocks.OAK_WOOD).mapColor(SILVER_PLANKS.getDefaultMapColor()).noCollision().strength(0.5F),
             BlockSetType.OAK
     );
-    public static final FenceBlock SILVER_WOOD_FENCE = new FenceBlock(FabricBlockSettings.of(Material.WOOD,
-            SILVER_PLANKS.getDefaultMapColor()).strength(2.0F, 3.0F).sounds(BlockSoundGroup.WOOD));
-    public static final FenceGateBlock SILVER_WOOD_FENCE_GATE = new FenceGateBlock(FabricBlockSettings.of(Material.WOOD,
-            SILVER_PLANKS.getDefaultMapColor()).strength(2.0F, 3.0F), WoodType.OAK);
+    public static final FenceBlock SILVER_WOOD_FENCE = new FenceBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD).
+            mapColor(SILVER_PLANKS.getDefaultMapColor()).strength(2.0F, 3.0F).sounds(BlockSoundGroup.WOOD));
+    public static final FenceGateBlock SILVER_WOOD_FENCE_GATE = new FenceGateBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD).
+            mapColor(SILVER_PLANKS.getDefaultMapColor()).strength(2.0F, 3.0F), WoodType.OAK);
     public static final StairsBlock SILVER_WOOD_STAIRS = new StairsBlock(SILVER_PLANKS.getDefaultState(),
             FabricBlockSettings.copyOf(SILVER_PLANKS));
-    public static final SlabBlock SILVER_WOOD_SLAB = new SlabBlock(FabricBlockSettings.of(Material.WOOD,
-            SILVER_PLANKS.getDefaultMapColor()).requiresTool().strength(1.5F, 6.0F));
-    public static final AquaticTorchBlock AQUATIC_TORCH = new AquaticTorchBlock(FabricBlockSettings.of(Material.DECORATION)
+    public static final SlabBlock SILVER_WOOD_SLAB = new SlabBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD).
+            mapColor(SILVER_PLANKS.getDefaultMapColor()).requiresTool().strength(1.5F, 6.0F));
+    public static final AquaticTorchBlock AQUATIC_TORCH = new AquaticTorchBlock(FabricBlockSettings.copyOf(Blocks.TORCH)
             .noCollision().breakInstantly().luminance(15).sounds(BlockSoundGroup.WOOD), ParticleTypes.FLAME);
-    public static final AquaticWallTorchBlock AQUATIC_WALL_TORCH = new AquaticWallTorchBlock(FabricBlockSettings.of(Material.DECORATION)
+    public static final AquaticWallTorchBlock AQUATIC_WALL_TORCH = new AquaticWallTorchBlock(FabricBlockSettings.copyOf(Blocks.TORCH)
             .noCollision().breakInstantly().luminance(15).sounds(BlockSoundGroup.WOOD), ParticleTypes.FLAME);
 
     public static final Map<String, Block> BLOCKS = new LinkedHashMap<>();

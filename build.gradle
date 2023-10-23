@@ -1,6 +1,6 @@
 plugins {
     id 'fabric-loom' version '1.2-SNAPSHOT'
-    id 'io.github.juuxel.loom-quiltflower' version '1.10.0'
+    id 'io.github.juuxel.loom-vineflower' version '1.11.0'
     id 'maven-publish'
 }
 
@@ -11,11 +11,8 @@ repositories {
     maven { url "https://jitpack.io" }
     maven { url "https://maven.shedaniel.me/" }
     maven { url "https://maven.terraformersmc.com/releases/" }
-    maven { url "https://ladysnake.jfrog.io/artifactory/mods" }
+    maven { url "https://maven.ladysnake.org/releases" }
     maven { url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
-    maven { url "https://cursemaven.com"
-        content { includeGroup "curse.maven" }
-    }
 }
 
 loom {
@@ -61,6 +58,7 @@ dependencies {
 
     modImplementation "net.fabricmc:fabric-loader:${loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
+
     modImplementation "dev.emi:trinkets:${trinkets_version}"
     modImplementation "software.bernie.geckolib:geckolib-fabric-${minecraft_version}:${geckolib_version}"
 
@@ -69,11 +67,9 @@ dependencies {
         exclude(group: "net.fabricmc.fabric-api")
     }
 
-    modLocalRuntime "curse.maven:jade-324717:4561717"
-    modLocalRuntime "curse.maven:language-reload-527334:4572883"
-
-    modCompileOnly "dev.emi:emi-fabric:${emi_version}:api"
-    modLocalRuntime "dev.emi:emi-fabric:${emi_version}"
+    //Fix for trinkets
+    modApi include("dev.onyxstudios.cardinal-components-api:cardinal-components-base:5.3.0")
+    modApi include("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:5.3.0")
 }
 
 processResources {

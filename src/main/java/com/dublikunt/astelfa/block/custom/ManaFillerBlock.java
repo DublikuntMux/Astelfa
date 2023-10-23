@@ -126,6 +126,6 @@ public class ManaFillerBlock extends BlockWithEntity implements BlockEntityProvi
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return checkType(type, ModBlockEntities.MANA_FILLER_BLOCK_ENTITY_TYPE, ManaFillerBlockEntity::tick);
+        return validateTicker(type, ModBlockEntities.MANA_FILLER_BLOCK_ENTITY_TYPE, ManaFillerBlockEntity::tick);
     }
 }

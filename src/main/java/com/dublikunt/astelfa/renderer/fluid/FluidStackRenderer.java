@@ -8,10 +8,9 @@ import net.fabricmc.fabric.api.transfer.v1.client.fluid.FluidVariantRendering;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawableHelper;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.client.texture.Sprite;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.registry.Registries;
 import net.minecraft.screen.PlayerScreenHandler;
@@ -53,7 +52,7 @@ public class FluidStackRenderer implements IIngredientRenderer<FluidStack> {
         this.height = height;
     }
 
-    public void drawFluid(MatrixStack matrixStack, @NotNull FluidStack fluid, int x, int y, int width, int height, long maxCapacity) {
+    public void drawFluid(DrawContext context, @NotNull FluidStack fluid, int x, int y, int width, int height, long maxCapacity) {
         if (fluid.getFluidVariant().getFluid() == Fluids.EMPTY) {
             return;
         }
@@ -72,7 +71,7 @@ public class FluidStackRenderer implements IIngredientRenderer<FluidStack> {
         while (drawHeight != 0) {
             final int curHeight = Math.min(drawHeight, iconHeight);
 
-            DrawableHelper.drawSprite(matrixStack, x, y - drawHeight, 0, width, curHeight, sprite);
+            context.drawSprite(x, y - drawHeight, 0, width, curHeight, sprite);
             drawHeight -= curHeight;
             iteration++;
             if (iteration > 50) {

@@ -27,9 +27,6 @@
     ],
     "modmenu": [
       "com.dublikunt.astelfa.integration.ModMenu"
-    ],
-    "emi": [
-      "com.dublikunt.astelfa.integration.AstelfaEmiPlugin"
     ]
   },
   "mixins": [

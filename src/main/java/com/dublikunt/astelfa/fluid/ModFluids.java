@@ -1,9 +1,7 @@
 package com.dublikunt.astelfa.fluid;
 
 import com.dublikunt.astelfa.helper.Helpers;
-import com.dublikunt.astelfa.item.ModItems;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -29,7 +27,5 @@ public class ModFluids {
                 });
         MANA_BUCKET = Registry.register(Registries.ITEM, Helpers.id("mana_bucket"),
                 new BucketItem(ModFluids.STILL_MANA_FLUID, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
-
-        ItemGroupEvents.modifyEntriesEvent(ModItems.MOD_GROUP).register(entries -> entries.add(MANA_BUCKET));
     }
 }

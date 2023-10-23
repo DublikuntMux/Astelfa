@@ -7,16 +7,14 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.data.server.recipe.RecipeJsonProvider;
+import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
-import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.book.RecipeCategory;
-
-import java.util.function.Consumer;
+import net.minecraft.util.Identifier;
 
 public class RecipeGenerator extends FabricRecipeProvider {
     public RecipeGenerator(FabricDataOutput output) {
@@ -24,7 +22,7 @@ public class RecipeGenerator extends FabricRecipeProvider {
     }
 
     @Override
-    public void generate(Consumer<RecipeJsonProvider> exporter) {
+    public void generate(RecipeExporter exporter) {
         offerMatter(exporter, Items.REDSTONE, Items.DIAMOND, ModItems.MATTER_1);
         offerMatter(exporter, Items.DIAMOND, ModItems.MATTER_1, ModItems.MATTER_2);
         offerMatter(exporter, ModItems.MATTER_1, ModItems.MATTER_2, ModItems.MATTER_3);
@@ -46,7 +44,7 @@ public class RecipeGenerator extends FabricRecipeProvider {
                 .input('W', ModBlocks.SILVER_PLANKS)
                 .criterion(FabricRecipeProvider.hasItem(ModBlocks.SILVER_LOG),
                         FabricRecipeProvider.conditionsFromItem(ModBlocks.SILVER_LOG))
-                .offerTo(exporter);
+                .offerTo(exporter, new Identifier(getRecipeName(ModBlocks.CARVED_SILVER_WOOD)));
 
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.MANA_FILLER_BLOCK)
                 .pattern("ICI")
@@ -58,7 +56,7 @@ public class RecipeGenerator extends FabricRecipeProvider {
                 .input('C', Blocks.RED_CARPET)
                 .criterion(FabricRecipeProvider.hasItem(ModBlocks.SILVER_LOG),
                         FabricRecipeProvider.conditionsFromItem(ModBlocks.SILVER_LOG))
-                .offerTo(exporter);
+                .offerTo(exporter, new Identifier(getRecipeName(ModBlocks.MANA_FILLER_BLOCK)));
 
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.INFUSING_TABLE_BLOCK)
                 .pattern("AAA")
@@ -69,10 +67,10 @@ public class RecipeGenerator extends FabricRecipeProvider {
                 .input('W', ModBlocks.STRIPPED_SILVER_LOG)
                 .criterion(FabricRecipeProvider.hasItem(ModBlocks.SILVER_LOG),
                         FabricRecipeProvider.conditionsFromItem(ModBlocks.SILVER_LOG))
-                .offerTo(exporter);
+                .offerTo(exporter, new Identifier(getRecipeName(ModBlocks.INFUSING_TABLE_BLOCK)));
     }
 
-    private void offerMatter(Consumer<RecipeJsonProvider> exporter, Item ringItem, Item inItem, Item output) {
+    private void offerMatter(RecipeExporter exporter, Item ringItem, Item inItem, Item output) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, output)
                 .pattern("OOO")
                 .pattern("OIO")
@@ -80,10 +78,10 @@ public class RecipeGenerator extends FabricRecipeProvider {
                 .input('O', ringItem)
                 .input('I', inItem)
                 .criterion(FabricRecipeProvider.hasItem(inItem), FabricRecipeProvider.conditionsFromItem(inItem))
-                .offerTo(exporter);
+                .offerTo(exporter, new Identifier(getRecipeName(output)));
     }
 
-    private void offerWood(Consumer<RecipeJsonProvider> exporter, Block wood, Block log,
+    private void offerWood(RecipeExporter exporter, Block wood, Block log,
                            Block stripped_wood, Block stripped_log, Block planks, Block button, Block door,
                            Block trapdoor, Block pressurePlate, Block fence, Block fenceGate, Block slab, Block stairs) {
         offerBarkBlockRecipe(exporter, wood, log);
@@ -104,85 +102,85 @@ public class RecipeGenerator extends FabricRecipeProvider {
         offerStairs(exporter, stairs, planks);
     }
 
-    private void offerPlank(Consumer<RecipeJsonProvider> exporter, ItemConvertible input, ItemConvertible output, Integer id) {
+    private void offerPlank(RecipeExporter exporter, ItemConvertible input, ItemConvertible output, Integer id) {
         ShapelessRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, output, 4)
                 .input(input)
                 .group("planks")
                 .criterion(FabricRecipeProvider.hasItem(input), FabricRecipeProvider.conditionsFromItem(input))
-                .offerTo(exporter, Helpers.id(output.asItem().getName().getString() + "_" + id));
+                .offerTo(exporter, new Identifier(getRecipeName(output)));
     }
 
-    private void offerButton(Consumer<RecipeJsonProvider> exporter, ItemConvertible output, ItemConvertible input) {
+    private void offerButton(RecipeExporter exporter, ItemConvertible output, ItemConvertible input) {
         ShapelessRecipeJsonBuilder.create(RecipeCategory.REDSTONE, output)
                 .input(input)
                 .criterion(FabricRecipeProvider.hasItem(input), FabricRecipeProvider.conditionsFromItem(input))
-                .offerTo(exporter);
+                .offerTo(exporter, new Identifier(getRecipeName(output)));
     }
 
-    private void offerDoor(Consumer<RecipeJsonProvider> exporter, ItemConvertible output, ItemConvertible input) {
+    private void offerDoor(RecipeExporter exporter, ItemConvertible output, ItemConvertible input) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.REDSTONE, output, 3)
                 .pattern("##")
                 .pattern("##")
                 .pattern("##")
                 .input('#', input)
                 .criterion(FabricRecipeProvider.hasItem(input), FabricRecipeProvider.conditionsFromItem(input))
-                .offerTo(exporter);
+                .offerTo(exporter, new Identifier(getRecipeName(output)));
     }
 
-    private void offerTrapdoor(Consumer<RecipeJsonProvider> exporter, ItemConvertible output, ItemConvertible input) {
+    private void offerTrapdoor(RecipeExporter exporter, ItemConvertible output, ItemConvertible input) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.REDSTONE, output, 2)
                 .pattern("###")
                 .pattern("###")
                 .input('#', input)
                 .criterion(FabricRecipeProvider.hasItem(input), FabricRecipeProvider.conditionsFromItem(input))
-                .offerTo(exporter);
+                .offerTo(exporter, new Identifier(getRecipeName(output)));
     }
 
-    private void offerPressurePlate(Consumer<RecipeJsonProvider> exporter, ItemConvertible output, ItemConvertible input) {
+    private void offerPressurePlate(RecipeExporter exporter, ItemConvertible output, ItemConvertible input) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.REDSTONE, output)
                 .pattern("##")
                 .input('#', input)
                 .criterion(FabricRecipeProvider.hasItem(input), FabricRecipeProvider.conditionsFromItem(input))
-                .offerTo(exporter);
+                .offerTo(exporter, new Identifier(getRecipeName(output)));
     }
 
-    private void offerFence(Consumer<RecipeJsonProvider> exporter, ItemConvertible output, ItemConvertible input) {
+    private void offerFence(RecipeExporter exporter, ItemConvertible output, ItemConvertible input) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, output, 3)
                 .input('#', Items.STICK)
                 .input('W', input)
                 .pattern("W#W")
                 .pattern("W#W")
                 .criterion(FabricRecipeProvider.hasItem(input), FabricRecipeProvider.conditionsFromItem(input))
-                .offerTo(exporter);
+                .offerTo(exporter, new Identifier(getRecipeName(output)));
     }
 
-    private void offerFenceGate(Consumer<RecipeJsonProvider> exporter, ItemConvertible output, ItemConvertible input) {
+    private void offerFenceGate(RecipeExporter exporter, ItemConvertible output, ItemConvertible input) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.REDSTONE, output)
                 .input('#', Items.STICK)
                 .input('W', input)
                 .pattern("#W#")
                 .pattern("#W#")
                 .criterion(FabricRecipeProvider.hasItem(input), FabricRecipeProvider.conditionsFromItem(input))
-                .offerTo(exporter);
+                .offerTo(exporter, new Identifier(getRecipeName(output)));
     }
 
-    private void offerStairs(Consumer<RecipeJsonProvider> exporter, ItemConvertible output, ItemConvertible input) {
+    private void offerStairs(RecipeExporter exporter, ItemConvertible output, ItemConvertible input) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, output, 4)
                 .pattern("#  ")
                 .pattern("## ")
                 .pattern("###")
                 .input('#', input)
                 .criterion(FabricRecipeProvider.hasItem(input), FabricRecipeProvider.conditionsFromItem(input))
-                .offerTo(exporter);
+                .offerTo(exporter, new Identifier(getRecipeName(output)));
     }
 
-    private void offerTorch(Consumer<RecipeJsonProvider> exporter, ItemConvertible ingredient, ItemConvertible output) {
+    private void offerTorch(RecipeExporter exporter, ItemConvertible ingredient, ItemConvertible output) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, output, 4)
                 .pattern("R")
                 .pattern("S")
                 .input('R', ingredient)
                 .input('S', Items.STICK)
                 .criterion(FabricRecipeProvider.hasItem(ingredient), FabricRecipeProvider.conditionsFromItem(ingredient))
-                .offerTo(exporter);
+                .offerTo(exporter, new Identifier(getRecipeName(output)));
     }
 }

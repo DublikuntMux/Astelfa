@@ -27,6 +27,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.recipe.RecipeEntry;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -46,26 +47,6 @@ public class ManaFillerBlockEntity extends BlockEntity implements ExtendedScreen
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(4, ItemStack.EMPTY);
     private int progress = 0;
     private int maxProgress = 100;
-
-    public final SingleVariantStorage<FluidVariant> fluidStorage = new SingleVariantStorage<>() {
-        @Override
-        protected FluidVariant getBlankVariant() {
-            return FluidVariant.blank();
-        }
-
-        @Override
-        protected long getCapacity(FluidVariant variant) {
-            return FluidStack.convertDropletsToMb(FluidConstants.BUCKET) * 20;
-        }
-
-        @Override
-        protected void onFinalCommit() {
-            markDirty();
-            if (!world.isClient()) {
-                sendFluidPacket();
-            }
-        }
-    };
 
     public ManaFillerBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.MANA_FILLER_BLOCK_ENTITY_TYPE, pos, state);
@@ -90,7 +71,25 @@ public class ManaFillerBlockEntity extends BlockEntity implements ExtendedScreen
                 return 2;
             }
         };
-    }
+    }    public final SingleVariantStorage<FluidVariant> fluidStorage = new SingleVariantStorage<>() {
+        @Override
+        protected FluidVariant getBlankVariant() {
+            return FluidVariant.blank();
+        }
+
+        @Override
+        protected long getCapacity(FluidVariant variant) {
+            return FluidStack.convertDropletsToMb(FluidConstants.BUCKET) * 20;
+        }
+
+        @Override
+        protected void onFinalCommit() {
+            markDirty();
+            if (!world.isClient()) {
+                sendFluidPacket();
+            }
+        }
+    };
 
     public static void tick(@NotNull World world, BlockPos blockPos, BlockState state, ManaFillerBlockEntity entity) {
         if (world.isClient()) {
@@ -118,19 +117,18 @@ public class ManaFillerBlockEntity extends BlockEntity implements ExtendedScreen
             inventory.setStack(i, entity.getStack(i));
         }
 
-        Optional<ManaFillerRecipe> recipe = entity.getWorld().getRecipeManager()
-                .getFirstMatch(ManaFillerRecipe.Type.INSTANCE, inventory, entity.getWorld());
+        Optional<RecipeEntry<ManaFillerRecipe>> recipe = getCurrentRecipe(entity);
 
         if (hasRecipe(entity)) {
             entity.removeStack(0, 1);
-            entity.setStack(2, new ItemStack(recipe.get().getOutput().getItem(),
+            entity.setStack(2, new ItemStack(recipe.get().value().getResult().getItem(),
                     entity.getStack(2).getCount() + 1));
 
             entity.resetProgress();
 
-            try(Transaction transaction = Transaction.openOuter()) {
+            try (Transaction transaction = Transaction.openOuter()) {
                 entity.fluidStorage.extract(FluidVariant.of(ModFluids.STILL_MANA_FLUID),
-                        recipe.get().getManaAmount(), transaction);
+                        recipe.get().value().getManaAmount(), transaction);
                 transaction.commit();
             }
         }
@@ -142,12 +140,11 @@ public class ManaFillerBlockEntity extends BlockEntity implements ExtendedScreen
             inventory.setStack(i, entity.getStack(i));
         }
 
-        Optional<ManaFillerRecipe> match = entity.getWorld().getRecipeManager()
-                .getFirstMatch(ManaFillerRecipe.Type.INSTANCE, inventory, entity.getWorld());
+        Optional<RecipeEntry<ManaFillerRecipe>> match = getCurrentRecipe(entity);
 
         return match.isPresent() && canInsertAmountIntoOutputSlot(inventory)
-                && canInsertItemIntoOutputSlot(inventory, match.get().getOutput().getItem())
-                && entity.fluidStorage.amount >= match.get().getManaAmount();
+                && canInsertItemIntoOutputSlot(inventory, match.get().value().getResult().getItem())
+                && entity.fluidStorage.amount >= match.get().value().getManaAmount();
     }
 
     private static boolean canInsertItemIntoOutputSlot(@NotNull SimpleInventory inventory, Item output) {
@@ -159,7 +156,7 @@ public class ManaFillerBlockEntity extends BlockEntity implements ExtendedScreen
     }
 
     private static void transferFluidToFluidStorage(@NotNull ManaFillerBlockEntity entity) {
-        try(Transaction transaction = Transaction.openOuter()) {
+        try (Transaction transaction = Transaction.openOuter()) {
             entity.fluidStorage.insert(FluidVariant.of(ModFluids.STILL_MANA_FLUID),
                     FluidStack.convertDropletsToMb(FluidConstants.BUCKET), transaction);
             transaction.commit();
@@ -169,6 +166,15 @@ public class ManaFillerBlockEntity extends BlockEntity implements ExtendedScreen
 
     private static boolean hasFluidSourceInSlot(@NotNull ManaFillerBlockEntity entity) {
         return entity.getStack(3).getItem() == ModFluids.MANA_BUCKET;
+    }
+
+    private static Optional<RecipeEntry<ManaFillerRecipe>> getCurrentRecipe(@NotNull ManaFillerBlockEntity entity) {
+        SimpleInventory inv = new SimpleInventory(entity.size());
+        for (int i = 0; i < entity.size(); i++) {
+            inv.setStack(i, entity.getStack(i));
+        }
+
+        return entity.getWorld().getRecipeManager().getFirstMatch(ManaFillerRecipe.Type.INSTANCE, inv, entity.getWorld());
     }
 
     private void sendFluidPacket() {
@@ -263,4 +269,6 @@ public class ManaFillerBlockEntity extends BlockEntity implements ExtendedScreen
             return this.getStack(2);
         }
     }
+
+
 }

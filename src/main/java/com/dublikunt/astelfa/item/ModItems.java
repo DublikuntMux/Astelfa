@@ -14,6 +14,8 @@ import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Rarity;
@@ -51,9 +53,8 @@ public class ModItems {
     public static final VerticallyAttachableBlockItem AQUATIC_TORCH_ITEM = new VerticallyAttachableBlockItem(ModBlocks.AQUATIC_TORCH, ModBlocks.AQUATIC_WALL_TORCH,
             new Item.Settings(), Direction.DOWN);
 
-    public static final ItemGroup MOD_GROUP = FabricItemGroup.builder(Helpers.id("item_group"))
-            .icon(() -> new ItemStack(ModItems.MATTER_1))
-            .build();
+    public static final RegistryKey<ItemGroup> MOD_GROUP = RegistryKey.of(RegistryKeys.ITEM_GROUP, Helpers.id("item_group"));
+
     public static final Map<String, Item> ITEMS = new LinkedHashMap<>();
 
     static {
@@ -74,6 +75,13 @@ public class ModItems {
         ITEMS.put("irritant_egg", IRRITANT_EGG);
 
         ITEMS.put("aquatic_torch", AQUATIC_TORCH_ITEM);
+    }
+
+    public static void registerGroup() {
+        Registry.register(Registries.ITEM_GROUP, MOD_GROUP, FabricItemGroup.builder()
+                .icon(() -> new ItemStack(MATTER_1))
+                .displayName(Text.translatable("itemGroup.astelfa.item_group"))
+                .build());
     }
 
     public static void register() {

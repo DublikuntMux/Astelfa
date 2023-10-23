@@ -20,6 +20,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.recipe.RecipeEntry;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -87,15 +88,14 @@ public class InfuseTableBlockEntity extends BlockEntity implements ExtendedScree
             inventory.setStack(i, entity.getStack(i));
         }
 
-        Optional<InfuseTableRecipe> recipe = entity.getWorld().getRecipeManager()
-                .getFirstMatch(InfuseTableRecipe.Type.INSTANCE, inventory, entity.getWorld());
+        Optional<RecipeEntry<InfuseTableRecipe>> recipe = getCurrentRecipe(entity);
 
         if (hasRecipe(entity)) {
             for (int i = 0; i < 9; i++) {
                 entity.removeStack(i, 1);
             }
 
-            entity.setStack(9, new ItemStack(recipe.get().getOutput().getItem(),
+            entity.setStack(9, new ItemStack(recipe.get().value().getResult().getItem(),
                     entity.getStack(9).getCount() + 1));
 
             entity.resetProgress();
@@ -108,11 +108,10 @@ public class InfuseTableBlockEntity extends BlockEntity implements ExtendedScree
             inventory.setStack(i, entity.getStack(i));
         }
 
-        Optional<InfuseTableRecipe> match = entity.getWorld().getRecipeManager()
-                .getFirstMatch(InfuseTableRecipe.Type.INSTANCE, inventory, entity.getWorld());
+        Optional<RecipeEntry<InfuseTableRecipe>> match = getCurrentRecipe(entity);
 
         return match.isPresent() && canInsertAmountIntoOutputSlot(inventory)
-                && canInsertItemIntoOutputSlot(inventory, match.get().getOutput().getItem());
+                && canInsertItemIntoOutputSlot(inventory, match.get().value().getResult().getItem());
     }
 
     private static boolean canInsertItemIntoOutputSlot(@NotNull SimpleInventory inventory, Item output) {
@@ -121,6 +120,15 @@ public class InfuseTableBlockEntity extends BlockEntity implements ExtendedScree
 
     private static boolean canInsertAmountIntoOutputSlot(@NotNull SimpleInventory inventory) {
         return inventory.getStack(9).getMaxCount() > inventory.getStack(9).getCount();
+    }
+
+    private static Optional<RecipeEntry<InfuseTableRecipe>> getCurrentRecipe(@NotNull InfuseTableBlockEntity entity) {
+        SimpleInventory inv = new SimpleInventory(entity.size());
+        for (int i = 0; i < entity.size(); i++) {
+            inv.setStack(i, entity.getStack(i));
+        }
+
+        return entity.getWorld().getRecipeManager().getFirstMatch(InfuseTableRecipe.Type.INSTANCE, inv, entity.getWorld());
     }
 
     @Override

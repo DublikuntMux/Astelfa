@@ -26,11 +26,11 @@ public class PlayerEntityMixin {
     }
 
     private void CurseTick(@NotNull PlayerEntity player) {
-        if (player.world.isClient) {
+        if (player.getWorld().isClient) {
             if (Astelfa.RANDOM.nextInt(Astelfa.config.illusionChange) == 0) {
                 for (ItemStack armor : player.getArmorItems()) {
                     if (!armor.isEmpty() && EnchantmentHelper.getLevel(ModEnchantments.ILLUSION_CURSE, armor) > 0) {
-                        player.world
+                        player.getWorld()
                                 .playSound(
                                         player.getX() - 1.0, player.getY(), player.getZ(),
                                         IllusionCurse.getRandomSound(), SoundCategory.AMBIENT, 0.8F, 1.0F,

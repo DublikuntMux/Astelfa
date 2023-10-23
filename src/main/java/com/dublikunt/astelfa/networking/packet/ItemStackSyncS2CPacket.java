@@ -1,7 +1,6 @@
 package com.dublikunt.astelfa.networking.packet;
 
 import com.dublikunt.astelfa.block.entity.InfuseTableBlockEntity;
-import com.dublikunt.astelfa.block.entity.ManaFillerBlockEntity;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;

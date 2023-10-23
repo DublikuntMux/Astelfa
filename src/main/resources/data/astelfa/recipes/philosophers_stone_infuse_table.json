@@ -1,32 +1,34 @@
 {
   "type": "astelfa:infuse_table",
-  "input1": {
-    "item": "minecraft:nether_star"
-  },
-  "input2": {
-    "item": "astelfa:matter6"
-  },
-  "input3": {
-    "item": "astelfa:matter6"
-  },
-  "input4": {
-    "item": "astelfa:matter6"
-  },
-  "input5": {
-    "item": "astelfa:matter6"
-  },
-  "input6": {
-    "item": "astelfa:matter6"
-  },
-  "input7": {
-    "item": "astelfa:matter6"
-  },
-  "input8": {
-    "item": "astelfa:matter6"
-  },
-  "input9": {
-    "item": "astelfa:matter6"
-  },
+  "ingredients": [
+    {
+      "item": "minecraft:nether_star"
+    },
+    {
+      "item": "astelfa:matter6"
+    },
+    {
+      "item": "astelfa:matter6"
+    },
+    {
+      "item": "astelfa:matter6"
+    },
+    {
+      "item": "astelfa:matter6"
+    },
+    {
+      "item": "astelfa:matter6"
+    },
+    {
+      "item": "astelfa:matter6"
+    },
+    {
+      "item": "astelfa:matter6"
+    },
+    {
+      "item": "astelfa:matter6"
+    }
+  ],
   "output": {
     "item": "astelfa:philosophers_stone"
   }

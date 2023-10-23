@@ -34,8 +34,7 @@ public class Astelfa implements ModInitializer {
 
         ModMessages.registerC2SPackets();
         ModParticle.registerServer();
-        ModItems.register();
-        ModBlocks.register();
+        ModItems.registerGroup();
         ModBlocks.registerWithoutItem();
         ModBlocks.registerFlammableBlocks();
         ModBlocks.registerStrippables();

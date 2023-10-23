@@ -1,26 +1,27 @@
 package com.dublikunt.astelfa.recipe;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.recipe.*;
 import net.minecraft.registry.DynamicRegistryManager;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
-public class InfuseTableRecipe implements Recipe<SimpleInventory> {
-    private final Identifier id;
-    private final ItemStack output;
-    private final DefaultedList<Ingredient> recipeItems;
+import java.util.List;
 
-    public InfuseTableRecipe(Identifier id, ItemStack output, DefaultedList<Ingredient> recipeItems) {
-        this.id = id;
-        this.output = output;
-        this.recipeItems = recipeItems;
+import static com.dublikunt.astelfa.helper.Helpers.validateAmount;
+
+public class InfuseTableRecipe implements Recipe<SimpleInventory> {
+    private final ItemStack output;
+    private final List<Ingredient> recipeItems;
+
+    public InfuseTableRecipe(List<Ingredient> ingredients, ItemStack itemStack) {
+        this.output = itemStack;
+        this.recipeItems = ingredients;
     }
 
     @Override
@@ -46,21 +47,16 @@ public class InfuseTableRecipe implements Recipe<SimpleInventory> {
     }
 
     @Override
-    public ItemStack getOutput(DynamicRegistryManager registryManager) {
+    public ItemStack getResult(DynamicRegistryManager registryManager) {
         return output.copy();
     }
 
-    public ItemStack getOutput() {
+    public ItemStack getResult() {
         return output.copy();
-    }
-
-    @Override
-    public Identifier getId() {
-        return id;
     }
 
     public DefaultedList<Ingredient> getInputs() {
-        return this.recipeItems;
+        return this.getIngredients();
     }
 
     @Override
@@ -81,51 +77,28 @@ public class InfuseTableRecipe implements Recipe<SimpleInventory> {
         }
     }
 
-    static class InfuseRecipeJsonFormat {
-        JsonObject input1;
-        JsonObject input2;
-        JsonObject input3;
-        JsonObject input4;
-        JsonObject input5;
-        JsonObject input6;
-        JsonObject input7;
-        JsonObject input8;
-        JsonObject input9;
-
-        JsonObject output;
-    }
-
     public static class Serializer implements RecipeSerializer<InfuseTableRecipe> {
         public static final Serializer INSTANCE = new Serializer();
         public static final String ID = "infuse_table";
 
+        public static final Codec<InfuseTableRecipe> CODEC = RecordCodecBuilder.create(in -> in.group(
+                validateAmount(Ingredient.DISALLOW_EMPTY_CODEC, 9).fieldOf("ingredients").forGetter(InfuseTableRecipe::getIngredients),
+                RecipeCodecs.CRAFTING_RESULT.fieldOf("output").forGetter(r -> r.output)
+        ).apply(in, InfuseTableRecipe::new));
+
         @Override
-        public InfuseTableRecipe read(Identifier id, JsonObject json) {
-            InfuseRecipeJsonFormat recipeJson = new Gson().fromJson(json, InfuseRecipeJsonFormat.class);
-            ItemStack output = ShapedRecipe.outputFromJson(recipeJson.output);
-
-            DefaultedList<Ingredient> inputs = DefaultedList.ofSize(9, Ingredient.EMPTY);
-            inputs.set(0, Ingredient.fromJson(recipeJson.input1));
-            inputs.set(1, Ingredient.fromJson(recipeJson.input2));
-            inputs.set(2, Ingredient.fromJson(recipeJson.input3));
-            inputs.set(3, Ingredient.fromJson(recipeJson.input4));
-            inputs.set(4, Ingredient.fromJson(recipeJson.input5));
-            inputs.set(5, Ingredient.fromJson(recipeJson.input6));
-            inputs.set(6, Ingredient.fromJson(recipeJson.input7));
-            inputs.set(7, Ingredient.fromJson(recipeJson.input8));
-            inputs.set(8, Ingredient.fromJson(recipeJson.input9));
-
-            return new InfuseTableRecipe(id, output, inputs);
+        public Codec<InfuseTableRecipe> codec() {
+            return CODEC;
         }
 
         @Override
-        public InfuseTableRecipe read(Identifier id, @NotNull PacketByteBuf buf) {
+        public InfuseTableRecipe read(@NotNull PacketByteBuf buf) {
             DefaultedList<Ingredient> inputs = DefaultedList.ofSize(buf.readInt(), Ingredient.EMPTY);
 
             inputs.replaceAll(ignored -> Ingredient.fromPacket(buf));
 
             ItemStack output = buf.readItemStack();
-            return new InfuseTableRecipe(id, output, inputs);
+            return new InfuseTableRecipe(inputs, output);
         }
 
         @Override
@@ -134,7 +107,7 @@ public class InfuseTableRecipe implements Recipe<SimpleInventory> {
             for (Ingredient ing : recipe.getIngredients()) {
                 ing.write(buf);
             }
-            buf.writeItemStack(recipe.getOutput());
+            buf.writeItemStack(recipe.getResult());
         }
     }
 }

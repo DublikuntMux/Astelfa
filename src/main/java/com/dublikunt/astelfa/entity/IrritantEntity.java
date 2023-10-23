@@ -65,7 +65,7 @@ public class IrritantEntity extends AmbientEntity implements GeoEntity {
     protected void mobTick() {
         super.mobTick();
 
-        if (this.hangingPosition != null && (!this.world.isAir(this.hangingPosition) || this.hangingPosition.getY() <= this.world.getBottomY())) {
+        if (this.hangingPosition != null && (!this.getWorld().isAir(this.hangingPosition) || this.hangingPosition.getY() <= this.getWorld().getBottomY())) {
             this.hangingPosition = null;
         }
 
