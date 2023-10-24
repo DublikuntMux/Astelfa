@@ -25,40 +25,6 @@ public class InfuseTableBlockEntity extends CraftingBlockEntity {
         super(ModBlockEntities.INFUSE_TABLE_BLOCK_ENTITY_TYPE, pos, state, 10);
     }
 
-    @Override
-    protected <T extends CraftingBlockEntity> void craftItem(@NotNull T entity) {
-            SimpleInventory inventory = new SimpleInventory(entity.size());
-            for (int i = 0; i < entity.size(); i++) {
-                inventory.setStack(i, entity.getStack(i));
-            }
-
-            Optional<RecipeEntry<InfuseTableRecipe>> recipe = getCurrentRecipe(entity);
-
-            if (hasRecipe(entity)) {
-                for (int i = 0; i < 9; i++) {
-                    entity.removeStack(i, 1);
-                }
-
-                entity.setStack(9, new ItemStack(recipe.get().value().getResult().getItem(),
-                        entity.getStack(9).getCount() + 1));
-
-                entity.resetProgress();
-            }
-    }
-
-    @Override
-    protected <T extends CraftingBlockEntity> boolean hasRecipe(@NotNull T entity) {
-        SimpleInventory inventory = new SimpleInventory(entity.size());
-        for (int i = 0; i < entity.size(); i++) {
-            inventory.setStack(i, entity.getStack(i));
-        }
-
-        Optional<RecipeEntry<InfuseTableRecipe>> match = getCurrentRecipe(entity);
-
-        return match.isPresent() && canInsertAmountIntoOutputSlot(inventory)
-                && canInsertItemIntoOutputSlot(inventory, match.get().value().getResult().getItem());
-    }
-
     private static boolean canInsertItemIntoOutputSlot(@NotNull SimpleInventory inventory, Item output) {
         return inventory.getStack(9).getItem() == output || inventory.getStack(9).isEmpty();
     }
@@ -74,6 +40,40 @@ public class InfuseTableBlockEntity extends CraftingBlockEntity {
         }
 
         return entity.getWorld().getRecipeManager().getFirstMatch(InfuseTableRecipe.Type.INSTANCE, inv, entity.getWorld());
+    }
+
+    @Override
+    protected <T extends CraftingBlockEntity> void craftItem(@NotNull T entity) {
+        SimpleInventory inventory = new SimpleInventory(entity.size());
+        for (int i = 0; i < entity.size(); i++) {
+            inventory.setStack(i, entity.getStack(i));
+        }
+
+        Optional<RecipeEntry<InfuseTableRecipe>> recipe = getCurrentRecipe(entity);
+
+        if (hasRecipe(entity)) {
+            for (int i = 0; i < 9; i++) {
+                entity.removeStack(i, 1);
+            }
+
+            entity.setStack(9, new ItemStack(recipe.get().value().getResult().getItem(),
+                    entity.getStack(9).getCount() + 1));
+
+            entity.resetProgress();
+        }
+    }
+
+    @Override
+    protected <T extends CraftingBlockEntity> boolean hasRecipe(@NotNull T entity) {
+        SimpleInventory inventory = new SimpleInventory(entity.size());
+        for (int i = 0; i < entity.size(); i++) {
+            inventory.setStack(i, entity.getStack(i));
+        }
+
+        Optional<RecipeEntry<InfuseTableRecipe>> match = getCurrentRecipe(entity);
+
+        return match.isPresent() && canInsertAmountIntoOutputSlot(inventory)
+                && canInsertItemIntoOutputSlot(inventory, match.get().value().getResult().getItem());
     }
 
     @Override

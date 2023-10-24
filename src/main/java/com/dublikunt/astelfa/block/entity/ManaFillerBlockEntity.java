@@ -4,7 +4,6 @@ import com.dublikunt.astelfa.block.ModBlockEntities;
 import com.dublikunt.astelfa.block.custom.ManaFillerBlock;
 import com.dublikunt.astelfa.fluid.ModFluids;
 import com.dublikunt.astelfa.helper.FluidStack;
-import com.dublikunt.astelfa.helper.notmy.InventoryImpl;
 import com.dublikunt.astelfa.item.ModItems;
 import com.dublikunt.astelfa.networking.ModMessages;
 import com.dublikunt.astelfa.recipe.ManaFillerRecipe;
@@ -12,13 +11,11 @@ import com.dublikunt.astelfa.screen.handler.ManaFillerScreenHandler;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
@@ -29,12 +26,10 @@ import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.recipe.RecipeEntry;
-import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
-import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
@@ -49,13 +44,16 @@ public class ManaFillerBlockEntity extends CraftingBlockEntity {
     }
 
     public static void tick(@NotNull World world, BlockPos blockPos, BlockState state, ManaFillerBlockEntity entity) {
-        CraftingBlockEntity.tick(world, blockPos,state, entity);
+        CraftingBlockEntity.tick(world, blockPos, state, entity);
 
         if (hasFluidSourceInSlot(entity)) {
             transferFluidToFluidStorage(entity);
         }
     }
-    public final SingleVariantStorage<FluidVariant> fluidStorage = new SingleVariantStorage<>() {
+
+    private static boolean canInsertItemIntoOutputSlot(@NotNull SimpleInventory inventory, Item output) {
+        return inventory.getStack(2).getItem() == output || inventory.getStack(2).isEmpty();
+    }    public final SingleVariantStorage<FluidVariant> fluidStorage = new SingleVariantStorage<>() {
         @Override
         protected FluidVariant getBlankVariant() {
             return FluidVariant.blank();
@@ -74,48 +72,6 @@ public class ManaFillerBlockEntity extends CraftingBlockEntity {
             }
         }
     };
-
-    @Override
-    protected <T extends CraftingBlockEntity> boolean hasRecipe(@NotNull T entity) {
-        SimpleInventory inventory = new SimpleInventory(entity.size());
-        for (int i = 0; i < entity.size(); i++) {
-            inventory.setStack(i, entity.getStack(i));
-        }
-
-        Optional<RecipeEntry<ManaFillerRecipe>> match = getCurrentRecipe(((ManaFillerBlockEntity) entity));
-
-        return match.isPresent() && canInsertAmountIntoOutputSlot(inventory)
-                && canInsertItemIntoOutputSlot(inventory, match.get().value().getResult().getItem())
-                && ((ManaFillerBlockEntity) entity).fluidStorage.amount >= match.get().value().getManaAmount();
-    }
-
-    @Override
-    protected <T extends CraftingBlockEntity> void craftItem(@NotNull T entity) {
-        SimpleInventory inventory = new SimpleInventory(entity.size());
-        for (int i = 0; i < entity.size(); i++) {
-            inventory.setStack(i, entity.getStack(i));
-        }
-
-        Optional<RecipeEntry<ManaFillerRecipe>> recipe = getCurrentRecipe((ManaFillerBlockEntity)entity);
-
-        if (hasRecipe(entity)) {
-            entity.removeStack(0, 1);
-            entity.setStack(2, new ItemStack(recipe.get().value().getResult().getItem(),
-                    entity.getStack(2).getCount() + 1));
-
-            entity.resetProgress();
-
-            try (Transaction transaction = Transaction.openOuter()) {
-                ((ManaFillerBlockEntity) entity).fluidStorage.extract(FluidVariant.of(ModFluids.STILL_MANA_FLUID),
-                        recipe.get().value().getManaAmount(), transaction);
-                transaction.commit();
-            }
-        }
-    }
-
-    private static boolean canInsertItemIntoOutputSlot(@NotNull SimpleInventory inventory, Item output) {
-        return inventory.getStack(2).getItem() == output || inventory.getStack(2).isEmpty();
-    }
 
     private static boolean canInsertAmountIntoOutputSlot(@NotNull SimpleInventory inventory) {
         return inventory.getStack(2).getMaxCount() > inventory.getStack(2).getCount();
@@ -141,6 +97,44 @@ public class ManaFillerBlockEntity extends CraftingBlockEntity {
         }
 
         return entity.getWorld().getRecipeManager().getFirstMatch(ManaFillerRecipe.Type.INSTANCE, inv, entity.getWorld());
+    }
+
+    @Override
+    protected <T extends CraftingBlockEntity> boolean hasRecipe(@NotNull T entity) {
+        SimpleInventory inventory = new SimpleInventory(entity.size());
+        for (int i = 0; i < entity.size(); i++) {
+            inventory.setStack(i, entity.getStack(i));
+        }
+
+        Optional<RecipeEntry<ManaFillerRecipe>> match = getCurrentRecipe(((ManaFillerBlockEntity) entity));
+
+        return match.isPresent() && canInsertAmountIntoOutputSlot(inventory)
+                && canInsertItemIntoOutputSlot(inventory, match.get().value().getResult().getItem())
+                && ((ManaFillerBlockEntity) entity).fluidStorage.amount >= match.get().value().getManaAmount();
+    }
+
+    @Override
+    protected <T extends CraftingBlockEntity> void craftItem(@NotNull T entity) {
+        SimpleInventory inventory = new SimpleInventory(entity.size());
+        for (int i = 0; i < entity.size(); i++) {
+            inventory.setStack(i, entity.getStack(i));
+        }
+
+        Optional<RecipeEntry<ManaFillerRecipe>> recipe = getCurrentRecipe((ManaFillerBlockEntity) entity);
+
+        if (hasRecipe(entity)) {
+            entity.removeStack(0, 1);
+            entity.setStack(2, new ItemStack(recipe.get().value().getResult().getItem(),
+                    entity.getStack(2).getCount() + 1));
+
+            entity.resetProgress();
+
+            try (Transaction transaction = Transaction.openOuter()) {
+                ((ManaFillerBlockEntity) entity).fluidStorage.extract(FluidVariant.of(ModFluids.STILL_MANA_FLUID),
+                        recipe.get().value().getManaAmount(), transaction);
+                transaction.commit();
+            }
+        }
     }
 
     private void sendFluidPacket() {
@@ -219,4 +213,6 @@ public class ManaFillerBlockEntity extends CraftingBlockEntity {
             return this.getStack(2);
         }
     }
+
+
 }

@@ -45,7 +45,7 @@ public class ManaFillerCategory implements DisplayCategory<BasicDisplay> {
         List<Widget> widgets = new LinkedList<>();
         widgets.add(Widgets.createTexturedWidget(TEXTURE, new Rectangle(startPoint.x, startPoint.y, 175, 81)));
 
-        widgets.add(Widgets.createSlot (new Point(startPoint.x + 42, startPoint.y + 30))
+        widgets.add(Widgets.createSlot(new Point(startPoint.x + 42, startPoint.y + 30))
                 .entries(display.getInputEntries().get(0)));
         widgets.add(Widgets.createSlot(new Point(startPoint.x + 59, startPoint.y + 7))
                 .entries(display.getInputEntries().get(1)));

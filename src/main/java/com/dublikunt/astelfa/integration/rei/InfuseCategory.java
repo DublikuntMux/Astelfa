@@ -18,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.LinkedList;
 import java.util.List;
 
-public class InfuseCategory  implements DisplayCategory<BasicDisplay> {
+public class InfuseCategory implements DisplayCategory<BasicDisplay> {
     public static final Identifier TEXTURE =
             new Identifier(Astelfa.MOD_ID, "textures/gui/infuse_table_rei.png");
     public static final CategoryIdentifier<InfusingDisplay> INFUSING =

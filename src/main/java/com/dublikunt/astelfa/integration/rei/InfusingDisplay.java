@@ -23,7 +23,7 @@ public class InfusingDisplay extends BasicDisplay {
     }
 
     private static @NotNull List<EntryIngredient> getInputList(InfuseTableRecipe recipe) {
-        if(recipe == null) return Collections.emptyList();
+        if (recipe == null) return Collections.emptyList();
         List<EntryIngredient> list = new ArrayList<>();
         for (int i = 0; i < 9; i++) {
             list.add(EntryIngredients.ofIngredient(recipe.getIngredients().get(i)));

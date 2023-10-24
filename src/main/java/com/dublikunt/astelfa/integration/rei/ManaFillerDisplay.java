@@ -25,13 +25,13 @@ public class ManaFillerDisplay extends BasicDisplay {
     }
 
     private static @NotNull List<EntryIngredient> getInputList(ManaFillerRecipe recipe) {
-        if(recipe == null) return Collections.emptyList();
+        if (recipe == null) return Collections.emptyList();
         List<EntryIngredient> list = new ArrayList<>();
         list.add(EntryIngredients.of(ModFluids.STILL_MANA_FLUID, recipe.getManaAmount()));
         list.add(EntryIngredients.ofIngredient(recipe.getIngredients().get(0)));
 
         boolean hasCatalyst = recipe.getIngredients().size() == 2;
-        if (hasCatalyst){
+        if (hasCatalyst) {
             list.add(EntryIngredients.ofIngredient(recipe.getIngredients().get(1)));
         } else {
             list.add(EntryIngredients.ofIngredient(Ingredient.EMPTY));

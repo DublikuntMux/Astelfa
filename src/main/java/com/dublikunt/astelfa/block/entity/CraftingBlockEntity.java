@@ -74,6 +74,7 @@ public abstract class CraftingBlockEntity extends BlockEntity implements Extende
     }
 
     protected abstract <T extends CraftingBlockEntity> boolean hasRecipe(@NotNull T entity);
+
     protected abstract <T extends CraftingBlockEntity> void craftItem(@NotNull T entity);
 
     @Override

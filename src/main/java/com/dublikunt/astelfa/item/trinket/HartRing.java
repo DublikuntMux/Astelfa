@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.UUID;
 
 public class HartRing extends TrinketItem {
-
     public HartRing(Settings settings) {
         super(settings);
     }
