@@ -29,11 +29,14 @@ public class InfuseTableRecipe implements Recipe<SimpleInventory> {
         if (world.isClient()) {
             return false;
         }
-        return recipeItems.get(0).test(inventory.getStack(0)) && recipeItems.get(1).test(inventory.getStack(1))
-                && recipeItems.get(2).test(inventory.getStack(2)) && recipeItems.get(3).test(inventory.getStack(3))
-                && recipeItems.get(4).test(inventory.getStack(4)) && recipeItems.get(5).test(inventory.getStack(5))
-                && recipeItems.get(6).test(inventory.getStack(6)) && recipeItems.get(7).test(inventory.getStack(7))
-                && recipeItems.get(8).test(inventory.getStack(8));
+        boolean isValidRecipe = true;
+        for (int i = 0; i < 9; i++) {
+            if (!recipeItems.get(i).test(inventory.getStack(i))) {
+                isValidRecipe = false;
+                break;
+            }
+        }
+        return isValidRecipe;
     }
 
     @Override
@@ -55,8 +58,11 @@ public class InfuseTableRecipe implements Recipe<SimpleInventory> {
         return output.copy();
     }
 
-    public List<Ingredient> getInputs() {
-        return recipeItems;
+    @Override
+    public DefaultedList<Ingredient> getIngredients() {
+        DefaultedList<Ingredient> list = DefaultedList.ofSize(this.recipeItems.size());
+        list.addAll(recipeItems);
+        return list;
     }
 
     @Override
@@ -82,7 +88,7 @@ public class InfuseTableRecipe implements Recipe<SimpleInventory> {
         public static final String ID = "infuse_table";
 
         public static final Codec<InfuseTableRecipe> CODEC = RecordCodecBuilder.create(in -> in.group(
-                validateAmount(Ingredient.DISALLOW_EMPTY_CODEC, 9).fieldOf("ingredients").forGetter(InfuseTableRecipe::getInputs),
+                validateAmount(Ingredient.DISALLOW_EMPTY_CODEC, 9).fieldOf("ingredients").forGetter(InfuseTableRecipe::getIngredients),
                 RecipeCodecs.CRAFTING_RESULT.fieldOf("output").forGetter(r -> r.output)
         ).apply(in, InfuseTableRecipe::new));
 

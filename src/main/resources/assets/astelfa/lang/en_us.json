@@ -76,5 +76,8 @@
   "enchantment.astelfa.climbing_curse": "Curse of Climbing",
 
   "block.astelfa.mana_filler.tooltip.amount_capacity": "%s / %s mB",
-  "block.astelfa.mana_filler.tooltip.amount": "%s mB"
+  "block.astelfa.mana_filler.tooltip.amount": "%s mB",
+
+  "category.astelfa.infuse_table": "Infusing",
+  "category.astelfa.mana_filler": "Mana filling"
 }

@@ -27,6 +27,9 @@
     ],
     "modmenu": [
       "com.dublikunt.astelfa.integration.ModMenu"
+    ],
+    "rei_client": [
+      "com.dublikunt.astelfa.integration.ReiIntegration"
     ]
   },
   "mixins": [
@@ -35,13 +38,13 @@
   "depends": {
     "minecraft": "${minecraft_version}",
     "fabricloader": ">=0.14",
-    "fabric": ">=0.83",
+    "fabric": ">=0.90",
     "trinkets": ">=3.6",
-    "geckolib": ">=4.1"
+    "geckolib": ">=4.2"
   },
   "suggests": {
-    "modmenu": ">=6.2",
-    "emi": ">=1.0",
-    "cloth-config": ">=10.0"
+    "modmenu": ">=8.0",
+    "rei": ">=13.0",
+    "cloth-config": ">=12.0"
   }
 }
