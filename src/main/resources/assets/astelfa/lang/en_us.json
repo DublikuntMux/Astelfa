@@ -8,6 +8,8 @@
   "config.astelfa.category.2.change_lose.tooltip": "Curse Chance",
   "config.astelfa.category.2.hungry_change": "Hungry and blood hungry enchantment use change",
   "config.astelfa.category.2.hungry_change.tooltip": "Curse Chance",
+  "config.astelfa.category.2.switch_change": "Item switch curse use change",
+  "config.astelfa.category.2.switch_change.tooltip": "Curse Chance",
   "config.astelfa.category.2.illusion_change": "Illusion curse use change",
   "config.astelfa.category.2.illusion_change.tooltip": "Curse Chance",
   "config.astelfa.category.2.climbing_change": "Climbing curse use change",

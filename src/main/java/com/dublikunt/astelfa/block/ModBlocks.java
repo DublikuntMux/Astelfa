@@ -55,7 +55,7 @@ public class ModBlocks {
             PressurePlateBlock.ActivationRule.EVERYTHING,
             FabricBlockSettings.copyOf(Blocks.OAK_WOOD).mapColor(SILVER_PLANKS.getDefaultMapColor()).noCollision().strength(0.5F),
             BlockSetType.OAK
-    ), "silver_wood_pressure_pate");
+    ), "silver_wood_pressure_plate");
     public static final FenceBlock SILVER_WOOD_FENCE = registerBlock(new FenceBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD).
             mapColor(SILVER_PLANKS.getDefaultMapColor()).strength(2.0F, 3.0F).sounds(BlockSoundGroup.WOOD)), "silver_wood_fence");
     public static final FenceGateBlock SILVER_WOOD_FENCE_GATE = registerBlock(new FenceGateBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD).

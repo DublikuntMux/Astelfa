@@ -8,7 +8,7 @@
       "item": "astelfa:philosophers_stone"
     }
   ],
-  "mana_amount": 500,
+  "mana_amount": 1000,
   "output": {
     "item": "minecraft:nether_star"
   }

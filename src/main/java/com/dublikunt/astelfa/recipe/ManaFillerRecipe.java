@@ -59,8 +59,11 @@ public class ManaFillerRecipe implements Recipe<SimpleInventory> {
         return manaAmount;
     }
 
-    public List<Ingredient> getInputs() {
-        return recipeItems;
+    @Override
+    public DefaultedList<Ingredient> getIngredients() {
+        DefaultedList<Ingredient> list = DefaultedList.ofSize(this.recipeItems.size());
+        list.addAll(recipeItems);
+        return list;
     }
 
     @Override
@@ -86,7 +89,7 @@ public class ManaFillerRecipe implements Recipe<SimpleInventory> {
         public static final String ID = "mana_filler";
 
         public static final Codec<ManaFillerRecipe> CODEC = RecordCodecBuilder.create(in -> in.group(
-                validateAmount(Ingredient.DISALLOW_EMPTY_CODEC, 2).fieldOf("ingredients").forGetter(ManaFillerRecipe::getInputs),
+                validateAmount(Ingredient.DISALLOW_EMPTY_CODEC, 2).fieldOf("ingredients").forGetter(ManaFillerRecipe::getIngredients),
                 RecipeCodecs.CRAFTING_RESULT.fieldOf("output").forGetter(r -> r.output),
                 Codecs.POSITIVE_INT.fieldOf("mana_amount").forGetter(ManaFillerRecipe::getManaAmount)
         ).apply(in, ManaFillerRecipe::new));
