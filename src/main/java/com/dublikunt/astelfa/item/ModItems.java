@@ -50,6 +50,8 @@ public class ModItems {
 
     public static final SpawnEggItem IRRITANT_EGG = registerItem(new SpawnEggItem(ModEntitys.IRRITANT, 0x101B21,
             0x009195, new FabricItemSettings()), "irritant_egg");
+    public static final SpawnEggItem SLIME_BOSS_EGG = registerItem(new SpawnEggItem(ModEntitys.SLIME_BOSS, 0x163614,
+            0x2CDE1F, new FabricItemSettings()), "slime_boss_egg");
     public static final VerticallyAttachableBlockItem AQUATIC_TORCH_ITEM = registerItem(new VerticallyAttachableBlockItem(ModBlocks.AQUATIC_TORCH, ModBlocks.AQUATIC_WALL_TORCH,
             new Item.Settings(), Direction.DOWN), "aquatic_torch");
 

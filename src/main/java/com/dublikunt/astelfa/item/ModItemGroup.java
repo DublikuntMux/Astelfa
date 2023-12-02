@@ -36,6 +36,7 @@ public class ModItemGroup {
                     entries.add(ModItems.MANA_BUCKET);
 
                     entries.add(ModItems.IRRITANT_EGG);
+                    entries.add(ModItems.SLIME_BOSS_EGG);
 
                     entries.add(ModItems.AQUATIC_TORCH_ITEM);
 

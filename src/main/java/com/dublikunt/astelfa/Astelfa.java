@@ -31,36 +31,36 @@ public class Astelfa implements ModInitializer {
     public void onInitialize() {
         Logger.debug("Mod loading start...");
 
-        Logger.debug("Initialize Geckolib.");
+        Logger.debug("  Initialize Geckolib.");
         GeckoLib.initialize();
 
-        Logger.debug("Register C2S packets.");
+        Logger.debug("  Register C2S packets.");
         ModMessages.registerC2SPackets();
-        Logger.debug("Register particles on server.");
+        Logger.debug("  Register particles on server.");
         ModParticle.registerServer();
-        Logger.debug("Register item groups.");
+        Logger.debug("  Register item groups.");
         ModItemGroup.registerGroup();
-        Logger.debug("Register items.");
+        Logger.debug("  Register items.");
         ModItems.registerModItems();
-        Logger.debug("Register flammable blocks.");
+        Logger.debug("  Register flammable blocks.");
         ModBlocks.registerFlammableBlocks();
-        Logger.debug("Register strippable blocks.");
+        Logger.debug("  Register strippable blocks.");
         ModBlocks.registerStrippables();
-        Logger.debug("Register block entities.");
+        Logger.debug("  Register block entities.");
         ModBlockEntities.register();
-        Logger.debug("Register recipes.");
+        Logger.debug("  Register recipes.");
         ModRecipes.register();
-        Logger.debug("Register entity.");
+        Logger.debug("  Register entity.");
         ModEntitys.register();
-        Logger.debug("Register enchantments.");
+        Logger.debug("  Register enchantments.");
         ModEnchantments.register();
-        Logger.debug("Register screen handlers.");
+        Logger.debug("  Register screen handlers.");
         ModScreenHandlers.registry();
-        Logger.debug("Register world gen.");
+        Logger.debug("  Register world gen.");
         ModWorldGen.generateWorldGen();
-        Logger.debug("Register fluids.");
+        Logger.debug("  Register fluids.");
         ModFluids.register();
-        Logger.debug("Modify loot tables.");
+        Logger.debug("  Modify loot tables.");
         LootTableModifiers.modifyLootTables();
 
         Logger.debug("Mod loading complete!");

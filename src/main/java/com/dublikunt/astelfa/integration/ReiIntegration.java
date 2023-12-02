@@ -14,6 +14,8 @@ import me.shedaniel.rei.api.client.plugins.REIClientPlugin;
 import me.shedaniel.rei.api.client.registry.category.CategoryRegistry;
 import me.shedaniel.rei.api.client.registry.display.DisplayRegistry;
 import me.shedaniel.rei.api.client.registry.screen.ScreenRegistry;
+import me.shedaniel.rei.api.common.entry.EntryStack;
+import me.shedaniel.rei.api.common.entry.type.VanillaEntryTypes;
 import me.shedaniel.rei.api.common.util.EntryStacks;
 import org.jetbrains.annotations.NotNull;
 
@@ -23,8 +25,8 @@ public class ReiIntegration implements REIClientPlugin {
         registry.add(new InfuseCategory());
         registry.add(new ManaFillerCategory());
 
-        registry.addWorkstations(InfuseCategory.INFUSING, EntryStacks.of(ModBlocks.INFUSING_TABLE_BLOCK));
-        registry.addWorkstations(ManaFillerCategory.MANA_FILLER, EntryStacks.of(ModBlocks.MANA_FILLER_BLOCK));
+        registry.addWorkstations(InfuseCategory.INFUSING, EntryStack.of(VanillaEntryTypes.ITEM, ModBlocks.INFUSING_TABLE_BLOCK.asItem().getDefaultStack()));
+        registry.addWorkstations(ManaFillerCategory.MANA_FILLER, EntryStack.of(VanillaEntryTypes.ITEM, ModBlocks.MANA_FILLER_BLOCK.asItem().getDefaultStack()));
     }
 
     @Override

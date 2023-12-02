@@ -4,6 +4,8 @@ import com.dublikunt.astelfa.recipe.InfuseTableRecipe;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.display.basic.BasicDisplay;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;
+import me.shedaniel.rei.api.common.entry.EntryStack;
+import me.shedaniel.rei.api.common.entry.type.VanillaEntryTypes;
 import me.shedaniel.rei.api.common.util.EntryIngredients;
 import me.shedaniel.rei.api.common.util.EntryStacks;
 import net.minecraft.recipe.RecipeEntry;
@@ -19,7 +21,7 @@ public class InfusingDisplay extends BasicDisplay {
     }
 
     public InfusingDisplay(@NotNull RecipeEntry<InfuseTableRecipe> recipe) {
-        super(getInputList(recipe.value()), List.of(EntryIngredient.of(EntryStacks.of(recipe.value().getResult(null)))));
+        super(getInputList(recipe.value()), List.of(EntryIngredient.of(EntryStack.of(VanillaEntryTypes.ITEM, recipe.value().getResult(null)))));
     }
 
     private static @NotNull List<EntryIngredient> getInputList(InfuseTableRecipe recipe) {

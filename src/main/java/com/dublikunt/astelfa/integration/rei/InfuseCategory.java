@@ -10,6 +10,8 @@ import me.shedaniel.rei.api.client.gui.widgets.Widgets;
 import me.shedaniel.rei.api.client.registry.display.DisplayCategory;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.display.basic.BasicDisplay;
+import me.shedaniel.rei.api.common.entry.EntryStack;
+import me.shedaniel.rei.api.common.entry.type.VanillaEntryTypes;
 import me.shedaniel.rei.api.common.util.EntryStacks;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -36,7 +38,7 @@ public class InfuseCategory implements DisplayCategory<BasicDisplay> {
 
     @Override
     public Renderer getIcon() {
-        return EntryStacks.of(ModBlocks.INFUSING_TABLE_BLOCK.asItem().getDefaultStack());
+        return EntryStack.of(VanillaEntryTypes.ITEM, ModBlocks.INFUSING_TABLE_BLOCK.asItem().getDefaultStack());
     }
 
     @Override
