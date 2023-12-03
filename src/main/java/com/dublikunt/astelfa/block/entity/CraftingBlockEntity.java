@@ -63,13 +63,13 @@ public abstract class CraftingBlockEntity extends BlockEntity implements Extende
 
         if (entity.hasRecipe(entity)) {
             entity.progress++;
-            entity.markDirty(world, blockPos, state);
+            markDirty(world, blockPos, state);
             if (entity.progress >= entity.maxProgress) {
                 entity.craftItem(entity);
             }
         } else {
             entity.resetProgress();
-            entity.markDirty(world, blockPos, state);
+            markDirty(world, blockPos, state);
         }
     }
 

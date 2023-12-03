@@ -1,5 +1,6 @@
 package com.dublikunt.astelfa.block.common;
 
+import com.dublikunt.astelfa.helper.Helpers;
 import com.dublikunt.astelfa.particle.ModParticle;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SaplingBlock;
@@ -18,9 +19,6 @@ public class SparkleSaplingBlock extends SaplingBlock {
 
     @Override
     public void randomDisplayTick(BlockState state, @NotNull World world, @NotNull BlockPos pos, @NotNull Random random) {
-        double positionX = ((double) pos.getX() - extraDistance) + (random.nextDouble() + (2 * extraDistance));
-        double positionY = ((double) pos.getY() - extraDistance) + (random.nextDouble() + (2 * extraDistance));
-        double positionZ = ((double) pos.getZ() - extraDistance) + (random.nextDouble() + (2 * extraDistance));
-        world.addParticle(ModParticle.SPARKLE_PARTICLE, positionX, positionY, positionZ, 0, 0, 0);
+        Helpers.createParticles(world, pos, random, extraDistance, ModParticle.SPARKLE_PARTICLE);
     }
 }

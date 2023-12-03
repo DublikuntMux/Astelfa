@@ -57,6 +57,15 @@ public class ManaFillerBlockEntity extends CraftingBlockEntity {
 
     private static boolean canInsertAmountIntoOutputSlot(@NotNull SimpleInventory inventory) {
         return inventory.getStack(2).getMaxCount() > inventory.getStack(2).getCount();
+    }
+
+    private static void transferFluidToFluidStorage(@NotNull ManaFillerBlockEntity entity) {
+        try (Transaction transaction = Transaction.openOuter()) {
+            entity.fluidStorage.insert(FluidVariant.of(ModFluids.STILL_MANA_FLUID),
+                    FluidStack.convertDropletsToMb(FluidConstants.BUCKET), transaction);
+            transaction.commit();
+            entity.setStack(3, new ItemStack(Items.BUCKET));
+        }
     }    public final SingleVariantStorage<FluidVariant> fluidStorage = new SingleVariantStorage<>() {
         @Override
         protected FluidVariant getBlankVariant() {
@@ -76,15 +85,6 @@ public class ManaFillerBlockEntity extends CraftingBlockEntity {
             }
         }
     };
-
-    private static void transferFluidToFluidStorage(@NotNull ManaFillerBlockEntity entity) {
-        try (Transaction transaction = Transaction.openOuter()) {
-            entity.fluidStorage.insert(FluidVariant.of(ModFluids.STILL_MANA_FLUID),
-                    FluidStack.convertDropletsToMb(FluidConstants.BUCKET), transaction);
-            transaction.commit();
-            entity.setStack(3, new ItemStack(Items.BUCKET));
-        }
-    }
 
     private static boolean hasFluidSourceInSlot(@NotNull ManaFillerBlockEntity entity) {
         return entity.getStack(3).getItem() == ModItems.MANA_BUCKET;

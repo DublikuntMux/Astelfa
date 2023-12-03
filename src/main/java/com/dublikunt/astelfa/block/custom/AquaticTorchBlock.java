@@ -1,5 +1,6 @@
 package com.dublikunt.astelfa.block.custom;
 
+import com.dublikunt.astelfa.helper.Helpers;
 import com.dublikunt.astelfa.particle.ModParticle;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -45,12 +46,7 @@ public class AquaticTorchBlock extends TorchBlock implements Waterloggable {
 
     @Override
     public FluidState getFluidState(@NotNull BlockState state) {
-        if (state.get(WATERLOGGED) && state.get(FLOWING_WATER) == 8) {
-            return Fluids.WATER.getStill(false);
-        } else {
-            return state.get(WATERLOGGED) && state.get(FLOWING_WATER) != 8 ?
-                    Fluids.WATER.getFlowing(state.get(FLOWING_WATER), false) : Fluids.EMPTY.getDefaultState();
-        }
+        return Helpers.WaterLoggable(state, WATERLOGGED, FLOWING_WATER);
     }
 
     public void randomDisplayTick(BlockState state, @NotNull World world, @NotNull BlockPos blockPos, Random random) {

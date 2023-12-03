@@ -6,7 +6,8 @@ import net.minecraft.entity.EquipmentSlot;
 
 public class ClimbingCurse extends Enchantment {
     public ClimbingCurse() {
-        super(Rarity.COMMON, EnchantmentTarget.ARMOR, new EquipmentSlot[]{EquipmentSlot.LEGS});
+        super(Rarity.COMMON, EnchantmentTarget.ARMOR,
+                new EquipmentSlot[]{EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET});
     }
 
     @Override

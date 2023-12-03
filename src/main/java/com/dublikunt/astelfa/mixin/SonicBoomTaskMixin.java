@@ -53,9 +53,9 @@ public class SonicBoomTaskMixin {
     }
 
     @Inject(
-            cancellable = true,
             method = "method_43265(Lnet/minecraft/entity/mob/WardenEntity;Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/entity/LivingEntity;)V",
-            at = @At(value = "INVOKE", target = "net/minecraft/entity/LivingEntity.addVelocity(DDD)V", shift = At.Shift.BEFORE)
+            at = @At(value = "INVOKE", target = "net/minecraft/entity/LivingEntity.addVelocity(DDD)V", shift = At.Shift.BEFORE),
+            cancellable = true
     )
     private static void sonicDeflect$cancelKnockback(WardenEntity wardenEntity, ServerWorld serverWorld, LivingEntity livingEntity, CallbackInfo ci) {
         if (entityHasSonicDeflect(livingEntity)) {

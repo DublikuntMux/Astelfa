@@ -86,7 +86,7 @@ dependencies {
     modApi include("dev.onyxstudios.cardinal-components-api:cardinal-components-base:5.3.0")
     modApi include("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:5.3.0")
 
-    modImplementation "curse.maven:jade-324717:4858827"
+    modRuntimeOnly "curse.maven:jade-324717:4858827"
 }
 
 processResources {

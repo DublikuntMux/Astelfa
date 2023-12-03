@@ -1,5 +1,6 @@
 package com.dublikunt.astelfa.block.custom;
 
+import com.dublikunt.astelfa.helper.Helpers;
 import com.dublikunt.astelfa.particle.ModParticle;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
@@ -82,11 +83,7 @@ public class AquaticWallTorchBlock extends WallTorchBlock implements Waterloggab
 
     @Override
     public FluidState getFluidState(@NotNull BlockState state) {
-        if (state.get(WATERLOGGED) && state.get(FLOWING_WATER) == 8) {
-            return Fluids.WATER.getStill(false);
-        } else {
-            return state.get(WATERLOGGED) && state.get(FLOWING_WATER) != 8 ? Fluids.WATER.getFlowing(state.get(FLOWING_WATER), false) : Fluids.EMPTY.getDefaultState();
-        }
+        return Helpers.WaterLoggable(state, WATERLOGGED, FLOWING_WATER);
     }
 
     public void randomDisplayTick(@NotNull BlockState state, @NotNull World world, @NotNull BlockPos blockPos, Random random) {

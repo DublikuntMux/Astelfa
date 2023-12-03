@@ -15,7 +15,6 @@ import net.minecraft.util.Hand;
 import org.jetbrains.annotations.NotNull;
 
 public class LooseCurse extends Enchantment {
-
     public LooseCurse() {
         super(Rarity.UNCOMMON, EnchantmentTarget.WEAPON,
                 new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
