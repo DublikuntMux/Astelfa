@@ -5,6 +5,7 @@ import com.dublikunt.astelfa.entity.ModEntitys;
 import com.dublikunt.astelfa.fluid.ModFluids;
 import com.dublikunt.astelfa.helper.Helpers;
 import com.dublikunt.astelfa.item.animated.PhilosophersStone;
+import com.dublikunt.astelfa.item.common.ManaDetectPaper;
 import com.dublikunt.astelfa.item.common.TooltipItem;
 import com.dublikunt.astelfa.item.trinket.AdosChains;
 import com.dublikunt.astelfa.item.trinket.HartRing;
@@ -38,6 +39,9 @@ public class ModItems {
             new FabricItemSettings()), "mana_ingot");
     public static final TooltipItem ESSENTIAL_FUEL = registerItem(new TooltipItem(Text.translatable("item.astelfa.essential_fuel.tooltip"),
             new FabricItemSettings()), "essential_fuel");
+    public static final ManaDetectPaper MANA_DETECT_PAPER = registerItem(new ManaDetectPaper(new FabricItemSettings()), "mana_detect_paper");
+    public static final TooltipItem USED_MANA_DETECT_PAPER = registerItem(new TooltipItem(Text.translatable("item.astelfa.mana_detect_paper.tooltip"),
+            new FabricItemSettings().maxCount(1)), "used_mana_detect_paper");
 
     public static final HartRing HART_RING = registerItem(new HartRing(new FabricItemSettings().rarity(Rarity.RARE)), "hart_ring");
     public static final AdosChains ADOS_CHAINS = registerItem(new AdosChains(new FabricItemSettings().rarity(Rarity.RARE)), "ados_chains");

@@ -78,9 +78,6 @@ public class InfuseTableRecipe implements Recipe<SimpleInventory> {
     public static class Type implements RecipeType<InfuseTableRecipe> {
         public static final Type INSTANCE = new Type();
         public static final String ID = "infuse_table";
-
-        private Type() {
-        }
     }
 
     public static class Serializer implements RecipeSerializer<InfuseTableRecipe> {

@@ -4,6 +4,7 @@ import com.dublikunt.astelfa.block.ModBlockEntities;
 import com.dublikunt.astelfa.block.custom.ManaFillerBlock;
 import com.dublikunt.astelfa.fluid.ModFluids;
 import com.dublikunt.astelfa.helper.FluidStack;
+import com.dublikunt.astelfa.helper.block.CraftingBlockEntity;
 import com.dublikunt.astelfa.item.ModItems;
 import com.dublikunt.astelfa.networking.ModMessages;
 import com.dublikunt.astelfa.recipe.ManaFillerRecipe;
@@ -66,25 +67,7 @@ public class ManaFillerBlockEntity extends CraftingBlockEntity {
             transaction.commit();
             entity.setStack(3, new ItemStack(Items.BUCKET));
         }
-    }    public final SingleVariantStorage<FluidVariant> fluidStorage = new SingleVariantStorage<>() {
-        @Override
-        protected FluidVariant getBlankVariant() {
-            return FluidVariant.blank();
-        }
-
-        @Override
-        protected long getCapacity(FluidVariant variant) {
-            return FluidStack.convertDropletsToMb(FluidConstants.BUCKET) * 20;
-        }
-
-        @Override
-        protected void onFinalCommit() {
-            markDirty();
-            if (!world.isClient()) {
-                sendFluidPacket();
-            }
-        }
-    };
+    }
 
     private static boolean hasFluidSourceInSlot(@NotNull ManaFillerBlockEntity entity) {
         return entity.getStack(3).getItem() == ModItems.MANA_BUCKET;
@@ -111,7 +94,25 @@ public class ManaFillerBlockEntity extends CraftingBlockEntity {
         return match.isPresent() && canInsertAmountIntoOutputSlot(inventory)
                 && canInsertItemIntoOutputSlot(inventory, match.get().value().getResult().getItem())
                 && ((ManaFillerBlockEntity) entity).fluidStorage.amount >= match.get().value().getManaAmount();
-    }
+    }    public final SingleVariantStorage<FluidVariant> fluidStorage = new SingleVariantStorage<>() {
+        @Override
+        protected FluidVariant getBlankVariant() {
+            return FluidVariant.blank();
+        }
+
+        @Override
+        protected long getCapacity(FluidVariant variant) {
+            return FluidStack.convertDropletsToMb(FluidConstants.BUCKET) * 20;
+        }
+
+        @Override
+        protected void onFinalCommit() {
+            markDirty();
+            if (!world.isClient()) {
+                sendFluidPacket();
+            }
+        }
+    };
 
     @Override
     protected <T extends CraftingBlockEntity> void craftItem(@NotNull T entity) {

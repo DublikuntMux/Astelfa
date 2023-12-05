@@ -27,6 +27,7 @@ public class ModItemGroup {
                     entries.add(ModItems.MATTER_6);
                     entries.add(ModItems.MANA_INGOT);
                     entries.add(ModItems.ESSENTIAL_FUEL);
+                    entries.add(ModItems.MANA_DETECT_PAPER);
 
                     entries.add(ModItems.HART_RING);
                     entries.add(ModItems.ADOS_CHAINS);

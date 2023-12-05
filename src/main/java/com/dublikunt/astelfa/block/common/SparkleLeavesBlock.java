@@ -4,7 +4,6 @@ import com.dublikunt.astelfa.helper.Helpers;
 import com.dublikunt.astelfa.particle.ModParticle;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.LeavesBlock;
-import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;

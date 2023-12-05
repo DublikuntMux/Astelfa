@@ -2,13 +2,16 @@ package com.dublikunt.astelfa;
 
 import com.dublikunt.astelfa.block.ModBlockEntities;
 import com.dublikunt.astelfa.block.ModBlocks;
+import com.dublikunt.astelfa.comand.ModCommands;
 import com.dublikunt.astelfa.enchantment.ModEnchantments;
 import com.dublikunt.astelfa.entity.ModEntitys;
 import com.dublikunt.astelfa.fluid.ModFluids;
 import com.dublikunt.astelfa.generator.LootTableModifiers;
+import com.dublikunt.astelfa.helper.chunkstorage.DataObjectRegistry;
 import com.dublikunt.astelfa.helper.common.Logger;
 import com.dublikunt.astelfa.item.ModItemGroup;
 import com.dublikunt.astelfa.item.ModItems;
+import com.dublikunt.astelfa.item.common.ManaDetectPaper;
 import com.dublikunt.astelfa.networking.ModMessages;
 import com.dublikunt.astelfa.particle.ModParticle;
 import com.dublikunt.astelfa.recipe.ModRecipes;
@@ -42,9 +45,11 @@ public class Astelfa implements ModInitializer {
         ModItemGroup.registerGroup();
         Logger.debug("  Register items.");
         ModItems.registerModItems();
+        Logger.debug("      Register tooltip adding.");
+        ManaDetectPaper.registerTooltipAdding();
         Logger.debug("  Register flammable blocks.");
         ModBlocks.registerFlammableBlocks();
-        Logger.debug("  Register strippable blocks.");
+        Logger.debug("  Register stoppable blocks.");
         ModBlocks.registerStrippables();
         Logger.debug("  Register block entities.");
         ModBlockEntities.register();
@@ -62,6 +67,10 @@ public class Astelfa implements ModInitializer {
         ModFluids.register();
         Logger.debug("  Modify loot tables.");
         LootTableModifiers.modifyLootTables();
+        Logger.debug("  Register chunk data objects.");
+        DataObjectRegistry.initialize();
+        Logger.debug("  Register mod commands.");
+        ModCommands.RegisterCommands();
 
         Logger.debug("Mod loading complete!");
     }

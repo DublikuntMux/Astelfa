@@ -11,16 +11,16 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class TooltipItem extends Item {
-    private final Text tooltip;
+    private final Text base_tooltip;
 
     public TooltipItem(Text tooltip, Settings settings) {
         super(settings);
-        this.tooltip = tooltip;
+        this.base_tooltip = tooltip;
     }
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, @NotNull List<Text> tooltip, TooltipContext context) {
-        tooltip.add(this.tooltip);
+        tooltip.add(this.base_tooltip);
         super.appendTooltip(stack, world, tooltip, context);
     }
 }

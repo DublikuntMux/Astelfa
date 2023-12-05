@@ -79,9 +79,6 @@ public class ManaFillerRecipe implements Recipe<SimpleInventory> {
     public static class Type implements RecipeType<ManaFillerRecipe> {
         public static final ManaFillerRecipe.Type INSTANCE = new ManaFillerRecipe.Type();
         public static final String ID = "mana_filler";
-
-        private Type() {
-        }
     }
 
     public static class Serializer implements RecipeSerializer<ManaFillerRecipe> {

@@ -1,4 +1,4 @@
-package com.dublikunt.astelfa.block.entity;
+package com.dublikunt.astelfa.helper.block;
 
 import com.dublikunt.astelfa.helper.notmy.InventoryImpl;
 import com.dublikunt.astelfa.networking.ModMessages;
@@ -96,7 +96,7 @@ public abstract class CraftingBlockEntity extends BlockEntity implements Extende
         progress = nbt.getInt("progress");
     }
 
-    protected void resetProgress() {
+    public void resetProgress() {
         this.progress = 0;
     }
 

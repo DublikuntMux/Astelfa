@@ -2,6 +2,7 @@ package com.dublikunt.astelfa.block.entity;
 
 import com.dublikunt.astelfa.block.ModBlockEntities;
 import com.dublikunt.astelfa.block.custom.InfuseTableBlock;
+import com.dublikunt.astelfa.helper.block.CraftingBlockEntity;
 import com.dublikunt.astelfa.recipe.InfuseTableRecipe;
 import com.dublikunt.astelfa.screen.handler.InfuseTableScreenHandler;
 import net.minecraft.block.BlockState;

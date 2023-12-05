@@ -31,6 +31,10 @@
   "item.astelfa.mana_bucket": "Bucket of mana",
   "item.astelfa.essential_fuel": "Essential fuel",
   "item.astelfa.essential_fuel.tooltip": "Almost out of potassium",
+  "item.astelfa.mana_detect_paper": "Mana detect paper",
+  "item.astelfa.mana_detect_paper.tooltip": "Can detect mana in air",
+  "item.astelfa.used_mana_detect_paper": "Used mana detect paper",
+  "item.astelfa.used_mana_detect_paper.tooltip": "Mana amount on air: %s, in chunk with position: x %s, z %s",
 
   "item.astelfa.hart_ring": "Hart ring",
   "item.astelfa.hart_ring.tooltip": "The demon's heart begins to beat in unison with yours",
@@ -83,5 +87,8 @@
   "block.astelfa.mana_filler.tooltip.amount": "%s mB",
 
   "category.astelfa.infuse_table": "Infusing",
-  "category.astelfa.mana_filler": "Mana filling"
+  "category.astelfa.mana_filler": "Mana filling",
+  "category.astelfa.cauldron": "Cauldron",
+
+  "command.astelfa.mana_amount": "Chunk mana amount is: %s"
 }

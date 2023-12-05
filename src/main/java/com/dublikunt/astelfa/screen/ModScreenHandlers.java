@@ -18,6 +18,4 @@ public class ModScreenHandlers {
             new ExtendedScreenHandlerType<>(InfuseTableScreenHandler::new);
     public static final ScreenHandlerType<ManaFillerScreenHandler> MANA_FILLER_SCREEN_HANDLER =
             new ExtendedScreenHandlerType<>(ManaFillerScreenHandler::new);
-
-
 }
