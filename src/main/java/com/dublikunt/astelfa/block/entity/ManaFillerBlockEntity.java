@@ -94,25 +94,7 @@ public class ManaFillerBlockEntity extends CraftingBlockEntity {
         return match.isPresent() && canInsertAmountIntoOutputSlot(inventory)
                 && canInsertItemIntoOutputSlot(inventory, match.get().value().getResult().getItem())
                 && ((ManaFillerBlockEntity) entity).fluidStorage.amount >= match.get().value().getManaAmount();
-    }    public final SingleVariantStorage<FluidVariant> fluidStorage = new SingleVariantStorage<>() {
-        @Override
-        protected FluidVariant getBlankVariant() {
-            return FluidVariant.blank();
-        }
-
-        @Override
-        protected long getCapacity(FluidVariant variant) {
-            return FluidStack.convertDropletsToMb(FluidConstants.BUCKET) * 20;
-        }
-
-        @Override
-        protected void onFinalCommit() {
-            markDirty();
-            if (!world.isClient()) {
-                sendFluidPacket();
-            }
-        }
-    };
+    }
 
     @Override
     protected <T extends CraftingBlockEntity> void craftItem(@NotNull T entity) {
@@ -147,7 +129,25 @@ public class ManaFillerBlockEntity extends CraftingBlockEntity {
         for (ServerPlayerEntity player : PlayerLookup.tracking((ServerWorld) world, getPos())) {
             ServerPlayNetworking.send(player, ModMessages.FLUID_SYNC, data);
         }
-    }
+    }    public final SingleVariantStorage<FluidVariant> fluidStorage = new SingleVariantStorage<>() {
+        @Override
+        protected FluidVariant getBlankVariant() {
+            return FluidVariant.blank();
+        }
+
+        @Override
+        protected long getCapacity(FluidVariant variant) {
+            return FluidStack.convertDropletsToMb(FluidConstants.BUCKET) * 20;
+        }
+
+        @Override
+        protected void onFinalCommit() {
+            markDirty();
+            if (!world.isClient()) {
+                sendFluidPacket();
+            }
+        }
+    };
 
     public void setFluidLevel(FluidVariant fluidVariant, long fluidLevel) {
         this.fluidStorage.variant = fluidVariant;
@@ -214,8 +214,6 @@ public class ManaFillerBlockEntity extends CraftingBlockEntity {
             return this.getStack(2);
         }
     }
-
-
 
 
 }

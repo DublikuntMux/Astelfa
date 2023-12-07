@@ -1,6 +1,6 @@
 package com.dublikunt.astelfa.item.common;
 
-import com.dublikunt.astelfa.helper.air_mana.ManaAmount;
+import com.dublikunt.astelfa.air_mana.ManaAmount;
 import com.dublikunt.astelfa.item.ModItems;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.minecraft.entity.player.PlayerEntity;

@@ -1,6 +1,6 @@
 package com.dublikunt.astelfa.comand;
 
-import com.dublikunt.astelfa.helper.air_mana.ManaAmount;
+import com.dublikunt.astelfa.air_mana.ManaAmount;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
@@ -19,9 +19,7 @@ public final class ChunkManaCommand {
         dispatcher.register(CommandManager.literal("chunk_mana")
                 .then(CommandManager.argument("position", Vec2ArgumentType.vec2())
                         .then(CommandManager.literal("get")
-                                .then(CommandManager.argument("position", Vec2ArgumentType.vec2())
-                                        .executes(ChunkManaCommand::getMana)
-                                )
+                                .executes(ChunkManaCommand::getMana)
                         )
                         .then(CommandManager.literal("set")
                                 .then(CommandManager.argument("amount", IntegerArgumentType.integer(0))

@@ -1,6 +1,8 @@
 package com.dublikunt.astelfa.mixin;
 
 import com.dublikunt.astelfa.Astelfa;
+import com.dublikunt.astelfa.air_mana.ManaAmount;
+import com.dublikunt.astelfa.effects.ModEffects;
 import com.dublikunt.astelfa.enchantment.ModEnchantments;
 import com.dublikunt.astelfa.enchantment.curse.IllusionCurse;
 import net.minecraft.block.BlockState;
@@ -8,10 +10,12 @@ import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.block.LadderBlock;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.math.Direction;
+import net.minecraft.world.chunk.WorldChunk;
 import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -24,6 +28,7 @@ public class PlayerEntityMixin {
     @Inject(at = @At("RETURN"), method = "tick")
     public void onTick(CallbackInfo ci) {
         CurseTick((PlayerEntity) (Object) this);
+        AirManaTick((PlayerEntity) (Object) this);
     }
 
     @Unique
@@ -53,6 +58,26 @@ public class PlayerEntityMixin {
                     }
                 }
             }
+        }
+    }
+
+    @Unique
+    private void AirManaTick(@NotNull PlayerEntity player) {
+        if (!player.getWorld().isClient) {
+            WorldChunk chunk = player.getWorld().getWorldChunk(player.getBlockPos());
+
+            int mana_around = ManaAmount.getOrCreateManaData(chunk).mana_amount;
+
+            StatusEffectInstance effect = null;
+
+            if (mana_around <= 150) {
+                effect = new StatusEffectInstance(ModEffects.MAGICAL_SUFFOCATION_EFFECT, 40);
+            } else if (mana_around >= 900) {
+                effect = new StatusEffectInstance(ModEffects.ASCENSION_EFFECT, 40);
+            }
+
+            if (effect != null)
+                player.addStatusEffect(effect);
         }
     }
 }

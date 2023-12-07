@@ -3,6 +3,7 @@ package com.dublikunt.astelfa;
 import com.dublikunt.astelfa.block.ModBlockEntities;
 import com.dublikunt.astelfa.block.ModBlocks;
 import com.dublikunt.astelfa.comand.ModCommands;
+import com.dublikunt.astelfa.effects.ModEffects;
 import com.dublikunt.astelfa.enchantment.ModEnchantments;
 import com.dublikunt.astelfa.entity.ModEntitys;
 import com.dublikunt.astelfa.fluid.ModFluids;
@@ -71,6 +72,8 @@ public class Astelfa implements ModInitializer {
         DataObjectRegistry.initialize();
         Logger.debug("  Register mod commands.");
         ModCommands.RegisterCommands();
+        Logger.debug("  Register mod effects.");
+        ModEffects.registerEffects();
 
         Logger.debug("Mod loading complete!");
     }

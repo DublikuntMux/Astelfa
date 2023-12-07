@@ -1,7 +1,7 @@
 package com.dublikunt.astelfa.helper.chunkstorage;
 
+import com.dublikunt.astelfa.air_mana.ManaDataObject;
 import com.dublikunt.astelfa.helper.Helpers;
-import com.dublikunt.astelfa.helper.air_mana.ManaDataObject;
 
 public class DataObjectRegistry {
     public static DataObjectKey<ManaDataObject> MANA_DATA_OBJECT_KEY;

@@ -83,8 +83,8 @@ dependencies {
     modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:$rei_version"
 
     //Fix for trinkets
-    modApi include("dev.onyxstudios.cardinal-components-api:cardinal-components-base:5.3.0")
-    modApi include("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:5.3.0")
+    modRuntimeOnly "dev.onyxstudios.cardinal-components-api:cardinal-components-base:5.3.0"
+    modRuntimeOnly "dev.onyxstudios.cardinal-components-api:cardinal-components-entity:5.3.0"
 
     modRuntimeOnly "curse.maven:jade-324717:4858827"
 }

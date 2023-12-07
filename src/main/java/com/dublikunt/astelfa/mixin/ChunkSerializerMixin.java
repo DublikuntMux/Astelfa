@@ -12,6 +12,7 @@ import net.minecraft.world.chunk.*;
 import net.minecraft.world.chunk.light.LightingProvider;
 import net.minecraft.world.gen.chunk.BlendingData;
 import net.minecraft.world.poi.PointOfInterestStorage;
+import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -28,7 +29,7 @@ public class ChunkSerializerMixin {
     }
 
     @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/ChunkSerializer;serializeTicks(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/nbt/NbtCompound;Lnet/minecraft/world/chunk/Chunk$TickSchedulers;)V", shift = At.Shift.BEFORE), method = "serialize", locals = LocalCapture.CAPTURE_FAILHARD)
-    private static void onWrite(ServerWorld world, Chunk chunk, CallbackInfoReturnable<NbtCompound> cir, ChunkPos chunkPos, NbtCompound nbtCompound) {
+    private static void onWrite(ServerWorld world, @NotNull Chunk chunk, CallbackInfoReturnable<NbtCompound> cir, ChunkPos chunkPos, NbtCompound nbtCompound) {
         if (chunk.getStatus().getChunkType() != ChunkStatus.ChunkType.PROTOCHUNK) {
             LevelChunkAccess lc = (LevelChunkAccess) chunk;
             NbtCompound tag = lc.astelfa$getStorage().save();

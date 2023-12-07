@@ -1,4 +1,4 @@
-package com.dublikunt.astelfa.helper.air_mana;
+package com.dublikunt.astelfa.air_mana;
 
 import com.dublikunt.astelfa.helper.chunkstorage.DataObject;
 import net.minecraft.nbt.NbtCompound;

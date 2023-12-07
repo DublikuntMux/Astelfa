@@ -43,6 +43,8 @@
   "item.astelfa.ring_belt": "Ring belt",
   "item.astelfa.ring_belt.tooltip": "You decided that wearing a belt of rings is not such a bad idea",
 
+  "item.astelfa.glasses.info": "Chunk mana: %s",
+
   "block.astelfa.infuse_table": "Infuse table",
   "block.astelfa.mana_filler": "Mana filler",
   "block.astelfa.sculk_statue": "Sculk Statue",
@@ -82,6 +84,9 @@
   "enchantment.astelfa.blood_hungry": "Blood hungry",
   "enchantment.astelfa.item_switch": "Item switching",
   "enchantment.astelfa.climbing_curse": "Curse of Climbing",
+
+  "effect.astelfa.ascension": "Ascension",
+  "effect.astelfa.magical_suffocation": "Magical suffocation",
 
   "block.astelfa.mana_filler.tooltip.amount_capacity": "%s / %s mB",
   "block.astelfa.mana_filler.tooltip.amount": "%s mB",

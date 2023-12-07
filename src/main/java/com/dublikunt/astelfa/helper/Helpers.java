@@ -59,4 +59,11 @@ public class Helpers {
                     Fluids.WATER.getFlowing(state.get(flowingWater), false) : Fluids.EMPTY.getDefaultState();
         }
     }
+
+    public static double convertRange(double value, double oldMin, double oldMax, double newMin, double newMax) {
+        value = Math.max(oldMin, Math.min(value, oldMax));
+        double normalizedValue = (value - oldMin) / (oldMax - oldMin);
+
+        return newMin + normalizedValue * (newMax - newMin);
+    }
 }

@@ -67,6 +67,14 @@ public class RecipeGenerator extends FabricRecipeProvider {
                 .criterion(FabricRecipeProvider.hasItem(ModBlocks.SILVER_LOG),
                         FabricRecipeProvider.conditionsFromItem(ModBlocks.SILVER_LOG))
                 .offerTo(exporter, new Identifier(getRecipeName(ModBlocks.INFUSING_TABLE_BLOCK)));
+
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.BREWING, ModItems.MANA_DETECT_PAPER)
+                .input(Items.PAPER)
+                .input(Blocks.AZURE_BLUET)
+                .input(Blocks.BLUE_ORCHID)
+                .criterion(FabricRecipeProvider.hasItem(Items.PAPER),
+                        FabricRecipeProvider.conditionsFromItem(Items.PAPER))
+                .offerTo(exporter, new Identifier(getRecipeName(ModItems.MANA_DETECT_PAPER)));
     }
 
     private void offerMatter(RecipeExporter exporter, Item ringItem, Item inItem, Item output) {

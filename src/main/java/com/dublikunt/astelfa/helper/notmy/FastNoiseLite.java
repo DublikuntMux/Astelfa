@@ -212,6 +212,14 @@ public class FastNoiseLite {
         SetSeed(seed);
     }
 
+    /// <summary>
+    /// Create new FastNoise object with specified seed and noise type
+    /// </summary>
+    public FastNoiseLite(int seed, NoiseType noiseType) {
+        SetSeed(seed);
+        SetNoiseType(noiseType);
+    }
+
     private static float Lerp(float a, float b, float t) {
         return a + t * (b - a);
     }
@@ -1304,7 +1312,7 @@ public class FastNoiseLite {
     }
 
 
-    // Fractal PingPong 
+    // Fractal PingPong
 
     private float SingleCellular(int seed, float x, float y, float z) {
         int xr = Math.round(x);
