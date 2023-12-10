@@ -9,6 +9,7 @@ import com.dublikunt.astelfa.item.common.ManaDetectPaper;
 import com.dublikunt.astelfa.item.common.TooltipItem;
 import com.dublikunt.astelfa.item.trinket.AdosChains;
 import com.dublikunt.astelfa.item.trinket.HartRing;
+import com.dublikunt.astelfa.item.trinket.ManaGlasses;
 import com.dublikunt.astelfa.item.trinket.RingBelt;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
@@ -45,7 +46,8 @@ public class ModItems {
 
     public static final HartRing HART_RING = registerItem(new HartRing(new FabricItemSettings().rarity(Rarity.RARE)), "hart_ring");
     public static final AdosChains ADOS_CHAINS = registerItem(new AdosChains(new FabricItemSettings().rarity(Rarity.RARE)), "ados_chains");
-    public static final RingBelt RING_BELT = registerItem(new RingBelt(new FabricItemSettings()), "ring_belt");
+    public static final RingBelt RING_BELT = registerItem(new RingBelt(new FabricItemSettings().rarity(Rarity.UNCOMMON)), "ring_belt");
+    public static final ManaGlasses MANA_GLASSES = registerItem(new ManaGlasses(new FabricItemSettings().rarity(Rarity.UNCOMMON)), "mana_glasses");
 
     public static final PhilosophersStone PHILOSOPHERS_STONE = registerItem(new PhilosophersStone(new FabricItemSettings().rarity(Rarity.RARE).maxCount(1)),
             "philosophers_stone");

@@ -2,6 +2,7 @@ package com.dublikunt.astelfa;
 
 import com.dublikunt.astelfa.block.ModBlockEntities;
 import com.dublikunt.astelfa.block.ModBlocks;
+import com.dublikunt.astelfa.client.ManaInfoHudOverlay;
 import com.dublikunt.astelfa.entity.ModEntitys;
 import com.dublikunt.astelfa.fluid.ModFluids;
 import com.dublikunt.astelfa.helper.common.Logger;
@@ -10,12 +11,13 @@ import com.dublikunt.astelfa.particle.ModParticle;
 import com.dublikunt.astelfa.renderer.block.InfuseTableBlockEntityRenderer;
 import com.dublikunt.astelfa.renderer.block.ManaFillerBlockEntityRenderer;
 import com.dublikunt.astelfa.screen.ModScreenHandlers;
-import com.dublikunt.astelfa.screen.screen.InfuseTableScreen;
-import com.dublikunt.astelfa.screen.screen.ManaFillerScreen;
+import com.dublikunt.astelfa.screen.screen.craft.InfuseTableScreen;
+import com.dublikunt.astelfa.screen.screen.craft.ManaFillerScreen;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
+import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
@@ -63,6 +65,9 @@ public class AstelfaClient implements ClientModInitializer {
                 ));
         BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(),
                 ModFluids.STILL_MANA_FLUID, ModFluids.FLOWING_MANA_FLUID);
+
+        Logger.debug("  Register hud overlays.");
+        HudRenderCallback.EVENT.register(new ManaInfoHudOverlay());
 
         Logger.debug("Mod client loading complete!");
     }

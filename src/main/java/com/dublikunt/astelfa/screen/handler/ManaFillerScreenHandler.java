@@ -1,6 +1,7 @@
 package com.dublikunt.astelfa.screen.handler;
 
 import com.dublikunt.astelfa.block.entity.ManaFillerBlockEntity;
+import com.dublikunt.astelfa.criterion.ModCriterion;
 import com.dublikunt.astelfa.helper.FluidStack;
 import com.dublikunt.astelfa.screen.ModScreenHandlers;
 import net.minecraft.block.entity.BlockEntity;
@@ -13,6 +14,7 @@ import net.minecraft.screen.ArrayPropertyDelegate;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
+import net.minecraft.server.network.ServerPlayerEntity;
 import org.jetbrains.annotations.NotNull;
 
 public class ManaFillerScreenHandler extends ScreenHandler {
@@ -36,7 +38,7 @@ public class ManaFillerScreenHandler extends ScreenHandler {
 
         this.addSlot(new Slot(inventory, 0, 72, 13));
         this.addSlot(new Slot(inventory, 1, 72, 58));
-        this.addSlot(new Slot(inventory, 2, 135, 35));
+        this.addSlot(new OutputSlot(inventory, 2, 135, 35));
         this.addSlot(new Slot(inventory, 3, 8, 35));
 
         for (int si = 0; si < 3; ++si)
@@ -92,5 +94,20 @@ public class ManaFillerScreenHandler extends ScreenHandler {
     @Override
     public boolean canUse(PlayerEntity player) {
         return this.inventory.canPlayerUse(player);
+    }
+
+    static class OutputSlot extends Slot {
+        public OutputSlot(Inventory inventory, int i, int j, int k) {
+            super(inventory, i, j, k);
+        }
+
+        @Override
+        public void onTakeItem(PlayerEntity player, ItemStack stack) {
+            if (player instanceof ServerPlayerEntity) {
+                ModCriterion.MANA_FILLER.trigger((ServerPlayerEntity) player, stack.getItem());
+            }
+
+            super.onTakeItem(player, stack);
+        }
     }
 }

@@ -23,8 +23,8 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 public class ChunkSerializerMixin {
     @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/chunk/Chunk;setLightOn(Z)V", shift = At.Shift.BEFORE), method = "deserialize", locals = LocalCapture.CAPTURE_FAILHARD)
     private static void onRead(ServerWorld world, PointOfInterestStorage poiStorage, ChunkPos chunkPos, NbtCompound nbt, CallbackInfoReturnable<ProtoChunk> cir, ChunkPos chunkPos2, UpgradeData upgradeData, boolean bl, NbtList nbtList, int i, ChunkSection[] chunkSections, boolean bl2, ChunkManager chunkManager, LightingProvider lightingProvider, Registry registry, Codec codec, boolean bl3, long m, ChunkStatus.ChunkType chunkType, BlendingData blendingData, Chunk chunk) {
-        if (chunk instanceof LevelChunkAccess lc && nbt.contains("Astelfa-Data")) {
-            lc.astelfa$getStorage().load(nbt.getCompound("Astelfa-Data"));
+        if (chunk instanceof LevelChunkAccess lc && nbt.contains("astelfa.chunk_data")) {
+            lc.astelfa$getStorage().load(nbt.getCompound("astelfa.chunk_data"));
         }
     }
 
@@ -34,7 +34,7 @@ public class ChunkSerializerMixin {
             LevelChunkAccess lc = (LevelChunkAccess) chunk;
             NbtCompound tag = lc.astelfa$getStorage().save();
             if (tag != null) {
-                nbtCompound.put("Astelfa-Data", tag);
+                nbtCompound.put("astelfa.chunk_data", tag);
             }
         }
     }

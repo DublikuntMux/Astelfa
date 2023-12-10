@@ -1,4 +1,4 @@
-package com.dublikunt.astelfa.screen.screen;
+package com.dublikunt.astelfa.screen.screen.craft;
 
 import com.dublikunt.astelfa.helper.Helpers;
 import com.dublikunt.astelfa.screen.handler.InfuseTableScreenHandler;

@@ -18,6 +18,7 @@ public class AstelfaDataGenerator implements DataGeneratorEntrypoint {
         pack.addProvider(ItemTagGenerator::new);
         pack.addProvider(BlockTagGenerator::new);
         pack.addProvider(FluidTagGenerator::new);
+        pack.addProvider(AdvancementGenerator::new);
     }
 
     @Override

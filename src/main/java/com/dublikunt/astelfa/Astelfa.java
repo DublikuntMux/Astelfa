@@ -12,7 +12,6 @@ import com.dublikunt.astelfa.helper.chunkstorage.DataObjectRegistry;
 import com.dublikunt.astelfa.helper.common.Logger;
 import com.dublikunt.astelfa.item.ModItemGroup;
 import com.dublikunt.astelfa.item.ModItems;
-import com.dublikunt.astelfa.item.common.ManaDetectPaper;
 import com.dublikunt.astelfa.networking.ModMessages;
 import com.dublikunt.astelfa.particle.ModParticle;
 import com.dublikunt.astelfa.recipe.ModRecipes;
@@ -21,13 +20,13 @@ import com.dublikunt.astelfa.world.gen.ModWorldGen;
 import net.fabricmc.api.ModInitializer;
 import software.bernie.geckolib.GeckoLib;
 
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Astelfa implements ModInitializer {
     public static final String MOD_ID = "astelfa";
     public static final String MOD_NAME = "Astelfa Mod";
 
-    public static final Random RANDOM = new Random();
+    public static final ThreadLocalRandom RANDOM = ThreadLocalRandom.current();
 
     public static final AstelfaConfig config = AstelfaConfig.load();
 
@@ -46,8 +45,8 @@ public class Astelfa implements ModInitializer {
         ModItemGroup.registerGroup();
         Logger.debug("  Register items.");
         ModItems.registerModItems();
-        Logger.debug("      Register tooltip adding.");
-        ManaDetectPaper.registerTooltipAdding();
+        Logger.debug("  Register callbacks.");
+        ModCallbacks.registerCallbacks();
         Logger.debug("  Register flammable blocks.");
         ModBlocks.registerFlammableBlocks();
         Logger.debug("  Register stoppable blocks.");

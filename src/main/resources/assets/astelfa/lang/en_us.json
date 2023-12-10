@@ -1,19 +1,13 @@
 {
   "config.astelfa.title": "Astelfa config",
   "config.astelfa.category.1.title": "General config",
-  "config.astelfa.category.2.title": "Change config",
+  "config.astelfa.category.2.title": "Client config",
   "config.astelfa.category.1.log_type": "Log type for mod",
   "config.astelfa.category.1.log_type.tooltip": "Set logging type for mod",
-  "config.astelfa.category.2.change_lose": "Loose curse use change",
-  "config.astelfa.category.2.change_lose.tooltip": "Curse Chance",
-  "config.astelfa.category.2.hungry_change": "Hungry and blood hungry enchantment use change",
-  "config.astelfa.category.2.hungry_change.tooltip": "Curse Chance",
-  "config.astelfa.category.2.switch_change": "Item switch curse use change",
-  "config.astelfa.category.2.switch_change.tooltip": "Curse Chance",
-  "config.astelfa.category.2.illusion_change": "Illusion curse use change",
-  "config.astelfa.category.2.illusion_change.tooltip": "Curse Chance",
-  "config.astelfa.category.2.climbing_change": "Climbing curse use change",
-  "config.astelfa.category.2.climbing_change.tooltip": "Curse Chance",
+  "config.astelfa.category.2.mana_overlay_x": "Mana overlay position X",
+  "config.astelfa.category.2.mana_overlay_x.tooltip": "Additional position for mana info overlay in x",
+  "config.astelfa.category.2.mana_overlay_y": "Mana overlay position Y",
+  "config.astelfa.category.2.mana_overlay_y.tooltip": "Additional position for mana info overlay in y",
 
   "itemGroup.astelfa.item_group": "Astelfa Mod",
 
@@ -42,6 +36,8 @@
   "item.astelfa.ados_chains.tooltip": "You feel how your body is filled with new strength",
   "item.astelfa.ring_belt": "Ring belt",
   "item.astelfa.ring_belt.tooltip": "You decided that wearing a belt of rings is not such a bad idea",
+  "item.astelfa.mana_glasses": "Mana glasses",
+  "item.astelfa.mana_glasses.tooltip": "Now you see all mana secrets in the world",
 
   "item.astelfa.glasses.info": "Chunk mana: %s",
 
@@ -91,9 +87,29 @@
   "block.astelfa.mana_filler.tooltip.amount_capacity": "%s / %s mB",
   "block.astelfa.mana_filler.tooltip.amount": "%s mB",
 
+  "advancement.astelfa.root.title": "Doesn't melt in the furnace",
+  "advancement.astelfa.root.description": "Get first silver wood",
+  "advancement.astelfa.mana_filler.title": "First steps in magic",
+  "advancement.astelfa.mana_filler.description": "Get mana filler",
+  "advancement.astelfa.add_mana.title": "Just add water",
+  "advancement.astelfa.add_mana.description": "Craft essential fuel and mana ingot",
+  "advancement.astelfa.aquatic_torch.title": "Like in bedrock",
+  "advancement.astelfa.aquatic_torch.description": "Craft aquatic torch",
+  "advancement.astelfa.star_mana.title": "VEEEERY expensive",
+  "advancement.astelfa.star_mana.description": "Craft nether star from mana",
+  "advancement.astelfa.infuser.title": "Second step to magic world",
+  "advancement.astelfa.infuser.description": "Craft infuser table",
+
   "category.astelfa.infuse_table": "Infusing",
   "category.astelfa.mana_filler": "Mana filling",
   "category.astelfa.cauldron": "Cauldron",
 
-  "command.astelfa.mana_amount": "Chunk mana amount is: %s"
+  "hud.astelfa.mana_info.1": "Mana in chunk: %s",
+  "hud.astelfa.mana_info.2": "Maximum mana in chunk: %s",
+
+  "command.astelfa.mana_amount": "Chunk mana amount: %s",
+  "command.astelfa.local_maximum": "Chunk maximum mana amount: %s",
+  "command.astelfa.tick_to_regen": "Chunk tick to regen mana: %s",
+  "command.astelfa.per_regen_amount": "Chunk mana amount to regen per regen tick: %s",
+  "command.astelfa.get_all": "Chunk mana amount: %s\nChunk maximum mana amount: %s\nChunk tick to regen mana: %s\nChunk mana amount to regen per regen tick: %s"
 }

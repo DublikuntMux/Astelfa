@@ -6,6 +6,10 @@ import org.jetbrains.annotations.NotNull;
 
 public class ManaDataObject implements DataObject {
     public int mana_amount = -1;
+    public int local_maximum = -1;
+    public int tick_to_regen = -1;
+    public int per_regen_amount = -1;
+    public int tick_left = 0;
 
     @Override
     public NbtCompound save() {

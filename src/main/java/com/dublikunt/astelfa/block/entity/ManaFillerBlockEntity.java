@@ -129,25 +129,7 @@ public class ManaFillerBlockEntity extends CraftingBlockEntity {
         for (ServerPlayerEntity player : PlayerLookup.tracking((ServerWorld) world, getPos())) {
             ServerPlayNetworking.send(player, ModMessages.FLUID_SYNC, data);
         }
-    }    public final SingleVariantStorage<FluidVariant> fluidStorage = new SingleVariantStorage<>() {
-        @Override
-        protected FluidVariant getBlankVariant() {
-            return FluidVariant.blank();
-        }
-
-        @Override
-        protected long getCapacity(FluidVariant variant) {
-            return FluidStack.convertDropletsToMb(FluidConstants.BUCKET) * 20;
-        }
-
-        @Override
-        protected void onFinalCommit() {
-            markDirty();
-            if (!world.isClient()) {
-                sendFluidPacket();
-            }
-        }
-    };
+    }
 
     public void setFluidLevel(FluidVariant fluidVariant, long fluidLevel) {
         this.fluidStorage.variant = fluidVariant;
@@ -176,7 +158,25 @@ public class ManaFillerBlockEntity extends CraftingBlockEntity {
             case WEST -> side.rotateYCounterclockwise() == Direction.SOUTH && slot == 2 ||
                     side.rotateYCounterclockwise() == Direction.EAST && slot == 2;
         };
-    }
+    }    public final SingleVariantStorage<FluidVariant> fluidStorage = new SingleVariantStorage<>() {
+        @Override
+        protected FluidVariant getBlankVariant() {
+            return FluidVariant.blank();
+        }
+
+        @Override
+        protected long getCapacity(FluidVariant variant) {
+            return FluidStack.convertDropletsToMb(FluidConstants.BUCKET) * 20;
+        }
+
+        @Override
+        protected void onFinalCommit() {
+            markDirty();
+            if (!world.isClient()) {
+                sendFluidPacket();
+            }
+        }
+    };
 
     @Override
     public Text getDisplayName() {
@@ -214,6 +214,8 @@ public class ManaFillerBlockEntity extends CraftingBlockEntity {
             return this.getStack(2);
         }
     }
+
+
 
 
 }

@@ -13,11 +13,8 @@ import java.nio.file.Files;
 
 public class AstelfaConfig {
     public LogType logType = LogType.INFO;
-    public int loseChange = 30;
-    public int hungryChange = 5;
-    public int switchChange = 20;
-    public int illusionChange = 1_000;
-    public int climbingChange = 100;
+    public int manaOverlayPosX = 0;
+    public int manaOverlayPosY = 0;
 
     private transient File file;
 

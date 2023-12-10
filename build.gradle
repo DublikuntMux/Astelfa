@@ -1,6 +1,5 @@
 plugins {
-    id 'fabric-loom' version '1.2-SNAPSHOT'
-    id 'io.github.juuxel.loom-vineflower' version '1.11.0'
+    id 'fabric-loom' version '1.4.5'
     id 'maven-publish'
 }
 
@@ -13,16 +12,16 @@ repositories {
     maven { url "https://maven.architectury.dev/" }
     maven { url "https://maven.terraformersmc.com/releases/" }
     maven { url "https://maven.ladysnake.org/releases" }
-    maven { url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
+    maven { url "https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/" }
 
     exclusiveContent {
         forRepository {
             maven {
-                url "https://cursemaven.com"
+                url "https://api.modrinth.com/maven"
             }
         }
         filter {
-            includeGroup "curse.maven"
+            includeGroup "maven.modrinth"
         }
     }
 }
@@ -86,7 +85,8 @@ dependencies {
     modRuntimeOnly "dev.onyxstudios.cardinal-components-api:cardinal-components-base:5.3.0"
     modRuntimeOnly "dev.onyxstudios.cardinal-components-api:cardinal-components-entity:5.3.0"
 
-    modRuntimeOnly "curse.maven:jade-324717:4858827"
+    modRuntimeOnly "maven.modrinth:jade:1WeR5Hfq"
+    modRuntimeOnly "maven.modrinth:worldedit:PTig47IL"
 }
 
 processResources {

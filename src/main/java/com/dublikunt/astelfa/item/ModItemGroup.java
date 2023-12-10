@@ -33,6 +33,7 @@ public class ModItemGroup {
                     entries.add(ModItems.ADOS_CHAINS);
                     entries.add(ModItems.PHILOSOPHERS_STONE);
                     entries.add(ModItems.RING_BELT);
+                    entries.add(ModItems.MANA_GLASSES);
 
                     entries.add(ModItems.MANA_BUCKET);
 

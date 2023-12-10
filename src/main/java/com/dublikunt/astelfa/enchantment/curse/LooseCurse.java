@@ -22,7 +22,7 @@ public class LooseCurse extends Enchantment {
 
     @Override
     public void onTargetDamaged(LivingEntity user, Entity target, int level) {
-        if (user instanceof PlayerEntity && Astelfa.RANDOM.nextInt(Astelfa.config.loseChange) == 0) {
+        if (user instanceof PlayerEntity && Astelfa.RANDOM.nextInt(30) == 0) {
             ((PlayerEntity) user).dropItem(user.getMainHandStack(), true);
             user.setStackInHand(Hand.MAIN_HAND, ItemStack.EMPTY);
         }

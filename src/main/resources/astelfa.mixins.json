@@ -4,7 +4,6 @@
   "package": "com.dublikunt.astelfa.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "CauldronBlockMixin",
     "ChunkSerializerMixin",
     "EndermanEntityMixin",
     "PlayerEntityMixin",

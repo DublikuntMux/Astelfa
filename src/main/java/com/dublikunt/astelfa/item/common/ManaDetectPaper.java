@@ -2,7 +2,6 @@ package com.dublikunt.astelfa.item.common;
 
 import com.dublikunt.astelfa.air_mana.ManaAmount;
 import com.dublikunt.astelfa.item.ModItems;
-import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
@@ -16,20 +15,6 @@ import org.jetbrains.annotations.NotNull;
 public class ManaDetectPaper extends TooltipItem {
     public ManaDetectPaper(@NotNull Settings settings) {
         super(Text.translatable("item.astelfa.mana_detect_paper.tooltip"), settings);
-    }
-
-    public static void registerTooltipAdding() {
-        ItemTooltipCallback.EVENT.register((stack, context, lines) -> {
-            if (stack.getItem() == ModItems.USED_MANA_DETECT_PAPER) {
-                NbtCompound nbtData = stack.getNbt();
-                if (nbtData != null) {
-                    lines.add(Text.translatable("item.astelfa.used_mana_detect_paper.tooltip",
-                            nbtData.getInt("manAmount"),
-                            nbtData.getInt("chunkPosX"),
-                            nbtData.getInt("chunkPosZ")));
-                }
-            }
-        });
     }
 
     @Override

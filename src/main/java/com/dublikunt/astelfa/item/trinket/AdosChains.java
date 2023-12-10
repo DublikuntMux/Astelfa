@@ -25,56 +25,59 @@ public class AdosChains extends TrinketItem {
 
     @Override
     public void onEquip(ItemStack stack, SlotReference slot, LivingEntity entity) {
-        PlayerEntity player = (PlayerEntity) entity;
-        player.getAbilities().allowFlying = true;
-        player.sendAbilitiesUpdate();
+        if (entity instanceof PlayerEntity playerEntity) {
+            playerEntity.getAbilities().allowFlying = true;
+            playerEntity.sendAbilitiesUpdate();
+        }
     }
 
     @Override
     public void tick(ItemStack stack, SlotReference slot, LivingEntity entity) {
-        PlayerEntity player = (PlayerEntity) entity;
-        if (!player.isCreative() && !player.isSpectator()) {
-            player.getAbilities().allowFlying = true;
-            player.sendAbilitiesUpdate();
+        if (entity instanceof PlayerEntity playerEntity) {
+            if (!playerEntity.isCreative() && !playerEntity.isSpectator()) {
+                playerEntity.getAbilities().allowFlying = true;
+                playerEntity.sendAbilitiesUpdate();
 
-            int MAX_FLY_TIME = 60 * 20;
-            if (player.getAbilities().flying && !(currentFlyTime >= MAX_FLY_TIME)) {
-                currentFlyTime++;
+                int MAX_FLY_TIME = 60 * 20;
+                if (playerEntity.getAbilities().flying && !(currentFlyTime >= MAX_FLY_TIME)) {
+                    currentFlyTime++;
 
-                if (Math.random() < (double) 10 / 100) {
-                    if (player.isSprinting()) {
-                        player.addExhaustion(0.15F * 2);
-                    } else {
-                        player.addExhaustion(0.15F);
+                    if (Math.random() < (double) 10 / 100) {
+                        if (playerEntity.isSprinting()) {
+                            playerEntity.addExhaustion(0.15F * 2);
+                        } else {
+                            playerEntity.addExhaustion(0.15F);
+                        }
+                        if (stack.getDamage() == stack.getMaxDamage() - 1) {
+                            playerEntity.getAbilities().allowFlying = false;
+                            playerEntity.getAbilities().flying = false;
+                            playerEntity.playSound(SoundEvents.ENTITY_ITEM_BREAK, 1.0F, 1.0F);
+                            playerEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING, 200, 0));
+                        }
+                        stack.damage(1, playerEntity, e -> e.sendEquipmentBreakStatus(EquipmentSlot.LEGS));
                     }
-                    if (stack.getDamage() == stack.getMaxDamage() - 1) {
-                        player.getAbilities().allowFlying = false;
-                        player.getAbilities().flying = false;
-                        player.playSound(SoundEvents.ENTITY_ITEM_BREAK, 1.0F, 1.0F);
-                        player.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING, 200, 0));
-                    }
-                    stack.damage(1, player, e -> e.sendEquipmentBreakStatus(EquipmentSlot.LEGS));
                 }
-            }
-            if ((currentFlyTime >= MAX_FLY_TIME)) {
-                player.getAbilities().allowFlying = false;
-                player.sendAbilitiesUpdate();
-            }
-            if (!(player.getAbilities().flying) && (currentFlyTime > 0)) {
-                currentFlyTime = currentFlyTime - 0.3;
+                if ((currentFlyTime >= MAX_FLY_TIME)) {
+                    playerEntity.getAbilities().allowFlying = false;
+                    playerEntity.sendAbilitiesUpdate();
+                }
+                if (!(playerEntity.getAbilities().flying) && (currentFlyTime > 0)) {
+                    currentFlyTime = currentFlyTime - 0.3;
+                }
             }
         }
     }
 
     @Override
     public void onUnequip(ItemStack stack, SlotReference slot, LivingEntity entity) {
-        PlayerEntity player = (PlayerEntity) entity;
-        if (!player.getAbilities().creativeMode && !player.isSpectator()) {
-            player.getAbilities().allowFlying = false;
-            player.getAbilities().flying = false;
-            player.sendAbilitiesUpdate();
+        if (entity instanceof PlayerEntity playerEntity) {
+            if (!playerEntity.getAbilities().creativeMode && !playerEntity.isSpectator()) {
+                playerEntity.getAbilities().allowFlying = false;
+                playerEntity.getAbilities().flying = false;
+                playerEntity.sendAbilitiesUpdate();
+            }
+            currentFlyTime = 0;
         }
-        currentFlyTime = 0;
     }
 
     @Override

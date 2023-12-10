@@ -1,7 +1,9 @@
 package com.dublikunt.astelfa.mixin;
 
 import com.dublikunt.astelfa.Astelfa;
+import com.dublikunt.astelfa.air_mana.IPlayerDataSaver;
 import com.dublikunt.astelfa.air_mana.ManaAmount;
+import com.dublikunt.astelfa.air_mana.PlayerManaData;
 import com.dublikunt.astelfa.effects.ModEffects;
 import com.dublikunt.astelfa.enchantment.ModEnchantments;
 import com.dublikunt.astelfa.enchantment.curse.IllusionCurse;
@@ -13,6 +15,7 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.chunk.WorldChunk;
@@ -24,7 +27,13 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(PlayerEntity.class)
-public class PlayerEntityMixin {
+public class PlayerEntityMixin implements IPlayerDataSaver {
+    @Unique
+    private NbtCompound persistentData;
+
+    @Unique
+    private boolean isShowManaInfo;
+
     @Inject(at = @At("RETURN"), method = "tick")
     public void onTick(CallbackInfo ci) {
         CurseTick((PlayerEntity) (Object) this);
@@ -34,7 +43,7 @@ public class PlayerEntityMixin {
     @Unique
     private void CurseTick(@NotNull PlayerEntity player) {
         if (player.getWorld().isClient) {
-            if (Astelfa.RANDOM.nextInt(Astelfa.config.illusionChange) == 0) {
+            if (Astelfa.RANDOM.nextInt(1_000) == 0) {
                 for (ItemStack armor : player.getArmorItems()) {
                     if (!armor.isEmpty() && EnchantmentHelper.getLevel(ModEnchantments.ILLUSION_CURSE, armor) > 0) {
                         player.getWorld()
@@ -47,7 +56,7 @@ public class PlayerEntityMixin {
                     }
                 }
             }
-            if (Astelfa.RANDOM.nextInt(Astelfa.config.climbingChange) == 0) {
+            if (Astelfa.RANDOM.nextInt(100) == 0) {
                 ItemStack armor = player.getEquippedStack(EquipmentSlot.FEET);
                 if (!armor.isEmpty() && EnchantmentHelper.getLevel(ModEnchantments.CLIMBING_CURSE, armor) > 0) {
                     BlockState state = player.getBlockStateAtPos();
@@ -68,6 +77,8 @@ public class PlayerEntityMixin {
 
             int mana_around = ManaAmount.getOrCreateManaData(chunk).mana_amount;
 
+            PlayerManaData.setManaAround((IPlayerDataSaver) player, mana_around, ManaAmount.getOrCreateManaData(chunk).local_maximum);
+
             StatusEffectInstance effect = null;
 
             if (mana_around <= 150) {
@@ -79,5 +90,38 @@ public class PlayerEntityMixin {
             if (effect != null)
                 player.addStatusEffect(effect);
         }
+    }
+
+    @Inject(method = "writeCustomDataToNbt", at = @At("TAIL"))
+    protected void injectWriteMethod(NbtCompound nbt, CallbackInfo ci) {
+        if (persistentData != null) {
+            nbt.put("astelfa.player_data", persistentData);
+        }
+    }
+
+    @Inject(method = "readCustomDataFromNbt", at = @At("TAIL"))
+    protected void injectReadMethod(@NotNull NbtCompound nbt, CallbackInfo info) {
+        if (nbt.contains("astelfa.player_data", 10)) {
+            persistentData = nbt.getCompound("astelfa.player_data");
+        }
+    }
+
+    @Override
+    public NbtCompound astelfa$getPersistentData() {
+        if (persistentData == null) {
+            persistentData = new NbtCompound();
+        }
+
+        return persistentData;
+    }
+
+    @Override
+    public boolean astelfa$getShowManaInfo() {
+        return isShowManaInfo;
+    }
+
+    @Override
+    public void astelfa$setShowManaInfo(boolean value) {
+        isShowManaInfo = value;
     }
 }
