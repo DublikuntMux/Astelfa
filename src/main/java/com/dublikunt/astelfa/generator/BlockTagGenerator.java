@@ -36,7 +36,11 @@ public class BlockTagGenerator extends FabricTagProvider.BlockTagProvider {
                 .add(ModTags.Blocks.SILVER_WOOD.id());
 
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE)
-                .add(ModBlocks.SCULK_STATUE_BLOCK);
+                .add(ModBlocks.SCULK_STATUE_BLOCK)
+                .add(ModBlocks.LUMINITE_ORE)
+                .add(ModBlocks.DEEPSLATE_LUMINITE_ORE)
+                .add(ModBlocks.NETHERRACK_LUMINITE_ORE)
+                .add(ModBlocks.ENDSTONE_LUMINITE_ORE);
 
         getOrCreateTagBuilder(BlockTags.AXE_MINEABLE)
                 .add(ModBlocks.MANA_FILLER_BLOCK)
@@ -56,7 +60,11 @@ public class BlockTagGenerator extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.SILVER_WOOD_DOOR);
 
         getOrCreateTagBuilder(BlockTags.NEEDS_STONE_TOOL)
-                .add(ModBlocks.INFUSING_TABLE_BLOCK);
+                .add(ModBlocks.INFUSING_TABLE_BLOCK)
+                .add(ModBlocks.LUMINITE_ORE)
+                .add(ModBlocks.DEEPSLATE_LUMINITE_ORE)
+                .add(ModBlocks.NETHERRACK_LUMINITE_ORE)
+                .add(ModBlocks.ENDSTONE_LUMINITE_ORE);
 
         getOrCreateTagBuilder(BlockTags.NEEDS_IRON_TOOL)
                 .add(ModBlocks.SCULK_STATUE_BLOCK);

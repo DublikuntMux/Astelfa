@@ -1,0 +1,35 @@
+{
+  "type": "astelfa:infuse_table",
+  "ingredients": [
+    {
+      "item": "astelfa:aetherium_ingot"
+    },
+    {
+      "item": "astelfa:carved_silver_wood"
+    },
+    {
+      "item": "minecraft:leather"
+    },
+    {
+      "item": "astelfa:revelation_mirror"
+    },
+    {
+      "item": "astelfa:aetherium_ingot"
+    },
+    {
+      "item": "astelfa:aetherium_ingot"
+    },
+    {
+      "item": "astelfa:aetherium_ingot"
+    },
+    {
+      "item": "astelfa:revelation_mirror"
+    },
+    {
+      "item": "minecraft:leather"
+    }
+  ],
+  "output": {
+    "item": "astelfa:mana_glasses"
+  }
+}

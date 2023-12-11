@@ -36,8 +36,14 @@ public class ModItems {
             .formatted(Formatting.DARK_PURPLE), new FabricItemSettings().rarity(Rarity.EPIC)), "matter5");
     public static final TooltipItem MATTER_6 = registerItem(new TooltipItem(Text.translatable("item.astelfa.matter.tooltip")
             .formatted(Formatting.WHITE), new FabricItemSettings().rarity(Rarity.EPIC)), "matter6");
-    public static final TooltipItem MANA_INGOT = registerItem(new TooltipItem(Text.translatable("item.astelfa.mana_ingot.tooltip"),
-            new FabricItemSettings()), "mana_ingot");
+    public static final TooltipItem REVELATION_MIRROR = registerItem(new TooltipItem(Text.translatable("item.astelfa.revelation_mirror.tooltip"),
+            new FabricItemSettings()), "revelation_mirror");
+    public static final TooltipItem AETHERIUM_INGOT = registerItem(new TooltipItem(Text.translatable("item.astelfa.aetherium_ingot.tooltip"),
+            new FabricItemSettings()), "aetherium_ingot");
+
+    public static final Item RAW_LUMINITE = registerItem(new Item(new FabricItemSettings()), "raw_luminite");
+    public static final TooltipItem LUMINITE_INGOT = registerItem(new TooltipItem(Text.translatable("item.astelfa.luminite_ingot.tooltip"),
+            new FabricItemSettings()), "luminite_ingot");
     public static final TooltipItem ESSENTIAL_FUEL = registerItem(new TooltipItem(Text.translatable("item.astelfa.essential_fuel.tooltip"),
             new FabricItemSettings()), "essential_fuel");
     public static final ManaDetectPaper MANA_DETECT_PAPER = registerItem(new ManaDetectPaper(new FabricItemSettings()), "mana_detect_paper");
@@ -66,7 +72,7 @@ public class ModItems {
     }
 
     private static void addItemsToIngredientItemGroup(@NotNull FabricItemGroupEntries entries) {
-        entries.add(MANA_INGOT);
+        entries.add(AETHERIUM_INGOT);
         entries.add(ESSENTIAL_FUEL);
     }
 

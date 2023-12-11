@@ -54,7 +54,7 @@ public class AdvancementGenerator extends FabricAdvancementProvider {
 
         AdvancementEntry addManaAdvancement = Advancement.Builder.create().parent(manaFillerAdvancement)
                 .display(
-                        ModItems.MANA_INGOT,
+                        ModItems.AETHERIUM_INGOT,
                         Text.translatable("advancement.astelfa.add_mana.title"),
                         Text.translatable("advancement.astelfa.add_mana.description"),
                         null,
@@ -63,7 +63,7 @@ public class AdvancementGenerator extends FabricAdvancementProvider {
                         true,
                         false
                 )
-                .criterion("got_mana_ingot", ModCriterion.MANA_FILLER.create(new ManaFillerCriterion.Conditions(ModItems.MANA_INGOT)))
+                .criterion("got_mana_ingot", ModCriterion.MANA_FILLER.create(new ManaFillerCriterion.Conditions(ModItems.AETHERIUM_INGOT)))
                 .criterion("got_essential_fuel", ModCriterion.MANA_FILLER.create(new ManaFillerCriterion.Conditions(ModItems.ESSENTIAL_FUEL)))
                 .build(consumer, Astelfa.MOD_ID + "/add_mana");
 

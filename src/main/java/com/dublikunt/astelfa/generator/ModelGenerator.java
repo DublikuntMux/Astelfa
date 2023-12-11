@@ -24,6 +24,11 @@ public class ModelGenerator extends FabricModelProvider {
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.SILVER_PLANKS);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.CARVED_SILVER_WOOD);
 
+        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.LUMINITE_ORE);
+        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.DEEPSLATE_LUMINITE_ORE);
+        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.NETHERRACK_LUMINITE_ORE);
+        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.ENDSTONE_LUMINITE_ORE);
+
         blockStateModelGenerator.registerTintableCross(ModBlocks.SILVER_SAPLING, BlockStateModelGenerator.TintType.NOT_TINTED);
         blockStateModelGenerator.registerTorch(ModBlocks.AQUATIC_TORCH, ModBlocks.AQUATIC_WALL_TORCH);
     }
@@ -36,7 +41,10 @@ public class ModelGenerator extends FabricModelProvider {
         itemModelGenerator.register(ModItems.MATTER_4, Models.GENERATED);
         itemModelGenerator.register(ModItems.MATTER_5, Models.GENERATED);
         itemModelGenerator.register(ModItems.MATTER_6, Models.GENERATED);
-        itemModelGenerator.register(ModItems.MANA_INGOT, Models.GENERATED);
+        itemModelGenerator.register(ModItems.REVELATION_MIRROR, Models.GENERATED);
+        itemModelGenerator.register(ModItems.AETHERIUM_INGOT, Models.GENERATED);
+        itemModelGenerator.register(ModItems.RAW_LUMINITE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.LUMINITE_INGOT, Models.GENERATED);
         itemModelGenerator.register(ModItems.ESSENTIAL_FUEL, Models.GENERATED);
         itemModelGenerator.register(ModItems.MANA_DETECT_PAPER, Models.GENERATED);
         itemModelGenerator.register(ModItems.USED_MANA_DETECT_PAPER, Models.GENERATED);

@@ -1,0 +1,35 @@
+{
+  "type": "astelfa:infuse_table",
+  "ingredients": [
+    {
+      "item": "minecraft:white_stained_glass_pane"
+    },
+    {
+      "item": "astelfa:luminite_ingot"
+    },
+    {
+      "item": "astelfa:luminite_ingot"
+    },
+    {
+      "item": "astelfa:luminite_ingot"
+    },
+    {
+      "item": "astelfa:luminite_ingot"
+    },
+    {
+      "item": "astelfa:luminite_ingot"
+    },
+    {
+      "item": "astelfa:luminite_ingot"
+    },
+    {
+      "item": "astelfa:luminite_ingot"
+    },
+    {
+      "item": "astelfa:luminite_ingot"
+    }
+  ],
+  "output": {
+    "item": "astelfa:revelation_mirror"
+  }
+}

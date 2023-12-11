@@ -19,9 +19,10 @@ public class ItemTagGenerator extends FabricTagProvider.ItemTagProvider {
     @Override
     protected void configure(RegistryWrapper.WrapperLookup arg) {
         getOrCreateTagBuilder(ItemTags.BEACON_PAYMENT_ITEMS)
-                .add(ModItems.MANA_INGOT);
+                .add(ModItems.AETHERIUM_INGOT);
         getOrCreateTagBuilder(TagKey.of(RegistryKeys.ITEM, new Identifier("c", "ingots")))
-                .add(ModItems.MANA_INGOT);
+                .add(ModItems.AETHERIUM_INGOT)
+                .add(ModItems.LUMINITE_INGOT);
         getOrCreateTagBuilder(TagKey.of(RegistryKeys.ITEM, new Identifier("c", "coal")))
                 .add(ModItems.ESSENTIAL_FUEL);
     }

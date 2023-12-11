@@ -25,7 +25,10 @@ public class ModItemGroup {
                     entries.add(ModItems.MATTER_4);
                     entries.add(ModItems.MATTER_5);
                     entries.add(ModItems.MATTER_6);
-                    entries.add(ModItems.MANA_INGOT);
+                    entries.add(ModItems.AETHERIUM_INGOT);
+                    entries.add(ModItems.RAW_LUMINITE);
+                    entries.add(ModItems.LUMINITE_INGOT);
+                    entries.add(ModItems.REVELATION_MIRROR);
                     entries.add(ModItems.ESSENTIAL_FUEL);
                     entries.add(ModItems.MANA_DETECT_PAPER);
 
@@ -52,6 +55,11 @@ public class ModItemGroup {
                     entries.add(ModBlocks.STRIPPED_SILVER_WOOD);
                     entries.add(ModBlocks.SILVER_LEAVES);
                     entries.add(ModBlocks.SILVER_SAPLING);
+
+                    entries.add(ModBlocks.LUMINITE_ORE);
+                    entries.add(ModBlocks.DEEPSLATE_LUMINITE_ORE);
+                    entries.add(ModBlocks.NETHERRACK_LUMINITE_ORE);
+                    entries.add(ModBlocks.ENDSTONE_LUMINITE_ORE);
 
                     entries.add(ModBlocks.SILVER_PLANKS);
                     entries.add(ModBlocks.CARVED_SILVER_WOOD);

@@ -158,6 +158,19 @@ public class ManaFillerBlockEntity extends CraftingBlockEntity {
             case WEST -> side.rotateYCounterclockwise() == Direction.SOUTH && slot == 2 ||
                     side.rotateYCounterclockwise() == Direction.EAST && slot == 2;
         };
+    }
+
+    @Override
+    public Text getDisplayName() {
+        return Text.translatable("block.astelfa.mana_filler");
+    }
+
+    @Override
+    protected void writeNbt(NbtCompound nbt) {
+        super.writeNbt(nbt);
+        Inventories.writeNbt(nbt, inventory);
+        nbt.put("variant", fluidStorage.variant.toNbt());
+        nbt.putLong("fluid", fluidStorage.amount);
     }    public final SingleVariantStorage<FluidVariant> fluidStorage = new SingleVariantStorage<>() {
         @Override
         protected FluidVariant getBlankVariant() {
@@ -177,19 +190,6 @@ public class ManaFillerBlockEntity extends CraftingBlockEntity {
             }
         }
     };
-
-    @Override
-    public Text getDisplayName() {
-        return Text.translatable("block.astelfa.mana_filler");
-    }
-
-    @Override
-    protected void writeNbt(NbtCompound nbt) {
-        super.writeNbt(nbt);
-        Inventories.writeNbt(nbt, inventory);
-        nbt.put("variant", fluidStorage.variant.toNbt());
-        nbt.putLong("fluid", fluidStorage.amount);
-    }
 
     @Override
     public void readNbt(NbtCompound nbt) {

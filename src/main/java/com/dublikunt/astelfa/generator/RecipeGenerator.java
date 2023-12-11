@@ -2,6 +2,7 @@ package com.dublikunt.astelfa.generator;
 
 import com.dublikunt.astelfa.block.ModBlocks;
 import com.dublikunt.astelfa.item.ModItems;
+import com.google.common.collect.ImmutableList;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.block.Block;
@@ -16,6 +17,8 @@ import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.util.Identifier;
 
 public class RecipeGenerator extends FabricRecipeProvider {
+    private static final ImmutableList<ItemConvertible> LUMINITE_ORE = ImmutableList.of(ModItems.RAW_LUMINITE, ModBlocks.LUMINITE_ORE, ModBlocks.DEEPSLATE_LUMINITE_ORE, ModBlocks.NETHERRACK_LUMINITE_ORE, ModBlocks.ENDSTONE_LUMINITE_ORE);
+
     public RecipeGenerator(FabricDataOutput output) {
         super(output);
     }
@@ -75,6 +78,8 @@ public class RecipeGenerator extends FabricRecipeProvider {
                 .criterion(FabricRecipeProvider.hasItem(Items.PAPER),
                         FabricRecipeProvider.conditionsFromItem(Items.PAPER))
                 .offerTo(exporter, new Identifier(getRecipeName(ModItems.MANA_DETECT_PAPER)));
+
+        offerSmelting(exporter, LUMINITE_ORE, RecipeCategory.MISC, ModItems.LUMINITE_INGOT, 0.7F, 200, "luminite_ingot");
     }
 
     private void offerMatter(RecipeExporter exporter, Item ringItem, Item inItem, Item output) {

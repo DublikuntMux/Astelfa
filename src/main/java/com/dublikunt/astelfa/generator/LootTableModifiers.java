@@ -28,13 +28,19 @@ public class LootTableModifiers {
         LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
             if (BURIED_TREASURE_ID.equals(id) || DESERT_PYRAMID_ID.equals(id) || END_CITY_TREASURE_ID.equals(id)
                     || IGLOO_CHEST_ID.equals(id) || JUNGLE_TEMPLE_ID.equals(id) || WOODLAND_MANSION_ID.equals(id)) {
-                LootPool.Builder poolBuilder = LootPool.builder()
+                LootPool.Builder aetheriumPool = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
-                        .conditionally(RandomChanceLootCondition.builder(0.20f))
-                        .with(ItemEntry.builder(ModItems.MANA_INGOT))
+                        .conditionally(RandomChanceLootCondition.builder(0.10f))
+                        .with(ItemEntry.builder(ModItems.AETHERIUM_INGOT))
                         .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 4.0f)).build());
 
-                tableBuilder.pool(poolBuilder.build());
+                LootPool.Builder luminitePool = LootPool.builder()
+                        .rolls(ConstantLootNumberProvider.create(1))
+                        .conditionally(RandomChanceLootCondition.builder(0.20f))
+                        .with(ItemEntry.builder(ModItems.LUMINITE_INGOT))
+                        .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 4.0f)).build());
+
+                tableBuilder.pool(aetheriumPool.build()).pool(luminitePool.build());
             }
         });
     }

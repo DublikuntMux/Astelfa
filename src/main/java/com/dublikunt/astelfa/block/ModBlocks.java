@@ -16,8 +16,8 @@ import net.minecraft.item.Item;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
-import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.DyeColor;
+import net.minecraft.util.math.intprovider.UniformIntProvider;
 
 public class ModBlocks {
     public static final InfuseTableBlock INFUSING_TABLE_BLOCK = registerBlock(new InfuseTableBlock(
@@ -26,6 +26,15 @@ public class ModBlocks {
             FabricBlockSettings.copyOf(Blocks.STONE).nonOpaque()), "mana_filler");
     public static final SculkStatueBlock SCULK_STATUE_BLOCK = registerBlock(new SculkStatueBlock(
             FabricBlockSettings.copyOf(Blocks.SCULK).strength(3f).requiresTool().nonOpaque()), "sculk_statue");
+
+    public static final ExperienceDroppingBlock LUMINITE_ORE = registerBlock(new ExperienceDroppingBlock(
+            FabricBlockSettings.copyOf(Blocks.IRON_ORE).strength(3.0F, 3.0F).requiresTool(), UniformIntProvider.create(3, 7)), "luminite_ore");
+    public static final ExperienceDroppingBlock DEEPSLATE_LUMINITE_ORE = registerBlock(new ExperienceDroppingBlock(
+            FabricBlockSettings.copyOf(Blocks.DEEPSLATE_IRON_ORE).strength(4.5F, 3.0F).requiresTool(), UniformIntProvider.create(3, 7)), "deepslate_luminite_ore");
+    public static final ExperienceDroppingBlock NETHERRACK_LUMINITE_ORE = registerBlock(new ExperienceDroppingBlock(
+            FabricBlockSettings.copyOf(Blocks.NETHERRACK).strength(3.0F, 3.0F).requiresTool(), UniformIntProvider.create(3, 7)), "netherrack_luminite_ore");
+    public static final ExperienceDroppingBlock ENDSTONE_LUMINITE_ORE = registerBlock(new ExperienceDroppingBlock(
+            FabricBlockSettings.copyOf(Blocks.END_STONE).strength(3.0F, 9.0F).requiresTool(), UniformIntProvider.create(3, 7)), "endstone_luminite_ore");
 
     public static final SparklePillarBlock SILVER_LOG = registerBlock(new SparklePillarBlock(FabricBlockSettings.copyOf(
             Blocks.OAK_LOG).mapColor(DyeColor.LIGHT_GRAY)), "silver_log");
@@ -38,36 +47,35 @@ public class ModBlocks {
     public static final SparkleLeavesBlock SILVER_LEAVES = registerBlock(new SparkleLeavesBlock(FabricBlockSettings.copyOf(Blocks.OAK_LEAVES)
             .mapColor(DyeColor.LIGHT_GRAY)), "silver_leaves");
     public static final SparkleSaplingBlock SILVER_SAPLING = registerBlock(new SparkleSaplingBlock(new SilverWoodSaplingGenerator(),
-            FabricBlockSettings.copyOf(Blocks.OAK_SAPLING)
-                    .mapColor(DyeColor.LIGHT_GRAY)), "silver_sapling");
+            FabricBlockSettings.copyOf(Blocks.OAK_SAPLING).mapColor(DyeColor.LIGHT_GRAY)), "silver_sapling");
 
     public static final Block SILVER_PLANKS = registerBlock(new Block(FabricBlockSettings.copyOf(Blocks.OAK_PLANKS)
             .mapColor(DyeColor.LIGHT_GRAY)), "silver_planks");
     public static final Block CARVED_SILVER_WOOD = registerBlock(new Block(FabricBlockSettings.copyOf(Blocks.OAK_PLANKS)
             .mapColor(DyeColor.LIGHT_GRAY)), "carved_silver_wood");
-    public static final ButtonBlock SILVER_WOOD_BUTTON = registerBlock(new ButtonBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD)
+    public static final ButtonBlock SILVER_WOOD_BUTTON = registerBlock(new ButtonBlock(FabricBlockSettings.copyOf(Blocks.OAK_BUTTON)
             .noCollision().strength(0.5F), BlockSetType.OAK, 30, true), "silver_wood_button");
-    public static final DoorBlock SILVER_WOOD_DOOR = registerBlock(new DoorBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD).
-            mapColor(SILVER_PLANKS.getDefaultMapColor()).strength(3.0F).nonOpaque(), BlockSetType.OAK), "silver_wood_door");
-    public static final TrapdoorBlock SILVER_WOOD_TRAPDOOR = registerBlock(new TrapdoorBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD).
-            mapColor(SILVER_PLANKS.getDefaultMapColor()).strength(3.0F).nonOpaque(), BlockSetType.OAK), "silver_wood_trapdoor");
+    public static final DoorBlock SILVER_WOOD_DOOR = registerBlock(new DoorBlock(FabricBlockSettings.copyOf(Blocks.OAK_DOOR).
+            mapColor(DyeColor.LIGHT_GRAY), BlockSetType.OAK), "silver_wood_door");
+    public static final TrapdoorBlock SILVER_WOOD_TRAPDOOR = registerBlock(new TrapdoorBlock(FabricBlockSettings.copyOf(Blocks.OAK_TRAPDOOR).
+            mapColor(DyeColor.LIGHT_GRAY), BlockSetType.OAK), "silver_wood_trapdoor");
     public static final PressurePlateBlock SILVER_WOOD_PRESSURE_PLATE = registerBlock(new PressurePlateBlock(
             PressurePlateBlock.ActivationRule.EVERYTHING,
-            FabricBlockSettings.copyOf(Blocks.OAK_WOOD).mapColor(SILVER_PLANKS.getDefaultMapColor()).noCollision().strength(0.5F),
+            FabricBlockSettings.copyOf(Blocks.OAK_PRESSURE_PLATE).mapColor(DyeColor.LIGHT_GRAY),
             BlockSetType.OAK
     ), "silver_wood_pressure_plate");
-    public static final FenceBlock SILVER_WOOD_FENCE = registerBlock(new FenceBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD).
-            mapColor(SILVER_PLANKS.getDefaultMapColor()).strength(2.0F, 3.0F).sounds(BlockSoundGroup.WOOD)), "silver_wood_fence");
-    public static final FenceGateBlock SILVER_WOOD_FENCE_GATE = registerBlock(new FenceGateBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD).
-            mapColor(SILVER_PLANKS.getDefaultMapColor()).strength(2.0F, 3.0F), WoodType.OAK), "silver_wood_fence_gate");
+    public static final FenceBlock SILVER_WOOD_FENCE = registerBlock(new FenceBlock(FabricBlockSettings.copyOf(Blocks.OAK_FENCE).
+            mapColor(DyeColor.LIGHT_GRAY)), "silver_wood_fence");
+    public static final FenceGateBlock SILVER_WOOD_FENCE_GATE = registerBlock(new FenceGateBlock(FabricBlockSettings.copyOf(Blocks.OAK_FENCE_GATE).
+            mapColor(DyeColor.LIGHT_GRAY), WoodType.OAK), "silver_wood_fence_gate");
     public static final StairsBlock SILVER_WOOD_STAIRS = registerBlock(new StairsBlock(SILVER_PLANKS.getDefaultState(),
-            FabricBlockSettings.copyOf(SILVER_PLANKS)), "silver_wood_stairs");
-    public static final SlabBlock SILVER_WOOD_SLAB = registerBlock(new SlabBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD).
-            mapColor(SILVER_PLANKS.getDefaultMapColor()).requiresTool().strength(1.5F, 6.0F)), "silver_wood_slab");
+            FabricBlockSettings.copyOf(Blocks.OAK_STAIRS).mapColor(DyeColor.LIGHT_GRAY)), "silver_wood_stairs");
+    public static final SlabBlock SILVER_WOOD_SLAB = registerBlock(new SlabBlock(FabricBlockSettings.copyOf(Blocks.OAK_SLAB).
+            mapColor(DyeColor.LIGHT_GRAY)), "silver_wood_slab");
     public static final AquaticTorchBlock AQUATIC_TORCH = registerBlockWithoutItem(new AquaticTorchBlock(FabricBlockSettings.copyOf(Blocks.TORCH)
-            .noCollision().breakInstantly().luminance(15).sounds(BlockSoundGroup.WOOD), ParticleTypes.FLAME), "aquatic_torch");
+            .noCollision().breakInstantly().luminance(15), ParticleTypes.FLAME), "aquatic_torch");
     public static final AquaticWallTorchBlock AQUATIC_WALL_TORCH = registerBlockWithoutItem(new AquaticWallTorchBlock(FabricBlockSettings.copyOf(Blocks.TORCH)
-            .noCollision().breakInstantly().luminance(15).sounds(BlockSoundGroup.WOOD), ParticleTypes.FLAME), "aquatic_wall_torch");
+            .noCollision().breakInstantly().luminance(15), ParticleTypes.FLAME), "aquatic_wall_torch");
 
     private static <T extends Block> T registerBlock(T block, String name) {
         registerBlockItem(block, name);
