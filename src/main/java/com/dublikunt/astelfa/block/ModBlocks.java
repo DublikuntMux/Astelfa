@@ -24,6 +24,8 @@ public class ModBlocks {
             FabricBlockSettings.copyOf(Blocks.STONE).strength(2f).requiresTool().nonOpaque()), "infuse_table");
     public static final ManaFillerBlock MANA_FILLER_BLOCK = registerBlock(new ManaFillerBlock(
             FabricBlockSettings.copyOf(Blocks.STONE).nonOpaque()), "mana_filler");
+    public static final PedestalBlock PEDESTAL_BLOCK = registerBlock(new PedestalBlock(
+            FabricBlockSettings.copyOf(Blocks.STONE).strength(3f).requiresTool().nonOpaque()), "pedestal");
     public static final SculkStatueBlock SCULK_STATUE_BLOCK = registerBlock(new SculkStatueBlock(
             FabricBlockSettings.copyOf(Blocks.SCULK).strength(3f).requiresTool().nonOpaque()), "sculk_statue");
 

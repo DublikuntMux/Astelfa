@@ -15,11 +15,11 @@ import java.util.List;
 
 import static com.dublikunt.astelfa.helper.Helpers.validateAmount;
 
-public class InfuseTableRecipe implements Recipe<SimpleInventory> {
+public class PedestalRecipe implements Recipe<SimpleInventory> {
     private final ItemStack output;
     private final List<Ingredient> recipeItems;
 
-    public InfuseTableRecipe(List<Ingredient> ingredients, ItemStack itemStack) {
+    public PedestalRecipe(List<Ingredient> ingredients, ItemStack itemStack) {
         this.output = itemStack;
         this.recipeItems = ingredients;
     }
@@ -29,14 +29,19 @@ public class InfuseTableRecipe implements Recipe<SimpleInventory> {
         if (world.isClient()) {
             return false;
         }
-        boolean isValidRecipe = true;
-        for (int i = 0; i < inventory.size(); i++) {
-            if (!recipeItems.get(i).test(inventory.getStack(i))) {
-                isValidRecipe = false;
-                break;
+
+        RecipeMatcher recipeMatcher = new RecipeMatcher();
+        int i = 0;
+
+        for (int j = 0; j < inventory.size(); ++j) {
+            ItemStack itemStack = inventory.getStack(j);
+            if (!itemStack.isEmpty()) {
+                ++i;
+                recipeMatcher.addInput(itemStack, 1);
             }
         }
-        return isValidRecipe;
+
+        return i == this.recipeItems.size() && recipeMatcher.match(this, null);
     }
 
     @Override
@@ -75,37 +80,37 @@ public class InfuseTableRecipe implements Recipe<SimpleInventory> {
         return Type.INSTANCE;
     }
 
-    public static class Type implements RecipeType<InfuseTableRecipe> {
+    public static class Type implements RecipeType<PedestalRecipe> {
         public static final Type INSTANCE = new Type();
-        public static final String ID = "infuse_table";
+        public static final String ID = "pedestal";
     }
 
-    public static class Serializer implements RecipeSerializer<InfuseTableRecipe> {
+    public static class Serializer implements RecipeSerializer<PedestalRecipe> {
         public static final Serializer INSTANCE = new Serializer();
-        public static final String ID = "infuse_table";
+        public static final String ID = "pedestal";
 
-        public static final Codec<InfuseTableRecipe> CODEC = RecordCodecBuilder.create(in -> in.group(
-                validateAmount(Ingredient.DISALLOW_EMPTY_CODEC, 9).fieldOf("ingredients").forGetter(InfuseTableRecipe::getIngredients),
+        public static final Codec<PedestalRecipe> CODEC = RecordCodecBuilder.create(in -> in.group(
+                validateAmount(Ingredient.DISALLOW_EMPTY_CODEC, 28).fieldOf("ingredients").forGetter(PedestalRecipe::getIngredients),
                 RecipeCodecs.CRAFTING_RESULT.fieldOf("output").forGetter(r -> r.output)
-        ).apply(in, InfuseTableRecipe::new));
+        ).apply(in, PedestalRecipe::new));
 
         @Override
-        public Codec<InfuseTableRecipe> codec() {
+        public Codec<PedestalRecipe> codec() {
             return CODEC;
         }
 
         @Override
-        public InfuseTableRecipe read(@NotNull PacketByteBuf buf) {
+        public PedestalRecipe read(@NotNull PacketByteBuf buf) {
             DefaultedList<Ingredient> inputs = DefaultedList.ofSize(buf.readInt(), Ingredient.EMPTY);
 
             inputs.replaceAll(ignored -> Ingredient.fromPacket(buf));
 
             ItemStack output = buf.readItemStack();
-            return new InfuseTableRecipe(inputs, output);
+            return new PedestalRecipe(inputs, output);
         }
 
         @Override
-        public void write(@NotNull PacketByteBuf buf, @NotNull InfuseTableRecipe recipe) {
+        public void write(@NotNull PacketByteBuf buf, @NotNull PedestalRecipe recipe) {
             buf.writeInt(recipe.getIngredients().size());
             for (Ingredient ing : recipe.getIngredients()) {
                 ing.write(buf);

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "astelfa:block/pedestal"
+    },
+    "facing=south": {
+      "model": "astelfa:block/pedestal",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "astelfa:block/pedestal",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "astelfa:block/pedestal",
+      "y": 90
+    }
+  }
+}

@@ -38,6 +38,7 @@ public class BlockTagGenerator extends FabricTagProvider.BlockTagProvider {
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE)
                 .add(ModBlocks.SCULK_STATUE_BLOCK)
                 .add(ModBlocks.LUMINITE_ORE)
+                .add(ModBlocks.PEDESTAL_BLOCK)
                 .add(ModBlocks.DEEPSLATE_LUMINITE_ORE)
                 .add(ModBlocks.NETHERRACK_LUMINITE_ORE)
                 .add(ModBlocks.ENDSTONE_LUMINITE_ORE);
@@ -61,6 +62,7 @@ public class BlockTagGenerator extends FabricTagProvider.BlockTagProvider {
 
         getOrCreateTagBuilder(BlockTags.NEEDS_STONE_TOOL)
                 .add(ModBlocks.INFUSING_TABLE_BLOCK)
+                .add(ModBlocks.PEDESTAL_BLOCK)
                 .add(ModBlocks.LUMINITE_ORE)
                 .add(ModBlocks.DEEPSLATE_LUMINITE_ORE)
                 .add(ModBlocks.NETHERRACK_LUMINITE_ORE)

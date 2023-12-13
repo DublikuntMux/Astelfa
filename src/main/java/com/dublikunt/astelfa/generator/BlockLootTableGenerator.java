@@ -19,6 +19,7 @@ public class BlockLootTableGenerator extends FabricBlockLootTableProvider {
 
         addDrop(ModBlocks.INFUSING_TABLE_BLOCK);
         addDrop(ModBlocks.MANA_FILLER_BLOCK);
+        addDrop(ModBlocks.PEDESTAL_BLOCK);
         addDrop(ModBlocks.SCULK_STATUE_BLOCK);
         addDrop(ModBlocks.SILVER_LOG);
         addDrop(ModBlocks.SILVER_WOOD);

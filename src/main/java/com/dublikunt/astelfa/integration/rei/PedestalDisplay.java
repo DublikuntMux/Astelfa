@@ -1,6 +1,6 @@
 package com.dublikunt.astelfa.integration.rei;
 
-import com.dublikunt.astelfa.recipe.InfuseTableRecipe;
+import com.dublikunt.astelfa.recipe.PedestalRecipe;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.display.basic.BasicDisplay;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;
@@ -14,16 +14,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class InfusingDisplay extends BasicDisplay {
-    public InfusingDisplay(List<EntryIngredient> inputs, List<EntryIngredient> outputs) {
+public class PedestalDisplay extends BasicDisplay {
+    public PedestalDisplay(List<EntryIngredient> inputs, List<EntryIngredient> outputs) {
         super(inputs, outputs);
     }
 
-    public InfusingDisplay(@NotNull RecipeEntry<InfuseTableRecipe> recipe) {
+    public PedestalDisplay(@NotNull RecipeEntry<PedestalRecipe> recipe) {
         super(getInputList(recipe.value()), List.of(EntryIngredient.of(EntryStack.of(VanillaEntryTypes.ITEM, recipe.value().getResult(null)))));
     }
 
-    private static @NotNull List<EntryIngredient> getInputList(InfuseTableRecipe recipe) {
+    private static @NotNull List<EntryIngredient> getInputList(PedestalRecipe recipe) {
         if (recipe == null) return Collections.emptyList();
         List<EntryIngredient> list = new ArrayList<>();
         for (int i = 0; i < recipe.getIngredients().size(); i++) {
@@ -34,6 +34,6 @@ public class InfusingDisplay extends BasicDisplay {
 
     @Override
     public CategoryIdentifier<?> getCategoryIdentifier() {
-        return InfuseCategory.INFUSING;
+        return PedestalCategory.PEDESTAL;
     }
 }

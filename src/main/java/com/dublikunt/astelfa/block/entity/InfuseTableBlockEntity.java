@@ -5,14 +5,17 @@ import com.dublikunt.astelfa.block.custom.InfuseTableBlock;
 import com.dublikunt.astelfa.helper.block.CraftingBlockEntity;
 import com.dublikunt.astelfa.recipe.InfuseTableRecipe;
 import com.dublikunt.astelfa.screen.handler.InfuseTableScreenHandler;
+import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.recipe.RecipeEntry;
 import net.minecraft.screen.ScreenHandler;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -21,9 +24,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-public class InfuseTableBlockEntity extends CraftingBlockEntity {
+public class InfuseTableBlockEntity extends CraftingBlockEntity implements ExtendedScreenHandlerFactory {
     public InfuseTableBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntities.INFUSE_TABLE_BLOCK_ENTITY_TYPE, pos, state, 10);
+        super(ModBlockEntities.INFUSE_TABLE_BLOCK_ENTITY_TYPE, pos, state, 10, 100);
     }
 
     private static boolean canInsertItemIntoOutputSlot(@NotNull SimpleInventory inventory, Item output) {
@@ -110,6 +113,11 @@ public class InfuseTableBlockEntity extends CraftingBlockEntity {
     @Override
     public ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
         return new InfuseTableScreenHandler(syncId, playerInventory, this, propertyDelegate);
+    }
+
+    @Override
+    public void writeScreenOpeningData(ServerPlayerEntity player, @NotNull PacketByteBuf buf) {
+        buf.writeBlockPos(this.pos);
     }
 
     public ItemStack getRenderStack() {

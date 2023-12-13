@@ -5,34 +5,30 @@ import com.dublikunt.astelfa.networking.ModMessages;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.PropertyDelegate;
-import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-public abstract class CraftingBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory, InventoryImpl {
+public abstract class CraftingBlockEntity extends BlockEntity implements InventoryImpl {
     protected final PropertyDelegate propertyDelegate;
     protected final DefaultedList<ItemStack> inventory;
     protected int progress = 0;
-    protected int maxProgress = 100;
+    protected int maxProgress;
 
-    public CraftingBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state, int inventorySize) {
+    public CraftingBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state, int inventorySize, int maxProgress) {
         super(type, pos, state);
+        this.maxProgress = maxProgress;
         this.inventory = DefaultedList.ofSize(inventorySize, ItemStack.EMPTY);
         this.propertyDelegate = new PropertyDelegate() {
             public int get(int index) {
@@ -98,15 +94,6 @@ public abstract class CraftingBlockEntity extends BlockEntity implements Extende
 
     public void resetProgress() {
         this.progress = 0;
-    }
-
-    @Nullable
-    @Override
-    public abstract ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player);
-
-    @Override
-    public void writeScreenOpeningData(ServerPlayerEntity player, @NotNull PacketByteBuf buf) {
-        buf.writeBlockPos(this.pos);
     }
 
     public abstract ItemStack getRenderStack();

@@ -48,6 +48,7 @@
 
   "block.astelfa.infuse_table": "Infuse Table",
   "block.astelfa.mana_filler": "Mana Filler",
+  "block.astelfa.pedestal": "Pedestal",
   "block.astelfa.sculk_statue": "Sculk Statue",
   "block.astelfa.silver_log": "Silver Log",
   "block.astelfa.silver_wood": "Silver Wood",
@@ -108,10 +109,12 @@
   "advancement.astelfa.star_mana.description": "Craft nether star from mana",
   "advancement.astelfa.infuser.title": "Second step to magic world",
   "advancement.astelfa.infuser.description": "Craft infuser table",
+  "advancement.astelfa.pedestal.title": "Third step to magic world",
+  "advancement.astelfa.pedestal.description": "Craft pedestal",
 
   "category.astelfa.infuse_table": "Infusing",
   "category.astelfa.mana_filler": "Mana Filling",
-  "category.astelfa.cauldron": "Cauldron",
+  "category.astelfa.pedestal": "Pedestal Infusing",
 
   "hud.astelfa.mana_info.1": "Mana in chunk: %s",
   "hud.astelfa.mana_info.2": "Maximum mana in chunk: %s",

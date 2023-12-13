@@ -60,6 +60,18 @@ public class RecipeGenerator extends FabricRecipeProvider {
                         FabricRecipeProvider.conditionsFromItem(ModBlocks.SILVER_LOG))
                 .offerTo(exporter, new Identifier(getRecipeName(ModBlocks.MANA_FILLER_BLOCK)));
 
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.PEDESTAL_BLOCK)
+                .pattern("BWB")
+                .pattern(" S ")
+                .pattern("LLL")
+                .input('B', Blocks.STONE_BRICKS)
+                .input('W', Items.PURPLE_WOOL)
+                .input('S', Blocks.SMOOTH_STONE)
+                .input('L', Blocks.POLISHED_BASALT)
+                .criterion(FabricRecipeProvider.hasItem(Blocks.POLISHED_BASALT),
+                        FabricRecipeProvider.conditionsFromItem(Blocks.POLISHED_BASALT))
+                .offerTo(exporter, new Identifier(getRecipeName(ModBlocks.PEDESTAL_BLOCK)));
+
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.INFUSING_TABLE_BLOCK)
                 .pattern("AAA")
                 .pattern("PPP")

@@ -50,7 +50,7 @@ public class AdvancementGenerator extends FabricAdvancementProvider {
                         false
                 )
                 .criterion("got_mana_filler", InventoryChangedCriterion.Conditions.items(ModBlocks.MANA_FILLER_BLOCK))
-                .build(consumer, Astelfa.MOD_ID + "/mana_filler_ad");
+                .build(consumer, Astelfa.MOD_ID + "/mana_filler");
 
         AdvancementEntry addManaAdvancement = Advancement.Builder.create().parent(manaFillerAdvancement)
                 .display(
@@ -108,5 +108,19 @@ public class AdvancementGenerator extends FabricAdvancementProvider {
                 )
                 .criterion("got_infuser", InventoryChangedCriterion.Conditions.items(ModBlocks.INFUSING_TABLE_BLOCK))
                 .build(consumer, Astelfa.MOD_ID + "/infuser");
+
+        AdvancementEntry pedestalAdvancement = Advancement.Builder.create().parent(infuserAdvancement)
+                .display(
+                        ModBlocks.PEDESTAL_BLOCK,
+                        Text.translatable("advancement.astelfa.pedestal.title"),
+                        Text.translatable("advancement.astelfa.pedestal.description"),
+                        null,
+                        AdvancementFrame.TASK,
+                        true,
+                        true,
+                        false
+                )
+                .criterion("got_pedestal", InventoryChangedCriterion.Conditions.items(ModBlocks.PEDESTAL_BLOCK))
+                .build(consumer, Astelfa.MOD_ID + "/pedestal");
     }
 }

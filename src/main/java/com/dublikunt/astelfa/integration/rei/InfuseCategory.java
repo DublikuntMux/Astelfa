@@ -42,9 +42,9 @@ public class InfuseCategory implements DisplayCategory<BasicDisplay> {
 
     @Override
     public List<Widget> setupDisplay(@NotNull BasicDisplay display, @NotNull Rectangle bounds) {
-        final Point startPoint = new Point(bounds.getCenterX() - 87, bounds.getCenterY() - 35);
+        final Point startPoint = new Point(bounds.getCenterX() - 88, bounds.getCenterY() - 41);
         List<Widget> widgets = new LinkedList<>();
-        widgets.add(Widgets.createTexturedWidget(TEXTURE, new Rectangle(startPoint.x, startPoint.y, 175, 81)));
+        widgets.add(Widgets.createTexturedWidget(TEXTURE, new Rectangle(startPoint.x, startPoint.y, 176, 82)));
 
         widgets.add(Widgets.createSlot(new Point(startPoint.x + 41, startPoint.y + 33))
                 .entries(display.getInputEntries().get(0)));

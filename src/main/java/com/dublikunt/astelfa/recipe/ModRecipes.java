@@ -10,10 +10,14 @@ public class ModRecipes {
                 InfuseTableRecipe.Serializer.INSTANCE);
         Registry.register(Registries.RECIPE_SERIALIZER, Helpers.id(ManaFillerRecipe.Serializer.ID),
                 ManaFillerRecipe.Serializer.INSTANCE);
+        Registry.register(Registries.RECIPE_SERIALIZER, Helpers.id(PedestalRecipe.Serializer.ID),
+                PedestalRecipe.Serializer.INSTANCE);
 
         Registry.register(Registries.RECIPE_TYPE, Helpers.id(InfuseTableRecipe.Type.ID),
                 InfuseTableRecipe.Type.INSTANCE);
         Registry.register(Registries.RECIPE_TYPE, Helpers.id(ManaFillerRecipe.Type.ID),
                 ManaFillerRecipe.Type.INSTANCE);
+        Registry.register(Registries.RECIPE_TYPE, Helpers.id(PedestalRecipe.Type.ID),
+                PedestalRecipe.Type.INSTANCE);
     }
 }

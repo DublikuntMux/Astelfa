@@ -19,41 +19,45 @@ import org.jetbrains.annotations.NotNull;
 import java.util.LinkedList;
 import java.util.List;
 
-public class ManaFillerCategory implements DisplayCategory<BasicDisplay> {
+public class PedestalCategory implements DisplayCategory<BasicDisplay> {
     public static final Identifier TEXTURE =
-            new Identifier(Astelfa.MOD_ID, "textures/gui/mana_filler_rei.png");
-    public static final CategoryIdentifier<ManaFillerDisplay> MANA_FILLER =
-            CategoryIdentifier.of(Astelfa.MOD_ID, "mana_filler");
+            new Identifier(Astelfa.MOD_ID, "textures/gui/pedestal_rei.png");
+    public static final CategoryIdentifier<PedestalDisplay> PEDESTAL =
+            CategoryIdentifier.of(Astelfa.MOD_ID, "pedestal");
 
     @Override
     public CategoryIdentifier<? extends BasicDisplay> getCategoryIdentifier() {
-        return MANA_FILLER;
+        return PEDESTAL;
     }
 
     @Override
     public Text getTitle() {
-        return Text.translatable("category.astelfa.mana_filler");
+        return Text.translatable("category.astelfa.pedestal");
     }
 
     @Override
     public Renderer getIcon() {
-        return EntryStack.of(VanillaEntryTypes.ITEM, ModBlocks.MANA_FILLER_BLOCK.asItem().getDefaultStack());
+        return EntryStack.of(VanillaEntryTypes.ITEM, ModBlocks.PEDESTAL_BLOCK.asItem().getDefaultStack());
     }
 
     @Override
     public List<Widget> setupDisplay(@NotNull BasicDisplay display, @NotNull Rectangle bounds) {
-        final Point startPoint = new Point(bounds.getCenterX() - 88, bounds.getCenterY() - 41);
+        final Point startPoint = new Point(bounds.getCenterX() - 88, bounds.getCenterY() - 51);
         List<Widget> widgets = new LinkedList<>();
-        widgets.add(Widgets.createTexturedWidget(TEXTURE, new Rectangle(startPoint.x, startPoint.y, 176, 82)));
+        widgets.add(Widgets.createTexturedWidget(TEXTURE, new Rectangle(startPoint.x, startPoint.y, 176, 101)));
 
-        widgets.add(Widgets.createSlot(new Point(startPoint.x + 42, startPoint.y + 30))
-                .entries(display.getInputEntries().get(0)));
-        widgets.add(Widgets.createSlot(new Point(startPoint.x + 59, startPoint.y + 7))
-                .entries(display.getInputEntries().get(1)));
-        widgets.add(Widgets.createSlot(new Point(startPoint.x + 59, startPoint.y + 53))
-                .entries(display.getInputEntries().get(2)));
+        double angleBetweenSlots = 360.0 / display.getInputEntries().size();
 
-        widgets.add(Widgets.createSlot(new Point(startPoint.x + 120, startPoint.y + 30))
+        for (int i = 0; i < display.getInputEntries().size(); i++) {
+            double angle = Math.toRadians(i * angleBetweenSlots);
+            double slotX = 58 + 36 * Math.cos(angle) - 18 / 2;
+            double slotY = 50 + 36 * Math.sin(angle) - 18 / 2;
+
+            widgets.add(Widgets.createSlot(new Point(startPoint.x + slotX, startPoint.y + slotY))
+                    .entries(display.getInputEntries().get(i)));
+        }
+
+        widgets.add(Widgets.createSlot(new Point(startPoint.x + 137, startPoint.y + 40))
                 .markOutput().entries(display.getOutputEntries().get(0)));
 
         return widgets;
@@ -61,6 +65,6 @@ public class ManaFillerCategory implements DisplayCategory<BasicDisplay> {
 
     @Override
     public int getDisplayHeight() {
-        return 83;
+        return 102;
     }
 }

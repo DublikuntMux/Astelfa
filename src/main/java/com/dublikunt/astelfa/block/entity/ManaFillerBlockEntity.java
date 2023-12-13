@@ -12,6 +12,7 @@ import com.dublikunt.astelfa.screen.handler.ManaFillerScreenHandler;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
@@ -39,9 +40,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-public class ManaFillerBlockEntity extends CraftingBlockEntity {
+public class ManaFillerBlockEntity extends CraftingBlockEntity implements ExtendedScreenHandlerFactory {
     public ManaFillerBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntities.MANA_FILLER_BLOCK_ENTITY_TYPE, pos, state, 4);
+        super(ModBlockEntities.MANA_FILLER_BLOCK_ENTITY_TYPE, pos, state, 4, 100);
     }
 
     public static void tick(@NotNull World world, BlockPos blockPos, BlockState state, ManaFillerBlockEntity entity) {
@@ -171,6 +172,35 @@ public class ManaFillerBlockEntity extends CraftingBlockEntity {
         Inventories.writeNbt(nbt, inventory);
         nbt.put("variant", fluidStorage.variant.toNbt());
         nbt.putLong("fluid", fluidStorage.amount);
+    }
+
+    @Override
+    public void readNbt(NbtCompound nbt) {
+        Inventories.readNbt(nbt, inventory);
+        super.readNbt(nbt);
+        fluidStorage.variant = FluidVariant.fromNbt((NbtCompound) nbt.get("variant"));
+        fluidStorage.amount = nbt.getLong("fluid");
+    }
+
+    @Nullable
+    @Override
+    public ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
+        sendFluidPacket();
+
+        return new ManaFillerScreenHandler(syncId, playerInventory, this, propertyDelegate);
+    }
+
+    @Override
+    public void writeScreenOpeningData(ServerPlayerEntity player, @NotNull PacketByteBuf buf) {
+        buf.writeBlockPos(this.pos);
+    }
+
+    public ItemStack getRenderStack() {
+        if (this.getStack(2).isEmpty()) {
+            return this.getStack(0);
+        } else {
+            return this.getStack(2);
+        }
     }    public final SingleVariantStorage<FluidVariant> fluidStorage = new SingleVariantStorage<>() {
         @Override
         protected FluidVariant getBlankVariant() {
@@ -190,30 +220,6 @@ public class ManaFillerBlockEntity extends CraftingBlockEntity {
             }
         }
     };
-
-    @Override
-    public void readNbt(NbtCompound nbt) {
-        Inventories.readNbt(nbt, inventory);
-        super.readNbt(nbt);
-        fluidStorage.variant = FluidVariant.fromNbt((NbtCompound) nbt.get("variant"));
-        fluidStorage.amount = nbt.getLong("fluid");
-    }
-
-    @Nullable
-    @Override
-    public ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
-        sendFluidPacket();
-
-        return new ManaFillerScreenHandler(syncId, playerInventory, this, propertyDelegate);
-    }
-
-    public ItemStack getRenderStack() {
-        if (this.getStack(2).isEmpty()) {
-            return this.getStack(0);
-        } else {
-            return this.getStack(2);
-        }
-    }
 
 
 

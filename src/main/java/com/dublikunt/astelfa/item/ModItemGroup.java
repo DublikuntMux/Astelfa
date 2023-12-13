@@ -47,6 +47,7 @@ public class ModItemGroup {
 
                     entries.add(ModBlocks.INFUSING_TABLE_BLOCK);
                     entries.add(ModBlocks.MANA_FILLER_BLOCK);
+                    entries.add(ModBlocks.PEDESTAL_BLOCK);
                     entries.add(ModBlocks.SCULK_STATUE_BLOCK);
 
                     entries.add(ModBlocks.SILVER_LOG);
