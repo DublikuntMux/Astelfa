@@ -59,7 +59,7 @@ public class PhilosophersStone extends Item implements GeoItem {
 
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return cache;
+        return this.cache;
     }
 
     @Override

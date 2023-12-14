@@ -10,6 +10,7 @@ import com.dublikunt.astelfa.networking.ModMessages;
 import com.dublikunt.astelfa.particle.ModParticle;
 import com.dublikunt.astelfa.renderer.block.InfuseTableBlockEntityRenderer;
 import com.dublikunt.astelfa.renderer.block.ManaFillerBlockEntityRenderer;
+import com.dublikunt.astelfa.renderer.block.PedestalBlockEntityRenderer;
 import com.dublikunt.astelfa.screen.ModScreenHandlers;
 import com.dublikunt.astelfa.screen.screen.craft.InfuseTableScreen;
 import com.dublikunt.astelfa.screen.screen.craft.ManaFillerScreen;
@@ -54,8 +55,12 @@ public class AstelfaClient implements ClientModInitializer {
         HandledScreens.register(ModScreenHandlers.MANA_FILLER_SCREEN_HANDLER, ManaFillerScreen::new);
 
         Logger.debug("  Register block entity renderers.");
-        BlockEntityRendererFactories.register(ModBlockEntities.INFUSE_TABLE_BLOCK_ENTITY_TYPE, InfuseTableBlockEntityRenderer::new);
-        BlockEntityRendererFactories.register(ModBlockEntities.MANA_FILLER_BLOCK_ENTITY_TYPE, ManaFillerBlockEntityRenderer::new);
+        BlockEntityRendererFactories.register(ModBlockEntities.INFUSE_TABLE_BLOCK_ENTITY_TYPE,
+                InfuseTableBlockEntityRenderer::new);
+        BlockEntityRendererFactories.register(ModBlockEntities.MANA_FILLER_BLOCK_ENTITY_TYPE,
+                ManaFillerBlockEntityRenderer::new);
+        BlockEntityRendererFactories.register(ModBlockEntities.PEDESTAL_BLOCK_ENTITY_TYPE,
+                PedestalBlockEntityRenderer::new);
 
         Logger.debug("  Register fluid renderers.");
         FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.STILL_MANA_FLUID, ModFluids.FLOWING_MANA_FLUID,

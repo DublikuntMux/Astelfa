@@ -96,10 +96,10 @@ public class FluidStackRenderer implements IIngredientRenderer<FluidStack> {
         tooltip.add(displayName);
 
         long amount = fluidStack.getAmount();
-        if (tooltipMode == TooltipMode.SHOW_AMOUNT_AND_CAPACITY) {
-            MutableText amountString = Text.translatable("block.astelfa.mana_filler.tooltip.amount_capacity", amount, capacityMb);
+        if (this.tooltipMode == TooltipMode.SHOW_AMOUNT_AND_CAPACITY) {
+            MutableText amountString = Text.translatable("block.astelfa.mana_filler.tooltip.amount_capacity", amount, this.capacityMb);
             tooltip.add(amountString.fillStyle(Style.EMPTY.withColor(Formatting.DARK_GRAY)));
-        } else if (tooltipMode == TooltipMode.SHOW_AMOUNT) {
+        } else if (this.tooltipMode == TooltipMode.SHOW_AMOUNT) {
             MutableText amountString = Text.translatable("block.astelfa.mana_filler.tooltip.amount");
             tooltip.add(amountString.fillStyle(Style.EMPTY.withColor(Formatting.DARK_GRAY)));
         }
@@ -109,12 +109,12 @@ public class FluidStackRenderer implements IIngredientRenderer<FluidStack> {
 
     @Override
     public int getWidth() {
-        return width;
+        return this.width;
     }
 
     @Override
     public int getHeight() {
-        return height;
+        return this.height;
     }
 
     enum TooltipMode {

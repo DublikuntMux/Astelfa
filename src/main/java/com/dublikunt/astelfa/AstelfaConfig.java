@@ -47,7 +47,7 @@ public class AstelfaConfig {
         try {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             String json = gson.toJson(this, AstelfaConfig.class);
-            FileWriter newFile = new FileWriter(file.getAbsolutePath());
+            FileWriter newFile = new FileWriter(this.file.getAbsolutePath());
             newFile.write(json);
             newFile.flush();
             newFile.close();

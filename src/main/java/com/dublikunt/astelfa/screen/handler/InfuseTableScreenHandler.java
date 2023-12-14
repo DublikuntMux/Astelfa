@@ -27,20 +27,20 @@ public class InfuseTableScreenHandler extends ScreenHandler {
     public InfuseTableScreenHandler(int syncId, @NotNull PlayerInventory playerInventory, BlockEntity entity, PropertyDelegate delegate) {
         super(ModScreenHandlers.INFUSE_TABLE_SCREEN_HANDLER, syncId);
         this.inventory = (Inventory) entity;
-        inventory.onOpen(playerInventory.player);
+        this.inventory.onOpen(playerInventory.player);
         this.propertyDelegate = delegate;
         this.blockEntity = (InfuseTableBlockEntity) entity;
 
-        this.addSlot(new Slot(inventory, 0, 43, 35));
-        this.addSlot(new Slot(inventory, 1, 43, 8));
-        this.addSlot(new Slot(inventory, 2, 61, 17));
-        this.addSlot(new Slot(inventory, 3, 70, 35));
-        this.addSlot(new Slot(inventory, 4, 61, 53));
-        this.addSlot(new Slot(inventory, 5, 43, 62));
-        this.addSlot(new Slot(inventory, 6, 25, 53));
-        this.addSlot(new Slot(inventory, 7, 16, 35));
-        this.addSlot(new Slot(inventory, 8, 25, 17));
-        this.addSlot(new Slot(inventory, 9, 120, 35));
+        this.addSlot(new Slot(this.inventory, 0, 43, 35));
+        this.addSlot(new Slot(this.inventory, 1, 43, 8));
+        this.addSlot(new Slot(this.inventory, 2, 61, 17));
+        this.addSlot(new Slot(this.inventory, 3, 70, 35));
+        this.addSlot(new Slot(this.inventory, 4, 61, 53));
+        this.addSlot(new Slot(this.inventory, 5, 43, 62));
+        this.addSlot(new Slot(this.inventory, 6, 25, 53));
+        this.addSlot(new Slot(this.inventory, 7, 16, 35));
+        this.addSlot(new Slot(this.inventory, 8, 25, 17));
+        this.addSlot(new Slot(this.inventory, 9, 120, 35));
 
         for (int si = 0; si < 3; ++si)
             for (int sj = 0; sj < 9; ++sj)
@@ -52,7 +52,7 @@ public class InfuseTableScreenHandler extends ScreenHandler {
     }
 
     public boolean isCrafting() {
-        return propertyDelegate.get(0) > 0;
+        return this.propertyDelegate.get(0) > 0;
     }
 
     public int getScaledProgress() {

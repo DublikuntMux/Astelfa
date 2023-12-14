@@ -20,7 +20,7 @@ public class FluidStack {
     }
 
     public FluidVariant getFluidVariant() {
-        return fluidVariant;
+        return this.fluidVariant;
     }
 
     public void setFluidVariant(FluidVariant fluidVariant) {
@@ -28,7 +28,7 @@ public class FluidStack {
     }
 
     public long getAmount() {
-        return amount;
+        return this.amount;
     }
 
     public void setAmount(long amount) {

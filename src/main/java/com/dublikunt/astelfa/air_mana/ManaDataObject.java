@@ -14,13 +14,13 @@ public class ManaDataObject implements DataObject {
     @Override
     public NbtCompound save() {
         NbtCompound compound = new NbtCompound();
-        compound.putInt("mana_amount", mana_amount);
+        compound.putInt("mana_amount", this.mana_amount);
 
         return compound;
     }
 
     @Override
     public void load(@NotNull NbtCompound compound) {
-        mana_amount = compound.getInt("mana_amount");
+        this.mana_amount = compound.getInt("mana_amount");
     }
 }

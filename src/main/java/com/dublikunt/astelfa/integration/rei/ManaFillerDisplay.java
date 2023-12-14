@@ -22,7 +22,8 @@ public class ManaFillerDisplay extends BasicDisplay {
     }
 
     public ManaFillerDisplay(@NotNull RecipeEntry<ManaFillerRecipe> recipe) {
-        super(getInputList(recipe.value()), List.of(EntryIngredient.of(EntryStack.of(VanillaEntryTypes.ITEM, recipe.value().getResult(null)))));
+        super(getInputList(recipe.value()), List.of(EntryIngredient.of(EntryStack.of(VanillaEntryTypes.ITEM,
+                recipe.value().getResult(null)))));
     }
 
     private static @NotNull List<EntryIngredient> getInputList(ManaFillerRecipe recipe) {

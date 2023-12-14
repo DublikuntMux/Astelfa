@@ -10,14 +10,15 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
 public class SparklePillarBlock extends PillarBlock {
-    private static final double extraDistance = 0.25D;
+    private static final double extraDistance = 0.25;
 
     public SparklePillarBlock(Settings settings) {
         super(settings);
     }
 
     @Override
-    public void randomDisplayTick(BlockState state, @NotNull World world, @NotNull BlockPos pos, @NotNull Random random) {
+    public void randomDisplayTick(BlockState state, @NotNull World world, @NotNull BlockPos pos,
+                                  @NotNull Random random) {
         Helpers.createParticles(world, pos, random, extraDistance, ModParticle.SPARKLE_PARTICLE);
     }
 }

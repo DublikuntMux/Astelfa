@@ -46,16 +46,19 @@ public class PedestalCategory implements DisplayCategory<BasicDisplay> {
         List<Widget> widgets = new LinkedList<>();
         widgets.add(Widgets.createTexturedWidget(TEXTURE, new Rectangle(startPoint.x, startPoint.y, 176, 101)));
 
-        double angleBetweenSlots = 360.0 / display.getInputEntries().size();
+        double angleBetweenSlots = 360.0 / display.getInputEntries().size() - 1;
 
-        for (int i = 0; i < display.getInputEntries().size(); i++) {
+        for (int i = 0; i < display.getInputEntries().size() - 1; i++) {
             double angle = Math.toRadians(i * angleBetweenSlots);
             double slotX = 58 + 36 * Math.cos(angle) - 18 / 2;
             double slotY = 50 + 36 * Math.sin(angle) - 18 / 2;
 
-            widgets.add(Widgets.createSlot(new Point(startPoint.x + slotX, startPoint.y + slotY))
-                    .entries(display.getInputEntries().get(i)));
+            widgets.add(Widgets.createSlot(new Point(startPoint.x + slotX + 1, startPoint.y + slotY + 1))
+                    .entries(display.getInputEntries().get(i + 1)));
         }
+
+        widgets.add(Widgets.createSlot(new Point(startPoint.x + 49, startPoint.y + 41))
+                .entries(display.getInputEntries().get(0)));
 
         widgets.add(Widgets.createSlot(new Point(startPoint.x + 137, startPoint.y + 40))
                 .markOutput().entries(display.getOutputEntries().get(0)));

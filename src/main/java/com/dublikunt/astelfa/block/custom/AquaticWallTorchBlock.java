@@ -44,10 +44,6 @@ public class AquaticWallTorchBlock extends WallTorchBlock implements Waterloggab
         this.setDefaultState(this.stateManager.getDefaultState().with(WATERLOGGED, false).with(FLOWING_WATER, 8));
     }
 
-    protected void appendProperties(StateManager.@NotNull Builder<Block, BlockState> builder) {
-        builder.add(FACING, FLOWING_WATER, WATERLOGGED);
-    }
-
     @Nullable
     @Override
     public BlockState getPlacementState(@NotNull ItemPlacementContext ctx) {
@@ -73,26 +69,36 @@ public class AquaticWallTorchBlock extends WallTorchBlock implements Waterloggab
     }
 
     @Override
-    public BlockState getStateForNeighborUpdate(@NotNull BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
+    public BlockState getStateForNeighborUpdate(@NotNull BlockState state, Direction direction,
+                                                BlockState neighborState, WorldAccess world, BlockPos pos,
+                                                BlockPos neighborPos) {
         if (state.get(WATERLOGGED)) {
             world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
         }
 
-        return direction.getOpposite() == state.get(FACING) && !state.isFullCube(world, pos) ? Blocks.AIR.getDefaultState() : state;
+        return direction.getOpposite() == state.get(FACING) && !state.isFullCube(world, pos) ?
+                Blocks.AIR.getDefaultState() : state;
     }
 
-    @Override
-    public FluidState getFluidState(@NotNull BlockState state) {
-        return Helpers.WaterLoggable(state, WATERLOGGED, FLOWING_WATER);
-    }
-
-    public void randomDisplayTick(@NotNull BlockState state, @NotNull World world, @NotNull BlockPos blockPos, Random random) {
+    public void randomDisplayTick(@NotNull BlockState state, @NotNull World world, @NotNull BlockPos blockPos,
+                                  Random random) {
         Direction direction = state.get(FACING);
         double x = blockPos.getX() + 0.5;
         double y = blockPos.getY() + 0.7;
         double z = blockPos.getZ() + 0.5;
         Direction opposite = direction.getOpposite();
-        world.addParticle(ParticleTypes.UNDERWATER, x + 0.27 * opposite.getOffsetX(), y + 0.22, z + 0.27 * opposite.getOffsetZ(), 0.0, 0.0, 0.0);
-        world.addParticle(ModParticle.AQUA_FIRE_FLAME, x + 0.27 * opposite.getOffsetX(), y + 0.22, z + 0.27 * opposite.getOffsetZ(), 0.0, 0.0, 0.0);
+        world.addParticle(ParticleTypes.UNDERWATER, x + 0.27 * opposite.getOffsetX(), y + 0.22,
+                z + 0.27 * opposite.getOffsetZ(), 0.0, 0.0, 0.0);
+        world.addParticle(ModParticle.AQUA_FIRE_FLAME, x + 0.27 * opposite.getOffsetX(), y + 0.22,
+                z + 0.27 * opposite.getOffsetZ(), 0.0, 0.0, 0.0);
+    }
+
+    protected void appendProperties(StateManager.@NotNull Builder<Block, BlockState> builder) {
+        builder.add(FACING, FLOWING_WATER, WATERLOGGED);
+    }
+
+    @Override
+    public FluidState getFluidState(@NotNull BlockState state) {
+        return Helpers.WaterLoggable(state, WATERLOGGED, FLOWING_WATER);
     }
 }

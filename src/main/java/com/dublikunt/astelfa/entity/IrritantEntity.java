@@ -52,7 +52,7 @@ public class IrritantEntity extends AmbientEntity implements GeoEntity {
 
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return cache;
+        return this.cache;
     }
 
     @Override

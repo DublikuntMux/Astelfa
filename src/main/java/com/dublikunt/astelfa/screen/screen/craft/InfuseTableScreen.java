@@ -20,7 +20,7 @@ public class InfuseTableScreen extends HandledScreen<InfuseTableScreenHandler> {
     @Override
     protected void init() {
         super.init();
-        titleX = (backgroundWidth - textRenderer.getWidth(title)) / 2;
+        this.titleX = (this.backgroundWidth - this.textRenderer.getWidth(this.title)) / 2;
     }
 
     @Override
@@ -29,16 +29,16 @@ public class InfuseTableScreen extends HandledScreen<InfuseTableScreenHandler> {
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
         RenderSystem.setShaderTexture(0, TEXTURE);
-        int x = (width - backgroundWidth) / 2;
-        int y = (height - backgroundHeight) / 2;
-        context.drawTexture(TEXTURE, x, y, 0, 0, backgroundWidth, backgroundHeight);
+        int x = (this.width - this.backgroundWidth) / 2;
+        int y = (this.height - this.backgroundHeight) / 2;
+        context.drawTexture(TEXTURE, x, y, 0, 0, this.backgroundWidth, this.backgroundHeight);
 
         renderProgressArrow(context, x, y);
     }
 
     private void renderProgressArrow(DrawContext context, int x, int y) {
-        if (handler.isCrafting()) {
-            context.drawTexture(TEXTURE, x + 89, y + 38, 176, 0, handler.getScaledProgress(), 10);
+        if (this.handler.isCrafting()) {
+            context.drawTexture(TEXTURE, x + 89, y + 38, 176, 0, this.handler.getScaledProgress(), 10);
         }
     }
 

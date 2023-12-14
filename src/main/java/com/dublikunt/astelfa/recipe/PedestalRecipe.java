@@ -46,7 +46,7 @@ public class PedestalRecipe implements Recipe<SimpleInventory> {
 
     @Override
     public ItemStack craft(SimpleInventory inventory, DynamicRegistryManager registryManager) {
-        return output;
+        return this.output;
     }
 
     @Override
@@ -56,17 +56,17 @@ public class PedestalRecipe implements Recipe<SimpleInventory> {
 
     @Override
     public ItemStack getResult(DynamicRegistryManager registryManager) {
-        return output.copy();
+        return this.output.copy();
     }
 
     public ItemStack getResult() {
-        return output.copy();
+        return this.output.copy();
     }
 
     @Override
     public DefaultedList<Ingredient> getIngredients() {
         DefaultedList<Ingredient> list = DefaultedList.ofSize(this.recipeItems.size());
-        list.addAll(recipeItems);
+        list.addAll(this.recipeItems);
         return list;
     }
 

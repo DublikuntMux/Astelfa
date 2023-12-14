@@ -22,6 +22,8 @@ import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 public class InfuseTableBlockEntity extends CraftingBlockEntity implements ExtendedScreenHandlerFactory {
@@ -112,7 +114,7 @@ public class InfuseTableBlockEntity extends CraftingBlockEntity implements Exten
     @Nullable
     @Override
     public ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
-        return new InfuseTableScreenHandler(syncId, playerInventory, this, propertyDelegate);
+        return new InfuseTableScreenHandler(syncId, playerInventory, this, this.propertyDelegate);
     }
 
     @Override
@@ -120,11 +122,11 @@ public class InfuseTableBlockEntity extends CraftingBlockEntity implements Exten
         buf.writeBlockPos(this.pos);
     }
 
-    public ItemStack getRenderStack() {
+    public List<ItemStack> getRenderStacks() {
         if (this.getStack(9).isEmpty()) {
-            return this.getStack(0);
+            return Collections.singletonList(this.getStack(0));
         } else {
-            return this.getStack(9);
+            return Collections.singletonList(this.getStack(9));
         }
     }
 }

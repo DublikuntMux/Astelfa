@@ -52,20 +52,15 @@ public class ManaFillerBlock extends BlockWithEntity implements BlockEntityProvi
         return SHAPE;
     }
 
-    @Nullable
-    @Override
-    public BlockState getPlacementState(@NotNull ItemPlacementContext ctx) {
-        return this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing().getOpposite())
-                .with(WATERLOGGED, ctx.getWorld().getFluidState(ctx.getBlockPos()).getFluid() == Fluids.WATER);
-    }
-
     @Override
     public FluidState getFluidState(@NotNull BlockState state) {
         return state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
     }
 
     @Override
-    public BlockState getStateForNeighborUpdate(@NotNull BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
+    public BlockState getStateForNeighborUpdate(@NotNull BlockState state, Direction direction,
+                                                BlockState neighborState, WorldAccess world, BlockPos pos,
+                                                BlockPos neighborPos) {
         if (state.get(WATERLOGGED)) {
             world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
         }
@@ -83,17 +78,8 @@ public class ManaFillerBlock extends BlockWithEntity implements BlockEntityProvi
     }
 
     @Override
-    protected void appendProperties(StateManager.@NotNull Builder<Block, BlockState> builder) {
-        builder.add(FACING, WATERLOGGED);
-    }
-
-    @Override
-    public BlockRenderType getRenderType(BlockState state) {
-        return BlockRenderType.MODEL;
-    }
-
-    @Override
-    public void onStateReplaced(@NotNull BlockState state, World world, BlockPos pos, @NotNull BlockState newState, boolean moved) {
+    public void onStateReplaced(@NotNull BlockState state, World world, BlockPos pos, @NotNull BlockState newState,
+                                boolean moved) {
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof ManaFillerBlockEntity) {
@@ -105,7 +91,8 @@ public class ManaFillerBlock extends BlockWithEntity implements BlockEntityProvi
     }
 
     @Override
-    public ActionResult onUse(BlockState state, @NotNull World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    public ActionResult onUse(BlockState state, @NotNull World world, BlockPos pos, PlayerEntity player, Hand hand,
+                              BlockHitResult hit) {
         if (!world.isClient) {
             NamedScreenHandlerFactory screenHandlerFactory = ((ManaFillerBlockEntity) world.getBlockEntity(pos));
 
@@ -119,13 +106,31 @@ public class ManaFillerBlock extends BlockWithEntity implements BlockEntityProvi
 
     @Nullable
     @Override
+    public BlockState getPlacementState(@NotNull ItemPlacementContext ctx) {
+        return this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing().getOpposite())
+                .with(WATERLOGGED, ctx.getWorld().getFluidState(ctx.getBlockPos()).getFluid() == Fluids.WATER);
+    }
+
+    @Override
+    protected void appendProperties(StateManager.@NotNull Builder<Block, BlockState> builder) {
+        builder.add(FACING, WATERLOGGED);
+    }
+
+    @Override
+    public BlockRenderType getRenderType(BlockState state) {
+        return BlockRenderType.MODEL;
+    }
+
+    @Nullable
+    @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
         return new ManaFillerBlockEntity(pos, state);
     }
 
     @Nullable
     @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state,
+                                                                  BlockEntityType<T> type) {
         return validateTicker(type, ModBlockEntities.MANA_FILLER_BLOCK_ENTITY_TYPE, ManaFillerBlockEntity::tick);
     }
 }

@@ -1,7 +1,7 @@
 package com.dublikunt.astelfa.block.entity;
 
 import com.dublikunt.astelfa.block.ModBlockEntities;
-import com.dublikunt.astelfa.block.custom.InfuseTableBlock;
+import com.dublikunt.astelfa.block.custom.PedestalBlock;
 import com.dublikunt.astelfa.helper.block.CraftingBlockEntity;
 import com.dublikunt.astelfa.recipe.PedestalRecipe;
 import net.minecraft.block.BlockState;
@@ -13,6 +13,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class PedestalBlockEntity extends CraftingBlockEntity {
@@ -35,6 +37,30 @@ public class PedestalBlockEntity extends CraftingBlockEntity {
         }
 
         return entity.getWorld().getRecipeManager().getFirstMatch(PedestalRecipe.Type.INSTANCE, inv, entity.getWorld());
+    }
+
+    @Override
+    public boolean canExtract(int slot, ItemStack stack, Direction side) {
+        Direction localDir = this.getWorld().getBlockState(this.pos).get(PedestalBlock.FACING);
+
+        if (side == Direction.UP) {
+            return false;
+        }
+
+        if (side == Direction.DOWN) {
+            return slot == 29;
+        }
+
+        return switch (localDir) {
+            default -> side.getOpposite() == Direction.SOUTH && slot == 29 ||
+                    side.getOpposite() == Direction.EAST && slot == 29;
+            case EAST -> side.rotateYClockwise() == Direction.SOUTH && slot == 29 ||
+                    side.rotateYClockwise() == Direction.EAST && slot == 29;
+            case SOUTH -> side == Direction.SOUTH && slot == 29 ||
+                    side == Direction.EAST && slot == 29;
+            case WEST -> side.rotateYCounterclockwise() == Direction.SOUTH && slot == 29 ||
+                    side.rotateYCounterclockwise() == Direction.EAST && slot == 29;
+        };
     }
 
     @Override
@@ -71,35 +97,14 @@ public class PedestalBlockEntity extends CraftingBlockEntity {
                 && canInsertItemIntoOutputSlot(inventory, match.get().value().getResult().getItem());
     }
 
-    @Override
-    public boolean canExtract(int slot, ItemStack stack, Direction side) {
-        Direction localDir = this.getWorld().getBlockState(this.pos).get(InfuseTableBlock.FACING);
-
-        if (side == Direction.UP) {
-            return false;
+    public List<ItemStack> getRenderStacks() {
+        List<ItemStack> items = new ArrayList<>();
+        for (int i = 0; i < 27; i++) {
+            ItemStack itemStack = this.getStack(i);
+            if (itemStack != ItemStack.EMPTY) {
+                items.add(itemStack);
+            }
         }
-
-        if (side == Direction.DOWN) {
-            return slot == 29;
-        }
-
-        return switch (localDir) {
-            default -> side.getOpposite() == Direction.SOUTH && slot == 29 ||
-                    side.getOpposite() == Direction.EAST && slot == 29;
-            case EAST -> side.rotateYClockwise() == Direction.SOUTH && slot == 29 ||
-                    side.rotateYClockwise() == Direction.EAST && slot == 29;
-            case SOUTH -> side == Direction.SOUTH && slot == 29 ||
-                    side == Direction.EAST && slot == 29;
-            case WEST -> side.rotateYCounterclockwise() == Direction.SOUTH && slot == 29 ||
-                    side.rotateYCounterclockwise() == Direction.EAST && slot == 29;
-        };
-    }
-
-    public ItemStack getRenderStack() {
-        if (this.getStack(29).isEmpty()) {
-            return this.getStack(0);
-        } else {
-            return this.getStack(29);
-        }
+        return items;
     }
 }

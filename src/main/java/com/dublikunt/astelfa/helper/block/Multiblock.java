@@ -76,11 +76,11 @@ public class Multiblock {
 
         boolean result = true;
 
-        for (int i = 0; i < pattern.length; i++) {
-            for (int j = 0; j < pattern[i].length; j++) {
-                for (int k = 0; k < pattern[i][j].length; k++) {
+        for (int i = 0; i < this.pattern.length; i++) {
+            for (int j = 0; j < this.pattern[i].length; j++) {
+                for (int k = 0; k < this.pattern[i][j].length; k++) {
                     BlockPos blockPos = corner.add(j, i, k);
-                    Predicate<BlockState> predicate = predicates.get(pattern[i][j][k]);
+                    Predicate<BlockState> predicate = this.predicates.get(this.pattern[i][j][k]);
                     boolean isRightBlock = predicate.test(world.getBlockState(blockPos));
                     if (!isRightBlock) result = false;
                 }
@@ -99,18 +99,18 @@ public class Multiblock {
         for (int c = 0; c < height; c++) {
             for (int i = 0; i < length; i++) {
                 for (int j = 0; j < width; j++) {
-                    rotated[c][i][j] = pattern[c][width - 1 - j][i];
+                    rotated[c][i][j] = this.pattern[c][width - 1 - j][i];
                 }
             }
         }
-        pattern = rotated;
+        this.pattern = rotated;
     }
 
     public BlockPos findOffset(BlockPos pos) {
         for (int i = 0; i < this.height; i++) {
             for (int j = 0; j < this.width; j++) {
                 for (int k = 0; k < this.length; k++) {
-                    if (pattern[i][j][k] == '$') {
+                    if (this.pattern[i][j][k] == '$') {
                         return pos.add(-j, -i, -k);
                     }
                 }

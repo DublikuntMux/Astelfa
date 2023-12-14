@@ -39,8 +39,8 @@ public class AdosChains extends TrinketItem {
                 playerEntity.sendAbilitiesUpdate();
 
                 int MAX_FLY_TIME = 60 * 20;
-                if (playerEntity.getAbilities().flying && !(currentFlyTime >= MAX_FLY_TIME)) {
-                    currentFlyTime++;
+                if (playerEntity.getAbilities().flying && !(this.currentFlyTime >= MAX_FLY_TIME)) {
+                    this.currentFlyTime++;
 
                     if (Math.random() < (double) 10 / 100) {
                         if (playerEntity.isSprinting()) {
@@ -57,12 +57,12 @@ public class AdosChains extends TrinketItem {
                         stack.damage(1, playerEntity, e -> e.sendEquipmentBreakStatus(EquipmentSlot.LEGS));
                     }
                 }
-                if ((currentFlyTime >= MAX_FLY_TIME)) {
+                if ((this.currentFlyTime >= MAX_FLY_TIME)) {
                     playerEntity.getAbilities().allowFlying = false;
                     playerEntity.sendAbilitiesUpdate();
                 }
-                if (!(playerEntity.getAbilities().flying) && (currentFlyTime > 0)) {
-                    currentFlyTime = currentFlyTime - 0.3;
+                if (!(playerEntity.getAbilities().flying) && (this.currentFlyTime > 0)) {
+                    this.currentFlyTime = this.currentFlyTime - 0.3;
                 }
             }
         }
@@ -76,7 +76,7 @@ public class AdosChains extends TrinketItem {
                 playerEntity.getAbilities().flying = false;
                 playerEntity.sendAbilitiesUpdate();
             }
-            currentFlyTime = 0;
+            this.currentFlyTime = 0;
         }
     }
 

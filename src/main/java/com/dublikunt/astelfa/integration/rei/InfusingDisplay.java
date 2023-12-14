@@ -20,7 +20,8 @@ public class InfusingDisplay extends BasicDisplay {
     }
 
     public InfusingDisplay(@NotNull RecipeEntry<InfuseTableRecipe> recipe) {
-        super(getInputList(recipe.value()), List.of(EntryIngredient.of(EntryStack.of(VanillaEntryTypes.ITEM, recipe.value().getResult(null)))));
+        super(getInputList(recipe.value()), List.of(EntryIngredient.of(EntryStack.of(VanillaEntryTypes.ITEM,
+                recipe.value().getResult(null)))));
     }
 
     private static @NotNull List<EntryIngredient> getInputList(InfuseTableRecipe recipe) {

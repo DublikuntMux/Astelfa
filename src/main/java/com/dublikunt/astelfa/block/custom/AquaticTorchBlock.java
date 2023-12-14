@@ -30,18 +30,18 @@ public class AquaticTorchBlock extends TorchBlock implements Waterloggable {
         setDefaultState(getDefaultState().with(WATERLOGGED, false));
     }
 
-    @Override
-    protected void appendProperties(StateManager.@NotNull Builder<Block, BlockState> builder) {
-        builder.add(FLOWING_WATER, WATERLOGGED);
-    }
-
     @Nullable
     @Override
     public BlockState getPlacementState(@NotNull ItemPlacementContext ctx) {
         FluidState fluidstate = ctx.getWorld().getFluidState(ctx.getBlockPos());
         boolean flag = fluidstate.getFluid() == Fluids.WATER || fluidstate.getFluid() == Fluids.FLOWING_WATER;
         boolean is_flowing = fluidstate.getFluid() == Fluids.FLOWING_WATER;
-        return this.getDefaultState().with(WATERLOGGED, flag).with(FLOWING_WATER, is_flowing ? fluidstate.getLevel() : 8);
+        return getDefaultState().with(WATERLOGGED, flag).with(FLOWING_WATER, is_flowing ? fluidstate.getLevel() : 8);
+    }
+
+    @Override
+    protected void appendProperties(StateManager.@NotNull Builder<Block, BlockState> builder) {
+        builder.add(FLOWING_WATER, WATERLOGGED);
     }
 
     @Override

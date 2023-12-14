@@ -32,13 +32,13 @@ public class ManaFillerRecipe implements Recipe<SimpleInventory> {
         if (world.isClient()) {
             return false;
         }
-        boolean hasCatalyst = recipeItems.size() == 2;
-        return recipeItems.get(0).test(inventory.getStack(0)) && (hasCatalyst ? recipeItems.get(1).test(inventory.getStack(1)) : Ingredient.empty().test(inventory.getStack(1)));
+        boolean hasCatalyst = this.recipeItems.size() == 2;
+        return this.recipeItems.get(0).test(inventory.getStack(0)) && (hasCatalyst ? this.recipeItems.get(1).test(inventory.getStack(1)) : Ingredient.empty().test(inventory.getStack(1)));
     }
 
     @Override
     public ItemStack craft(SimpleInventory inventory, DynamicRegistryManager registryManager) {
-        return output;
+        return this.output;
     }
 
     @Override
@@ -48,21 +48,21 @@ public class ManaFillerRecipe implements Recipe<SimpleInventory> {
 
     @Override
     public ItemStack getResult(DynamicRegistryManager registryManager) {
-        return output.copy();
+        return this.output.copy();
     }
 
     public ItemStack getResult() {
-        return output.copy();
+        return this.output.copy();
     }
 
     public int getManaAmount() {
-        return manaAmount;
+        return this.manaAmount;
     }
 
     @Override
     public DefaultedList<Ingredient> getIngredients() {
         DefaultedList<Ingredient> list = DefaultedList.ofSize(this.recipeItems.size());
-        list.addAll(recipeItems);
+        list.addAll(this.recipeItems);
         return list;
     }
 

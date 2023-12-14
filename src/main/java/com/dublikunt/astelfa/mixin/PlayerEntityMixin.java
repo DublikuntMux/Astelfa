@@ -94,34 +94,34 @@ public class PlayerEntityMixin implements IPlayerDataSaver {
 
     @Inject(method = "writeCustomDataToNbt", at = @At("TAIL"))
     protected void injectWriteMethod(NbtCompound nbt, CallbackInfo ci) {
-        if (persistentData != null) {
-            nbt.put("astelfa.player_data", persistentData);
+        if (this.persistentData != null) {
+            nbt.put("astelfa.player_data", this.persistentData);
         }
     }
 
     @Inject(method = "readCustomDataFromNbt", at = @At("TAIL"))
     protected void injectReadMethod(@NotNull NbtCompound nbt, CallbackInfo info) {
         if (nbt.contains("astelfa.player_data", 10)) {
-            persistentData = nbt.getCompound("astelfa.player_data");
+            this.persistentData = nbt.getCompound("astelfa.player_data");
         }
     }
 
     @Override
     public NbtCompound astelfa$getPersistentData() {
-        if (persistentData == null) {
-            persistentData = new NbtCompound();
+        if (this.persistentData == null) {
+            this.persistentData = new NbtCompound();
         }
 
-        return persistentData;
+        return this.persistentData;
     }
 
     @Override
     public boolean astelfa$getShowManaInfo() {
-        return isShowManaInfo;
+        return this.isShowManaInfo;
     }
 
     @Override
     public void astelfa$setShowManaInfo(boolean value) {
-        isShowManaInfo = value;
+        this.isShowManaInfo = value;
     }
 }

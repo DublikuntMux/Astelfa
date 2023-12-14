@@ -31,15 +31,15 @@ public class ManaFillerScreenHandler extends ScreenHandler {
     public ManaFillerScreenHandler(int syncId, @NotNull PlayerInventory playerInventory, BlockEntity entity, PropertyDelegate delegate) {
         super(ModScreenHandlers.MANA_FILLER_SCREEN_HANDLER, syncId);
         this.inventory = (Inventory) entity;
-        inventory.onOpen(playerInventory.player);
+        this.inventory.onOpen(playerInventory.player);
         this.blockEntity = (ManaFillerBlockEntity) entity;
-        this.fluidStack = new FluidStack(blockEntity.fluidStorage.variant, blockEntity.fluidStorage.amount);
+        this.fluidStack = new FluidStack(this.blockEntity.fluidStorage.variant, this.blockEntity.fluidStorage.amount);
         this.propertyDelegate = delegate;
 
-        this.addSlot(new Slot(inventory, 0, 72, 13));
-        this.addSlot(new Slot(inventory, 1, 72, 58));
-        this.addSlot(new OutputSlot(inventory, 2, 135, 35));
-        this.addSlot(new Slot(inventory, 3, 8, 35));
+        this.addSlot(new Slot(this.inventory, 0, 72, 13));
+        this.addSlot(new Slot(this.inventory, 1, 72, 58));
+        this.addSlot(new OutputSlot(this.inventory, 2, 135, 35));
+        this.addSlot(new Slot(this.inventory, 3, 8, 35));
 
         for (int si = 0; si < 3; ++si)
             for (int sj = 0; sj < 9; ++sj)
@@ -51,11 +51,11 @@ public class ManaFillerScreenHandler extends ScreenHandler {
     }
 
     public void setFluid(FluidStack stack) {
-        fluidStack = stack;
+        this.fluidStack = stack;
     }
 
     public boolean isCrafting() {
-        return propertyDelegate.get(0) > 0;
+        return this.propertyDelegate.get(0) > 0;
     }
 
     public int getScaledProgress() {

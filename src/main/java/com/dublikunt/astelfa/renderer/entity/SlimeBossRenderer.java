@@ -9,7 +9,7 @@ import software.bernie.geckolib.renderer.GeoEntityRenderer;
 public class SlimeBossRenderer extends GeoEntityRenderer<SlimeBossEntity> {
     public SlimeBossRenderer(EntityRendererFactory.Context renderManager) {
         super(renderManager, new DefaultedEntityGeoModel<>(Helpers.id("slime_boss")));
-        scaleWidth = 4f;
-        scaleHeight = 4f;
+        this.scaleWidth = 4f;
+        this.scaleHeight = 4f;
     }
 }

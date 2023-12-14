@@ -49,7 +49,7 @@ public class SlimeBossEntity extends AmbientEntity implements GeoEntity {
 
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return cache;
+        return this.cache;
     }
 
     @Override

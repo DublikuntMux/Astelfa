@@ -30,8 +30,8 @@ public class InfuseTableRecipe implements Recipe<SimpleInventory> {
             return false;
         }
         boolean isValidRecipe = true;
-        for (int i = 0; i < inventory.size(); i++) {
-            if (!recipeItems.get(i).test(inventory.getStack(i))) {
+        for (int i = 0; i < 9; i++) {
+            if (!this.recipeItems.get(i).test(inventory.getStack(i))) {
                 isValidRecipe = false;
                 break;
             }
@@ -41,7 +41,7 @@ public class InfuseTableRecipe implements Recipe<SimpleInventory> {
 
     @Override
     public ItemStack craft(SimpleInventory inventory, DynamicRegistryManager registryManager) {
-        return output;
+        return this.output;
     }
 
     @Override
@@ -51,17 +51,17 @@ public class InfuseTableRecipe implements Recipe<SimpleInventory> {
 
     @Override
     public ItemStack getResult(DynamicRegistryManager registryManager) {
-        return output.copy();
+        return this.output.copy();
     }
 
     public ItemStack getResult() {
-        return output.copy();
+        return this.output.copy();
     }
 
     @Override
     public DefaultedList<Ingredient> getIngredients() {
         DefaultedList<Ingredient> list = DefaultedList.ofSize(this.recipeItems.size());
-        list.addAll(recipeItems);
+        list.addAll(this.recipeItems);
         return list;
     }
 

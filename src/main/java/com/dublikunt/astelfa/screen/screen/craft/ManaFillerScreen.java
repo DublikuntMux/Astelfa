@@ -26,7 +26,7 @@ public class ManaFillerScreen extends HandledScreen<ManaFillerScreenHandler> {
     @Override
     protected void init() {
         super.init();
-        titleX = (backgroundWidth - textRenderer.getWidth(title)) / 2;
+        this.titleX = (this.backgroundWidth - this.textRenderer.getWidth(this.title)) / 2;
         assignFluidStackRenderer();
     }
 
@@ -36,17 +36,17 @@ public class ManaFillerScreen extends HandledScreen<ManaFillerScreenHandler> {
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
         RenderSystem.setShaderTexture(0, TEXTURE);
-        int x = (width - backgroundWidth) / 2;
-        int y = (height - backgroundHeight) / 2;
-        context.drawTexture(TEXTURE, x, y, 0, 0, backgroundWidth, backgroundHeight);
+        int x = (this.width - this.backgroundWidth) / 2;
+        int y = (this.height - this.backgroundHeight) / 2;
+        context.drawTexture(TEXTURE, x, y, 0, 0, this.backgroundWidth, this.backgroundHeight);
 
         renderProgressArrow(context, x, y);
-        fluidStackRenderer.drawFluid(context, handler.fluidStack, x + 37, y + 13, 16, 61,
+        this.fluidStackRenderer.drawFluid(context, this.handler.fluidStack, x + 37, y + 13, 16, 61,
                 FluidStack.convertDropletsToMb(FluidConstants.BUCKET) * 20);
     }
 
     private void assignFluidStackRenderer() {
-        fluidStackRenderer = new FluidStackRenderer(FluidStack.convertDropletsToMb(FluidConstants.BUCKET) * 20,
+        this.fluidStackRenderer = new FluidStackRenderer(FluidStack.convertDropletsToMb(FluidConstants.BUCKET) * 20,
                 true, 16, 61);
     }
 
@@ -59,15 +59,15 @@ public class ManaFillerScreen extends HandledScreen<ManaFillerScreenHandler> {
 
     @Override
     protected void drawForeground(DrawContext context, int mouseX, int mouseY) {
-        int x = (width - backgroundWidth) / 2;
-        int y = (height - backgroundHeight) / 2;
+        int x = (this.width - this.backgroundWidth) / 2;
+        int y = (this.height - this.backgroundHeight) / 2;
 
-        renderFluidTooltip(context, mouseX, mouseY, x, y, handler.fluidStack, 37, 13, fluidStackRenderer);
+        renderFluidTooltip(context, mouseX, mouseY, x, y, this.handler.fluidStack, 37, 13, this.fluidStackRenderer);
     }
 
     private void renderProgressArrow(DrawContext context, int x, int y) {
-        if (handler.isCrafting()) {
-            context.drawTexture(TEXTURE, x + 76, y + 31, 176, 0, handler.getScaledProgress(), 25);
+        if (this.handler.isCrafting()) {
+            context.drawTexture(TEXTURE, x + 76, y + 31, 176, 0, this.handler.getScaledProgress(), 25);
         }
     }
 

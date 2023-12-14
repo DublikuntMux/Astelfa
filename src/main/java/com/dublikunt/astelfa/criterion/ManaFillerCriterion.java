@@ -45,7 +45,7 @@ public class ManaFillerCriterion extends AbstractCriterion<ManaFillerCriterion.C
         @Override
         public JsonObject toJson() {
             JsonObject jsonObject = super.toJson();
-            jsonObject.addProperty("item", Registries.ITEM.getId(item).toString());
+            jsonObject.addProperty("item", Registries.ITEM.getId(this.item).toString());
             return jsonObject;
         }
     }

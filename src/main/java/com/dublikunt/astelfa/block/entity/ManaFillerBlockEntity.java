@@ -38,6 +38,8 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 public class ManaFillerBlockEntity extends CraftingBlockEntity implements ExtendedScreenHandlerFactory {
@@ -53,12 +55,8 @@ public class ManaFillerBlockEntity extends CraftingBlockEntity implements Extend
         }
     }
 
-    private static boolean canInsertItemIntoOutputSlot(@NotNull SimpleInventory inventory, Item output) {
-        return inventory.getStack(2).getItem() == output || inventory.getStack(2).isEmpty();
-    }
-
-    private static boolean canInsertAmountIntoOutputSlot(@NotNull SimpleInventory inventory) {
-        return inventory.getStack(2).getMaxCount() > inventory.getStack(2).getCount();
+    private static boolean hasFluidSourceInSlot(@NotNull ManaFillerBlockEntity entity) {
+        return entity.getStack(3).getItem() == ModItems.MANA_BUCKET;
     }
 
     private static void transferFluidToFluidStorage(@NotNull ManaFillerBlockEntity entity) {
@@ -70,8 +68,12 @@ public class ManaFillerBlockEntity extends CraftingBlockEntity implements Extend
         }
     }
 
-    private static boolean hasFluidSourceInSlot(@NotNull ManaFillerBlockEntity entity) {
-        return entity.getStack(3).getItem() == ModItems.MANA_BUCKET;
+    private static boolean canInsertItemIntoOutputSlot(@NotNull SimpleInventory inventory, Item output) {
+        return inventory.getStack(2).getItem() == output || inventory.getStack(2).isEmpty();
+    }
+
+    private static boolean canInsertAmountIntoOutputSlot(@NotNull SimpleInventory inventory) {
+        return inventory.getStack(2).getMaxCount() > inventory.getStack(2).getCount();
     }
 
     private static Optional<RecipeEntry<ManaFillerRecipe>> getCurrentRecipe(@NotNull ManaFillerBlockEntity entity) {
@@ -80,56 +82,8 @@ public class ManaFillerBlockEntity extends CraftingBlockEntity implements Extend
             inv.setStack(i, entity.getStack(i));
         }
 
-        return entity.getWorld().getRecipeManager().getFirstMatch(ManaFillerRecipe.Type.INSTANCE, inv, entity.getWorld());
-    }
-
-    @Override
-    protected <T extends CraftingBlockEntity> boolean hasRecipe(@NotNull T entity) {
-        SimpleInventory inventory = new SimpleInventory(entity.size());
-        for (int i = 0; i < entity.size(); i++) {
-            inventory.setStack(i, entity.getStack(i));
-        }
-
-        Optional<RecipeEntry<ManaFillerRecipe>> match = getCurrentRecipe(((ManaFillerBlockEntity) entity));
-
-        return match.isPresent() && canInsertAmountIntoOutputSlot(inventory)
-                && canInsertItemIntoOutputSlot(inventory, match.get().value().getResult().getItem())
-                && ((ManaFillerBlockEntity) entity).fluidStorage.amount >= match.get().value().getManaAmount();
-    }
-
-    @Override
-    protected <T extends CraftingBlockEntity> void craftItem(@NotNull T entity) {
-        SimpleInventory inventory = new SimpleInventory(entity.size());
-        for (int i = 0; i < entity.size(); i++) {
-            inventory.setStack(i, entity.getStack(i));
-        }
-
-        Optional<RecipeEntry<ManaFillerRecipe>> recipe = getCurrentRecipe((ManaFillerBlockEntity) entity);
-
-        if (hasRecipe(entity)) {
-            entity.removeStack(0, 1);
-            entity.setStack(2, new ItemStack(recipe.get().value().getResult().getItem(),
-                    entity.getStack(2).getCount() + 1));
-
-            entity.resetProgress();
-
-            try (Transaction transaction = Transaction.openOuter()) {
-                ((ManaFillerBlockEntity) entity).fluidStorage.extract(FluidVariant.of(ModFluids.STILL_MANA_FLUID),
-                        recipe.get().value().getManaAmount(), transaction);
-                transaction.commit();
-            }
-        }
-    }
-
-    private void sendFluidPacket() {
-        PacketByteBuf data = PacketByteBufs.create();
-        fluidStorage.variant.toPacket(data);
-        data.writeLong(fluidStorage.amount);
-        data.writeBlockPos(getPos());
-
-        for (ServerPlayerEntity player : PlayerLookup.tracking((ServerWorld) world, getPos())) {
-            ServerPlayNetworking.send(player, ModMessages.FLUID_SYNC, data);
-        }
+        return entity.getWorld().getRecipeManager().getFirstMatch(ManaFillerRecipe.Type.INSTANCE, inv,
+                entity.getWorld());
     }
 
     public void setFluidLevel(FluidVariant fluidVariant, long fluidLevel) {
@@ -166,28 +120,23 @@ public class ManaFillerBlockEntity extends CraftingBlockEntity implements Extend
         return Text.translatable("block.astelfa.mana_filler");
     }
 
-    @Override
-    protected void writeNbt(NbtCompound nbt) {
-        super.writeNbt(nbt);
-        Inventories.writeNbt(nbt, inventory);
-        nbt.put("variant", fluidStorage.variant.toNbt());
-        nbt.putLong("fluid", fluidStorage.amount);
-    }
-
-    @Override
-    public void readNbt(NbtCompound nbt) {
-        Inventories.readNbt(nbt, inventory);
-        super.readNbt(nbt);
-        fluidStorage.variant = FluidVariant.fromNbt((NbtCompound) nbt.get("variant"));
-        fluidStorage.amount = nbt.getLong("fluid");
-    }
-
     @Nullable
     @Override
     public ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
         sendFluidPacket();
 
-        return new ManaFillerScreenHandler(syncId, playerInventory, this, propertyDelegate);
+        return new ManaFillerScreenHandler(syncId, playerInventory, this, this.propertyDelegate);
+    }
+
+    private void sendFluidPacket() {
+        PacketByteBuf data = PacketByteBufs.create();
+        this.fluidStorage.variant.toPacket(data);
+        data.writeLong(this.fluidStorage.amount);
+        data.writeBlockPos(getPos());
+
+        for (ServerPlayerEntity player : PlayerLookup.tracking((ServerWorld) this.world, getPos())) {
+            ServerPlayNetworking.send(player, ModMessages.FLUID_SYNC, data);
+        }
     }
 
     @Override
@@ -195,13 +144,70 @@ public class ManaFillerBlockEntity extends CraftingBlockEntity implements Extend
         buf.writeBlockPos(this.pos);
     }
 
-    public ItemStack getRenderStack() {
-        if (this.getStack(2).isEmpty()) {
-            return this.getStack(0);
-        } else {
-            return this.getStack(2);
+    @Override
+    protected <T extends CraftingBlockEntity> boolean hasRecipe(@NotNull T entity) {
+        SimpleInventory inventory = new SimpleInventory(entity.size());
+        for (int i = 0; i < entity.size(); i++) {
+            inventory.setStack(i, entity.getStack(i));
         }
-    }    public final SingleVariantStorage<FluidVariant> fluidStorage = new SingleVariantStorage<>() {
+
+        Optional<RecipeEntry<ManaFillerRecipe>> match = getCurrentRecipe(((ManaFillerBlockEntity) entity));
+
+        return match.isPresent() && canInsertAmountIntoOutputSlot(inventory)
+                && canInsertItemIntoOutputSlot(inventory, match.get().value().getResult().getItem())
+                && ((ManaFillerBlockEntity) entity).fluidStorage.amount >= match.get().value().getManaAmount();
+    }
+
+    @Override
+    protected <T extends CraftingBlockEntity> void craftItem(@NotNull T entity) {
+        SimpleInventory inventory = new SimpleInventory(entity.size());
+        for (int i = 0; i < entity.size(); i++) {
+            inventory.setStack(i, entity.getStack(i));
+        }
+
+        Optional<RecipeEntry<ManaFillerRecipe>> recipe = getCurrentRecipe((ManaFillerBlockEntity) entity);
+
+        if (hasRecipe(entity)) {
+            entity.removeStack(0, 1);
+            entity.setStack(2, new ItemStack(recipe.get().value().getResult().getItem(),
+                    entity.getStack(2).getCount() + 1));
+
+            entity.resetProgress();
+
+            try (Transaction transaction = Transaction.openOuter()) {
+                ((ManaFillerBlockEntity) entity).fluidStorage.extract(FluidVariant.of(ModFluids.STILL_MANA_FLUID),
+                        recipe.get().value().getManaAmount(),
+                        transaction);
+                transaction.commit();
+            }
+        }
+    }
+
+    @Override
+    protected void writeNbt(NbtCompound nbt) {
+        super.writeNbt(nbt);
+        Inventories.writeNbt(nbt, this.inventory);
+        nbt.put("variant", this.fluidStorage.variant.toNbt());
+        nbt.putLong("fluid", this.fluidStorage.amount);
+    }
+
+    @Override
+    public void readNbt(NbtCompound nbt) {
+        Inventories.readNbt(nbt, this.inventory);
+        super.readNbt(nbt);
+        this.fluidStorage.variant = FluidVariant.fromNbt((NbtCompound) nbt.get("variant"));
+        this.fluidStorage.amount = nbt.getLong("fluid");
+    }
+
+    public List<ItemStack> getRenderStacks() {
+        if (this.getStack(2).isEmpty()) {
+            return Collections.singletonList(this.getStack(0));
+        } else {
+            return Collections.singletonList(this.getStack(2));
+        }
+    }
+
+    public final SingleVariantStorage<FluidVariant> fluidStorage = new SingleVariantStorage<>() {
         @Override
         protected FluidVariant getBlankVariant() {
             return FluidVariant.blank();
@@ -215,13 +221,9 @@ public class ManaFillerBlockEntity extends CraftingBlockEntity implements Extend
         @Override
         protected void onFinalCommit() {
             markDirty();
-            if (!world.isClient()) {
+            if (!ManaFillerBlockEntity.this.world.isClient()) {
                 sendFluidPacket();
             }
         }
     };
-
-
-
-
 }

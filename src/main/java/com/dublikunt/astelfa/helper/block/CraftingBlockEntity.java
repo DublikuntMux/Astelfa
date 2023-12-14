@@ -20,6 +20,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
+
 public abstract class CraftingBlockEntity extends BlockEntity implements InventoryImpl {
     protected final PropertyDelegate propertyDelegate;
     protected final DefaultedList<ItemStack> inventory;
@@ -81,34 +83,34 @@ public abstract class CraftingBlockEntity extends BlockEntity implements Invento
     @Override
     protected void writeNbt(NbtCompound nbt) {
         super.writeNbt(nbt);
-        Inventories.writeNbt(nbt, inventory);
-        nbt.putInt("progress", progress);
+        Inventories.writeNbt(nbt, this.inventory);
+        nbt.putInt("progress", this.progress);
     }
 
     @Override
     public void readNbt(NbtCompound nbt) {
-        Inventories.readNbt(nbt, inventory);
+        Inventories.readNbt(nbt, this.inventory);
         super.readNbt(nbt);
-        progress = nbt.getInt("progress");
+        this.progress = nbt.getInt("progress");
     }
 
     public void resetProgress() {
         this.progress = 0;
     }
 
-    public abstract ItemStack getRenderStack();
+    public abstract List<ItemStack> getRenderStacks();
 
     @Override
     public void markDirty() {
-        if (!world.isClient()) {
+        if (!this.world.isClient()) {
             PacketByteBuf data = PacketByteBufs.create();
-            data.writeInt(inventory.size());
-            for (ItemStack itemStack : inventory) {
+            data.writeInt(this.inventory.size());
+            for (ItemStack itemStack : this.inventory) {
                 data.writeItemStack(itemStack);
             }
             data.writeBlockPos(getPos());
 
-            for (ServerPlayerEntity player : PlayerLookup.tracking((ServerWorld) world, getPos())) {
+            for (ServerPlayerEntity player : PlayerLookup.tracking((ServerWorld) this.world, getPos())) {
                 ServerPlayNetworking.send(player, ModMessages.ITEM_SYNC, data);
             }
         }

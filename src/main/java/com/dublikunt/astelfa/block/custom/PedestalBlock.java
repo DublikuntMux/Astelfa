@@ -33,14 +33,14 @@ import java.util.stream.Stream;
 public class PedestalBlock extends BlockWithEntity implements BlockEntityProvider, Waterloggable {
     public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
-
     private static final VoxelShape SHAPE = VoxelShapes.combineAndSimplify(Stream.of(
                     Block.createCuboidShape(2, 0, 2, 14, 2, 14),
                     Block.createCuboidShape(4, 2, 4, 12, 12, 12),
                     Block.createCuboidShape(3, 12, 3, 13, 14, 13),
                     Block.createCuboidShape(4, 14, 4, 12, 16, 12)
             ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get(),
-            Block.createCuboidShape(2, 0, 2, 14, 16, 14), BooleanBiFunction.OR);
+            Block.createCuboidShape(2, 0, 2, 14, 16, 14),
+            BooleanBiFunction.OR);
 
     public PedestalBlock(Settings settings) {
         super(settings);
@@ -52,20 +52,15 @@ public class PedestalBlock extends BlockWithEntity implements BlockEntityProvide
         return SHAPE;
     }
 
-    @Nullable
-    @Override
-    public BlockState getPlacementState(@NotNull ItemPlacementContext ctx) {
-        return this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing().getOpposite())
-                .with(WATERLOGGED, ctx.getWorld().getFluidState(ctx.getBlockPos()).getFluid() == Fluids.WATER);
-    }
-
     @Override
     public FluidState getFluidState(@NotNull BlockState state) {
         return state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
     }
 
     @Override
-    public BlockState getStateForNeighborUpdate(@NotNull BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
+    public BlockState getStateForNeighborUpdate(@NotNull BlockState state, Direction direction,
+                                                BlockState neighborState, WorldAccess world, BlockPos pos,
+                                                BlockPos neighborPos) {
         if (state.get(WATERLOGGED)) {
             world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
         }
@@ -83,17 +78,8 @@ public class PedestalBlock extends BlockWithEntity implements BlockEntityProvide
     }
 
     @Override
-    protected void appendProperties(StateManager.@NotNull Builder<Block, BlockState> builder) {
-        builder.add(FACING, WATERLOGGED);
-    }
-
-    @Override
-    public BlockRenderType getRenderType(BlockState state) {
-        return BlockRenderType.MODEL;
-    }
-
-    @Override
-    public void onStateReplaced(@NotNull BlockState state, World world, BlockPos pos, @NotNull BlockState newState, boolean moved) {
+    public void onStateReplaced(@NotNull BlockState state, World world, BlockPos pos, @NotNull BlockState newState,
+                                boolean moved) {
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof PedestalBlockEntity) {
@@ -115,6 +101,7 @@ public class PedestalBlock extends BlockWithEntity implements BlockEntityProvide
                             player.setStackInHand(Hand.MAIN_HAND, blockEntity.getItems().get(i));
                             blockEntity.setStack(i, ItemStack.EMPTY);
                         }
+                        blockEntity.markDirty();
                         return ActionResult.success(world.isClient());
                     }
                 }
@@ -127,6 +114,7 @@ public class PedestalBlock extends BlockWithEntity implements BlockEntityProvide
                             }
                             blockEntity.getItems().set(i, itemInHand.split(1));
                         }
+                        blockEntity.markDirty();
                         return ActionResult.success(world.isClient());
                     }
                 }
@@ -138,13 +126,31 @@ public class PedestalBlock extends BlockWithEntity implements BlockEntityProvide
 
     @Nullable
     @Override
+    public BlockState getPlacementState(@NotNull ItemPlacementContext ctx) {
+        return this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing().getOpposite())
+                .with(WATERLOGGED, ctx.getWorld().getFluidState(ctx.getBlockPos()).getFluid() == Fluids.WATER);
+    }
+
+    @Override
+    protected void appendProperties(StateManager.@NotNull Builder<Block, BlockState> builder) {
+        builder.add(FACING, WATERLOGGED);
+    }
+
+    @Override
+    public BlockRenderType getRenderType(BlockState state) {
+        return BlockRenderType.MODEL;
+    }
+
+    @Nullable
+    @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
         return new PedestalBlockEntity(pos, state);
     }
 
     @Nullable
     @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state,
+                                                                  BlockEntityType<T> type) {
         return validateTicker(type, ModBlockEntities.PEDESTAL_BLOCK_ENTITY_TYPE, PedestalBlockEntity::tick);
     }
 }
