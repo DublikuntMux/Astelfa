@@ -9,7 +9,7 @@ import net.minecraft.block.Waterloggable;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.particle.ParticleEffect;
+import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
@@ -25,8 +25,8 @@ public class AquaticTorchBlock extends TorchBlock implements Waterloggable {
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
     public static final IntProperty FLOWING_WATER = IntProperty.of("water_level", 1, 8);
 
-    public AquaticTorchBlock(Settings settings, ParticleEffect particle) {
-        super(settings, particle);
+    public AquaticTorchBlock(Settings settings, DefaultParticleType particle) {
+        super(particle, settings);
         setDefaultState(getDefaultState().with(WATERLOGGED, false));
     }
 

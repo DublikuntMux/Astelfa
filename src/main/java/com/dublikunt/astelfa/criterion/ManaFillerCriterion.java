@@ -1,52 +1,45 @@
 package com.dublikunt.astelfa.criterion;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonSyntaxException;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.advancement.AdvancementCriterion;
 import net.minecraft.advancement.criterion.AbstractCriterion;
-import net.minecraft.advancement.criterion.AbstractCriterionConditions;
 import net.minecraft.item.Item;
-import net.minecraft.predicate.entity.AdvancementEntityPredicateDeserializer;
+import net.minecraft.predicate.entity.EntityPredicate;
 import net.minecraft.predicate.entity.LootContextPredicate;
 import net.minecraft.registry.Registries;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.util.Identifier;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import net.minecraft.util.dynamic.Codecs;
 
 import java.util.Optional;
 
 public class ManaFillerCriterion extends AbstractCriterion<ManaFillerCriterion.Conditions> {
     @Override
-    protected Conditions conditionsFromJson(@NotNull JsonObject json,
-                                            Optional<LootContextPredicate> playerPredicate,
-                                            AdvancementEntityPredicateDeserializer predicateDeserializer) {
-        Identifier identifier = new Identifier(json.get("item").getAsString());
-        Item item = Registries.ITEM.getOrEmpty(identifier).orElseThrow(() -> new JsonSyntaxException("Unknown item '" + identifier + "'"));
-
-        return new ManaFillerCriterion.Conditions(item);
+    public Codec<ManaFillerCriterion.Conditions> getConditionsCodec() {
+        return ManaFillerCriterion.Conditions.CODEC;
     }
 
-    public void trigger(ServerPlayerEntity player, Item item) {
-        trigger(player, conditions -> conditions.requirementsMet(item));
+    public void trigger(ServerPlayerEntity player, RegistryEntry<Item> item) {
+        this.trigger(player, conditions -> conditions.matches(item));
     }
 
-    public static class Conditions extends AbstractCriterionConditions {
-        private final Item item;
+    public record Conditions(Optional<LootContextPredicate> player,
+                             Optional<RegistryEntry<Item>> item) implements AbstractCriterion.Conditions {
+        public static final Codec<ManaFillerCriterion.Conditions> CODEC = RecordCodecBuilder.create(
+                instance -> instance.group(
+                                Codecs.createStrictOptionalFieldCodec(EntityPredicate.LOOT_CONTEXT_PREDICATE_CODEC, "player").forGetter(ManaFillerCriterion.Conditions::player),
+                                Codecs.createStrictOptionalFieldCodec(Registries.ITEM.createEntryCodec(), "item").forGetter(ManaFillerCriterion.Conditions::item)
+                        )
+                        .apply(instance, ManaFillerCriterion.Conditions::new)
+        );
 
-        public Conditions(@Nullable Item item) {
-            super(Optional.empty());
-            this.item = item;
+        public static AdvancementCriterion<ManaFillerCriterion.Conditions> any() {
+            return ModCriterion.MANA_FILLER.create(new ManaFillerCriterion.Conditions(Optional.empty(), Optional.empty()));
         }
 
-        boolean requirementsMet(Item item) {
-            return this.item == item;
-        }
-
-        @Override
-        public JsonObject toJson() {
-            JsonObject jsonObject = super.toJson();
-            jsonObject.addProperty("item", Registries.ITEM.getId(this.item).toString());
-            return jsonObject;
+        public boolean matches(RegistryEntry<Item> item) {
+            return this.item.isEmpty() || this.item.get().equals(item);
         }
     }
 }

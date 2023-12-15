@@ -5,7 +5,7 @@ import com.dublikunt.astelfa.block.common.SparklePillarBlock;
 import com.dublikunt.astelfa.block.common.SparkleSaplingBlock;
 import com.dublikunt.astelfa.block.custom.*;
 import com.dublikunt.astelfa.helper.Helpers;
-import com.dublikunt.astelfa.world.feature.tree.SilverWoodSaplingGenerator;
+import com.dublikunt.astelfa.world.feature.ModSaplings;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
@@ -30,17 +30,17 @@ public class ModBlocks {
             FabricBlockSettings.copyOf(Blocks.SCULK).strength(3).requiresTool().nonOpaque()), "sculk_statue");
 
     public static final ExperienceDroppingBlock LUMINITE_ORE = registerBlock(new ExperienceDroppingBlock(
-            FabricBlockSettings.copyOf(Blocks.IRON_ORE).strength(3).requiresTool(),
-            UniformIntProvider.create(3, 7)), "luminite_ore");
+            UniformIntProvider.create(3, 7),
+            FabricBlockSettings.copyOf(Blocks.IRON_ORE).strength(3).requiresTool()), "luminite_ore");
     public static final ExperienceDroppingBlock DEEPSLATE_LUMINITE_ORE = registerBlock(new ExperienceDroppingBlock(
-            FabricBlockSettings.copyOf(Blocks.DEEPSLATE_IRON_ORE).strength(4.5f, 3).requiresTool(),
-            UniformIntProvider.create(3, 7)), "deepslate_luminite_ore");
+            UniformIntProvider.create(3, 7),
+            FabricBlockSettings.copyOf(Blocks.DEEPSLATE_IRON_ORE).strength(4.5f, 3).requiresTool()), "deepslate_luminite_ore");
     public static final ExperienceDroppingBlock NETHERRACK_LUMINITE_ORE = registerBlock(new ExperienceDroppingBlock(
-            FabricBlockSettings.copyOf(Blocks.NETHERRACK).strength(3).requiresTool(),
-            UniformIntProvider.create(3, 7)), "netherrack_luminite_ore");
+            UniformIntProvider.create(3, 7),
+            FabricBlockSettings.copyOf(Blocks.NETHERRACK).strength(3).requiresTool()), "netherrack_luminite_ore");
     public static final ExperienceDroppingBlock ENDSTONE_LUMINITE_ORE = registerBlock(new ExperienceDroppingBlock(
-            FabricBlockSettings.copyOf(Blocks.END_STONE).strength(3, 9).requiresTool(),
-            UniformIntProvider.create(3, 7)), "endstone_luminite_ore");
+            UniformIntProvider.create(3, 7),
+            FabricBlockSettings.copyOf(Blocks.END_STONE).strength(3, 9).requiresTool()), "endstone_luminite_ore");
 
     public static final SparklePillarBlock SILVER_LOG = registerBlock(new SparklePillarBlock(FabricBlockSettings.copyOf(
             Blocks.OAK_LOG).mapColor(DyeColor.LIGHT_GRAY)), "silver_log");
@@ -57,7 +57,7 @@ public class ModBlocks {
             registerBlock(new SparkleLeavesBlock(FabricBlockSettings.copyOf(Blocks.OAK_LEAVES)
                     .mapColor(DyeColor.LIGHT_GRAY)), "silver_leaves");
     public static final SparkleSaplingBlock SILVER_SAPLING =
-            registerBlock(new SparkleSaplingBlock(new SilverWoodSaplingGenerator(),
+            registerBlock(new SparkleSaplingBlock(ModSaplings.SILVER_WOOD,
                     FabricBlockSettings.copyOf(Blocks.OAK_SAPLING).mapColor(DyeColor.LIGHT_GRAY)), "silver_sapling");
 
     public static final Block SILVER_PLANKS = registerBlock(new Block(FabricBlockSettings.copyOf(Blocks.OAK_PLANKS)
@@ -67,25 +67,25 @@ public class ModBlocks {
                     .mapColor(DyeColor.LIGHT_GRAY)),
             "carved_silver_wood");
     public static final ButtonBlock SILVER_WOOD_BUTTON =
-            registerBlock(new ButtonBlock(FabricBlockSettings.copyOf(Blocks.OAK_BUTTON)
-                    .noCollision().strength(0.5f), BlockSetType.OAK, 30, true), "silver_wood_button");
+            registerBlock(new ButtonBlock(BlockSetType.OAK, 30,
+                    FabricBlockSettings.copyOf(Blocks.OAK_BUTTON)), "silver_wood_button");
     public static final DoorBlock SILVER_WOOD_DOOR =
-            registerBlock(new DoorBlock(FabricBlockSettings.copyOf(Blocks.OAK_DOOR).
-                    mapColor(DyeColor.LIGHT_GRAY), BlockSetType.OAK), "silver_wood_door");
+            registerBlock(new DoorBlock(BlockSetType.OAK,
+                            FabricBlockSettings.copyOf(Blocks.OAK_DOOR).mapColor(DyeColor.LIGHT_GRAY)),
+                    "silver_wood_door");
     public static final TrapdoorBlock SILVER_WOOD_TRAPDOOR =
-            registerBlock(new TrapdoorBlock(FabricBlockSettings.copyOf(Blocks.OAK_TRAPDOOR).
-                    mapColor(DyeColor.LIGHT_GRAY), BlockSetType.OAK), "silver_wood_trapdoor");
+            registerBlock(new TrapdoorBlock(BlockSetType.OAK, FabricBlockSettings.copyOf(Blocks.OAK_TRAPDOOR).
+                    mapColor(DyeColor.LIGHT_GRAY)), "silver_wood_trapdoor");
     public static final PressurePlateBlock SILVER_WOOD_PRESSURE_PLATE = registerBlock(new PressurePlateBlock(
-            PressurePlateBlock.ActivationRule.EVERYTHING,
-            FabricBlockSettings.copyOf(Blocks.OAK_PRESSURE_PLATE).mapColor(DyeColor.LIGHT_GRAY),
-            BlockSetType.OAK
+            BlockSetType.OAK,
+            FabricBlockSettings.copyOf(Blocks.OAK_PRESSURE_PLATE).mapColor(DyeColor.LIGHT_GRAY)
     ), "silver_wood_pressure_plate");
     public static final FenceBlock SILVER_WOOD_FENCE =
             registerBlock(new FenceBlock(FabricBlockSettings.copyOf(Blocks.OAK_FENCE).
                     mapColor(DyeColor.LIGHT_GRAY)), "silver_wood_fence");
     public static final FenceGateBlock SILVER_WOOD_FENCE_GATE =
-            registerBlock(new FenceGateBlock(FabricBlockSettings.copyOf(Blocks.OAK_FENCE_GATE).
-                    mapColor(DyeColor.LIGHT_GRAY), WoodType.OAK), "silver_wood_fence_gate");
+            registerBlock(new FenceGateBlock(WoodType.OAK, FabricBlockSettings.copyOf(Blocks.OAK_FENCE_GATE).
+                    mapColor(DyeColor.LIGHT_GRAY)), "silver_wood_fence_gate");
     public static final StairsBlock SILVER_WOOD_STAIRS = registerBlock(new StairsBlock(SILVER_PLANKS.getDefaultState(),
             FabricBlockSettings.copyOf(Blocks.OAK_STAIRS).mapColor(DyeColor.LIGHT_GRAY)), "silver_wood_stairs");
     public static final SlabBlock SILVER_WOOD_SLAB =

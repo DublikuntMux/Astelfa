@@ -104,7 +104,7 @@ public class ManaFillerScreenHandler extends ScreenHandler {
         @Override
         public void onTakeItem(PlayerEntity player, ItemStack stack) {
             if (player instanceof ServerPlayerEntity) {
-                ModCriterion.MANA_FILLER.trigger((ServerPlayerEntity) player, stack.getItem());
+                ModCriterion.MANA_FILLER.trigger((ServerPlayerEntity) player, stack.getRegistryEntry());
             }
 
             super.onTakeItem(player, stack);

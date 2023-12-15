@@ -8,7 +8,7 @@ import net.minecraft.block.*;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.particle.ParticleEffect;
+import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
@@ -39,8 +39,8 @@ public class AquaticWallTorchBlock extends WallTorchBlock implements Waterloggab
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
 
 
-    public AquaticWallTorchBlock(AbstractBlock.Settings settings, ParticleEffect particle) {
-        super(settings, particle);
+    public AquaticWallTorchBlock(AbstractBlock.Settings settings, DefaultParticleType particle) {
+        super(particle, settings);
         this.setDefaultState(this.stateManager.getDefaultState().with(WATERLOGGED, false).with(FLOWING_WATER, 8));
     }
 

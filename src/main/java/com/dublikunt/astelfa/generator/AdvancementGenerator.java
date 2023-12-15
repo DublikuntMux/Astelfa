@@ -15,6 +15,7 @@ import net.minecraft.advancement.criterion.InventoryChangedCriterion;
 import net.minecraft.item.Items;
 import net.minecraft.text.Text;
 
+import java.util.Optional;
 import java.util.function.Consumer;
 
 public class AdvancementGenerator extends FabricAdvancementProvider {
@@ -63,8 +64,8 @@ public class AdvancementGenerator extends FabricAdvancementProvider {
                         true,
                         false
                 )
-                .criterion("got_mana_ingot", ModCriterion.MANA_FILLER.create(new ManaFillerCriterion.Conditions(ModItems.AETHERIUM_INGOT)))
-                .criterion("got_essential_fuel", ModCriterion.MANA_FILLER.create(new ManaFillerCriterion.Conditions(ModItems.ESSENTIAL_FUEL)))
+                .criterion("got_mana_ingot", ModCriterion.MANA_FILLER.create(new ManaFillerCriterion.Conditions(Optional.empty(), Optional.ofNullable(ModItems.AETHERIUM_INGOT.getRegistryEntry()))))
+                .criterion("got_essential_fuel", ModCriterion.MANA_FILLER.create(new ManaFillerCriterion.Conditions(Optional.empty(), Optional.ofNullable(ModItems.ESSENTIAL_FUEL.getRegistryEntry()))))
                 .build(consumer, Astelfa.MOD_ID + "/add_mana");
 
         AdvancementEntry aquaticTorchAdvancement = Advancement.Builder.create().parent(addManaAdvancement)
@@ -92,7 +93,7 @@ public class AdvancementGenerator extends FabricAdvancementProvider {
                         true,
                         false
                 )
-                .criterion("got_star_from_mana", ModCriterion.MANA_FILLER.create(new ManaFillerCriterion.Conditions(Items.NETHER_STAR)))
+                .criterion("got_star_from_mana", ModCriterion.MANA_FILLER.create(new ManaFillerCriterion.Conditions(Optional.empty(), Optional.ofNullable(Items.NETHER_STAR.getRegistryEntry()))))
                 .build(consumer, Astelfa.MOD_ID + "/mana_star");
 
         AdvancementEntry infuserAdvancement = Advancement.Builder.create().parent(rootAdvancement)

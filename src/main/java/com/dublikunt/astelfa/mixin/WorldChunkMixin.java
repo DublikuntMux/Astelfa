@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(WorldChunk.class)
 public class WorldChunkMixin implements LevelChunkAccess {
     @Unique
-    private DataStorage dataStorage = new DataStorage();
+    private final DataStorage dataStorage = new DataStorage();
 
     public DataStorage astelfa$getStorage() {
         return this.dataStorage;

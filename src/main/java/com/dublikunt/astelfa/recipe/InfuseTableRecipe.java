@@ -5,7 +5,10 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.recipe.*;
+import net.minecraft.recipe.Ingredient;
+import net.minecraft.recipe.Recipe;
+import net.minecraft.recipe.RecipeSerializer;
+import net.minecraft.recipe.RecipeType;
 import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.world.World;
@@ -86,7 +89,7 @@ public class InfuseTableRecipe implements Recipe<SimpleInventory> {
 
         public static final Codec<InfuseTableRecipe> CODEC = RecordCodecBuilder.create(in -> in.group(
                 validateAmount(Ingredient.DISALLOW_EMPTY_CODEC, 9).fieldOf("ingredients").forGetter(InfuseTableRecipe::getIngredients),
-                RecipeCodecs.CRAFTING_RESULT.fieldOf("output").forGetter(r -> r.output)
+                ItemStack.RECIPE_RESULT_CODEC.fieldOf("output").forGetter(r -> r.output)
         ).apply(in, InfuseTableRecipe::new));
 
         @Override

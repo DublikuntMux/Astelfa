@@ -1,5 +1,6 @@
 package com.dublikunt.astelfa.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.block.*;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
@@ -25,7 +26,7 @@ import java.util.stream.Stream;
 public class SculkStatueBlock extends HorizontalFacingBlock implements Waterloggable {
     public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
-
+    public static final MapCodec<SculkStatueBlock> CODEC = createCodec(SculkStatueBlock::new);
     private static final VoxelShape SHAPE_N = Stream.of(
             Block.createCuboidShape(0, 0, 0, 16, 6, 16),
             Block.createCuboidShape(4, 6, 7, 12, 15, 11),
@@ -57,6 +58,11 @@ public class SculkStatueBlock extends HorizontalFacingBlock implements Waterlogg
     public SculkStatueBlock(Settings settings) {
         super(settings);
         setDefaultState(getDefaultState().with(WATERLOGGED, false));
+    }
+
+    @Override
+    protected MapCodec<? extends HorizontalFacingBlock> getCodec() {
+        return CODEC;
     }
 
     @Override

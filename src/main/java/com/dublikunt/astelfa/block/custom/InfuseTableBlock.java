@@ -2,6 +2,7 @@ package com.dublikunt.astelfa.block.custom;
 
 import com.dublikunt.astelfa.block.ModBlockEntities;
 import com.dublikunt.astelfa.block.entity.InfuseTableBlockEntity;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
@@ -33,6 +34,7 @@ import java.util.stream.Stream;
 public class InfuseTableBlock extends BlockWithEntity implements BlockEntityProvider, Waterloggable {
     public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
+    public static final MapCodec<InfuseTableBlock> CODEC = createCodec(InfuseTableBlock::new);
 
     private static final VoxelShape SHAPE = VoxelShapes.combineAndSimplify(Stream.of(
                     Block.createCuboidShape(0, 0, 0, 2, 9, 2),
@@ -45,6 +47,11 @@ public class InfuseTableBlock extends BlockWithEntity implements BlockEntityProv
     public InfuseTableBlock(Settings settings) {
         super(settings);
         setDefaultState(getDefaultState().with(WATERLOGGED, false));
+    }
+
+    @Override
+    protected MapCodec<? extends BlockWithEntity> getCodec() {
+        return CODEC;
     }
 
     @Override

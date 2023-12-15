@@ -5,7 +5,10 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.recipe.*;
+import net.minecraft.recipe.Ingredient;
+import net.minecraft.recipe.Recipe;
+import net.minecraft.recipe.RecipeSerializer;
+import net.minecraft.recipe.RecipeType;
 import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.dynamic.Codecs;
@@ -87,7 +90,7 @@ public class ManaFillerRecipe implements Recipe<SimpleInventory> {
 
         public static final Codec<ManaFillerRecipe> CODEC = RecordCodecBuilder.create(in -> in.group(
                 validateAmount(Ingredient.DISALLOW_EMPTY_CODEC, 2).fieldOf("ingredients").forGetter(ManaFillerRecipe::getIngredients),
-                RecipeCodecs.CRAFTING_RESULT.fieldOf("output").forGetter(r -> r.output),
+                ItemStack.RECIPE_RESULT_CODEC.fieldOf("output").forGetter(r -> r.output),
                 Codecs.POSITIVE_INT.fieldOf("mana_amount").forGetter(ManaFillerRecipe::getManaAmount)
         ).apply(in, ManaFillerRecipe::new));
 

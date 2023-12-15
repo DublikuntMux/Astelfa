@@ -57,7 +57,7 @@ public class PedestalCategory implements DisplayCategory<BasicDisplay> {
                     .entries(display.getInputEntries().get(i + 1)));
         }
 
-        widgets.add(Widgets.createSlot(new Point(startPoint.x + 49, startPoint.y + 41))
+        widgets.add(Widgets.createSlot(new Point(startPoint.x + 48, startPoint.y + 40))
                 .entries(display.getInputEntries().get(0)));
 
         widgets.add(Widgets.createSlot(new Point(startPoint.x + 137, startPoint.y + 40))

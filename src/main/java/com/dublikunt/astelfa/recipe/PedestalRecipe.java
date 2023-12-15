@@ -91,7 +91,7 @@ public class PedestalRecipe implements Recipe<SimpleInventory> {
 
         public static final Codec<PedestalRecipe> CODEC = RecordCodecBuilder.create(in -> in.group(
                 validateAmount(Ingredient.DISALLOW_EMPTY_CODEC, 28).fieldOf("ingredients").forGetter(PedestalRecipe::getIngredients),
-                RecipeCodecs.CRAFTING_RESULT.fieldOf("output").forGetter(r -> r.output)
+                ItemStack.RECIPE_RESULT_CODEC.fieldOf("output").forGetter(r -> r.output)
         ).apply(in, PedestalRecipe::new));
 
         @Override
